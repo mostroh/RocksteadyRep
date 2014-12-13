@@ -14,6 +14,14 @@
     <body>
         <h1>Hello admin!</h1>
         <button type="button" onclick="alert('Loading users...')">Edit users!</button>
-        
+        <div style="display: none;" id="hiddenText">
+            <li>User 1</li>
+            <li>User 2</li>
+            <li>User 3</li>
+            <li>User 4</li>
+            <li>User 5</li>
+        </div>
+        <div id="showText"><a href="#" onclick="document.getElementById('hiddenText').style.display = 'block';
+                              document.getElementById('showText').style.display = 'none';">Click here to see hidden text.</a></div>
     </body>
 </html>

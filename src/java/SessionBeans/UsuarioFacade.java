@@ -30,13 +30,13 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
     
     public List findByNameContaining(String s) {
-        return getEntityManager().createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
+        return em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
                 .setParameter("userName", "%"+s+"%")
                 .getResultList();
     }
     
     public List findByNameBegining(String s){
-        return getEntityManager().createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
+        return em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
                 .setParameter("userName", s+"%")
                 .getResultList();
     }
