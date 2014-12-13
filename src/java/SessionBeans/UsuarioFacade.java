@@ -6,6 +6,7 @@
 package SessionBeans;
 
 import Entities.Usuario;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,6 +28,12 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    public List getUserByName(String s){
+        return  em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
+                .setParameter("userName", s)
+                .getResultList();
     }
     
     public List findByNameContaining(String s) {

@@ -5,10 +5,14 @@
  */
 package Servlets;
 
+import Entities.Usuario;
 import SessionBeans.AdminPageHelper;
+import SessionBeans.PostFacade;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import static java.util.Objects.isNull;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,11 +25,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author EduardROckerse
  */
-@WebServlet(name = "AdminUsersFilteredServlet", urlPatterns = {"/AdminUsersFilteredServlet"})
-public class AdminUsersFilteredServlet extends HttpServlet {
+@WebServlet(name = "AdminPostByUserServlet", urlPatterns = {"/AdminPostByUserServlet"})
+public class AdminPostByUserServlet extends HttpServlet {
+
     @EJB
     private UsuarioFacade usuarioFacade;
-    
+    @EJB
+    private PostFacade postFacade;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,15 +44,27 @@ public class AdminUsersFilteredServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        AdminPageHelper allData = new AdminPageHelper();
+        allData.setSearchOption(2);
+        allData.setAdminName("post deleting admin");
+        Usuario user;
+        List resBusqueda = usuarioFacade.getUserByName(request.getParameter("postsByUserFilter"));
+        if(resBusqueda.isEmpty()){
+            System.out.println("USER NOT FOUND");
+            allData.setPostList(null);
+        }else{
+            user = (Usuario) resBusqueda.get(0);
+            allData.setPostList(postFacade.getPostsByUser(user.getUserId()));
+        }
+        /*if (user.getUserId().equals(new BigDecimal(0))) {
+            System.out.println("USER NOT FOUND");
+            allData.setPostList(null);
+        } else {
+            allData.setPostList(postFacade.getPostsByUser(user.getUserId()));
+        }*/
         
-        AdminPageHelper adminPageData = new AdminPageHelper();
         
-        adminPageData.setUserList(usuarioFacade.findByNameContaining(request.getParameter("usernameSearchFilter")));
-        adminPageData.setSearchOption(1);
-        adminPageData.setAdminName("admin editing users"); // coger nombre de session
-        
-        
-        request.setAttribute("allData",adminPageData);
+        request.setAttribute("allData",allData);
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/jsp/admin.jsp");
         rd.forward(request, response);
     }

@@ -6,13 +6,15 @@
 package SessionBeans;
 
 import Entities.Post;
+import java.math.BigDecimal;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Blackproxy
+ * @author EduardROckerse
  */
 @Stateless
 public class PostFacade extends AbstractFacade<Post> {
@@ -26,6 +28,11 @@ public class PostFacade extends AbstractFacade<Post> {
 
     public PostFacade() {
         super(Post.class);
+    }
+    
+    public List<Post> getPostsByUser(BigDecimal n){
+        System.out.println("VOY A PETAR");
+        return em.createQuery("SELECT p FROM Post p").getResultList();
     }
     
 }

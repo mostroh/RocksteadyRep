@@ -78,7 +78,7 @@
                     </div>
                     <div class="3u">
                         <section>
-                            <form action="/AdminServletPostsByUser">
+                            <form action="../AdminPostByUserServlet">
                                 <fieldset>
                                     <legend><b>Delete post</b></legend>
                                     From user:<br>
@@ -103,6 +103,38 @@
                         </section>
                     </div>
                 </div>
+                <!-- SEARCH RESULTS: -->
+
+                <c:choose>
+                <c:when test="${allData.searchOption == 1}"><header>
+                        <br><br><center><h2>User list:</h2></center>
+                    </header>
+
+                    <c:forEach items="${allData.userList}" var="user">
+                        <li>${user.username}</li>
+                        </c:forEach>
+                    </c:when>
+
+                <c:when test="${allData.searchOption == 2}"><header>
+                        <br><br><center><h2>Post list:</h2></center>
+                    </header>
+
+                    <c:forEach items="${allData.postList}" var="post">
+                        <li>${post.postContent}</li>
+                        </c:forEach>
+                    </c:when>
+                        
+                        <c:when test="${allData.searchOption == 3}"><header>
+                        <br><br><center><h2>Post list:</h2></center>
+                    </header>
+
+                    <c:forEach items="${allData.commentList}" var="c">
+                        <li>${c.commentContent}</li>
+                        </c:forEach>
+                    </c:when>
+                        </c:choose>
+
+                <!-- SEARCH RESULTS -->
 
             </div>
             <!-- Main -->

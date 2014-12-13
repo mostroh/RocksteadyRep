@@ -21,47 +21,91 @@ public class AdminPageHelper {
     private List<Post> postList;
     private List<Comentario> comentList;
 
+    /**
+     *
+     */
     public AdminPageHelper() {
     }
     
-    
-    
+    /**
+     *
+     * @return
+     */
     public String getAdminName() {
         return adminName;
     }
 
+    /**
+     *
+     * @param adminName
+     */
     public void setAdminName(String adminName) {
         this.adminName = adminName;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSearchOption() {
         return searchOption;
     }
 
+    /**
+     *
+     * @param searchOption 
+     * 1 = Edit users  
+     * 2 = Delete Post 
+     * 3 =  Delete Comment
+     */
     public void setSearchOption(int searchOption) {
         this.searchOption = searchOption;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Usuario> getUserList() {
         return userList;
     }
 
+    /**
+     *
+     * @param userList
+     */
     public void setUserList(List<Usuario> userList) {
         this.userList = userList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Post> getPostList() {
         return postList;
     }
 
+    /**
+     *
+     * @param postList
+     */
     public void setPostList(List<Post> postList) {
         this.postList = postList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Comentario> getComentList() {
         return comentList;
     }
 
+    /**
+     *
+     * @param comentList
+     */
     public void setComentList(List<Comentario> comentList) {
         this.comentList = comentList;
     }
