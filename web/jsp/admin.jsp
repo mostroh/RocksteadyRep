@@ -65,7 +65,7 @@
 
                     <div class="3u">
                         <section>
-                            <form action="../AdminServletUserNameSearch">
+                            <form action="/AdminServletUserNameSearch">
                                 <fieldset>
                                     <legend><b>Edit users</b></legend>
                                     Filter by:<br>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="3u">
                         <section>
-                            <form action="../AdminServletUserNameSearch">
+                            <form action="/AdminServletUserNameSearch">
                                 <fieldset>
                                     <legend><b>Delete post</b></legend>
                                     From user:<br>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="3u">
                         <section>
-                            <form action="../AdminServletUserNameSearch">
+                            <form action="/AdminServletUserNameSearch">
                                 <fieldset>
                                     <legend><b>Delete comment</b></legend>
                                     From user:<br>
@@ -106,13 +106,11 @@
                 <header>
                     <br><br><center><h2>Registered users:</h2></center>
                 </header>
-                <c:if test="${not empty allUsersList}">
-                    hakuna patata
-                    <c:forEach items="${allUsersList}" var="user">
+
+                <c:forEach items="${allUsersList}" var="user">
                     <li>${user.getUsername()}</li>
                     </c:forEach>
-                </c:if>
-                    nasiguenya
+
             </div>
             <!-- Main -->
 
