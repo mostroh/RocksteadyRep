@@ -54,7 +54,7 @@ public class AdminPostByUserServlet extends HttpServlet {
             allData.setPostList(null);
         }else{
             user = (Usuario) resBusqueda.get(0);
-            allData.setPostList(postFacade.getPostsByUser(user.getUserId()));
+            allData.setPostList(postFacade.getPostsByUser(user));
         }
         /*if (user.getUserId().equals(new BigDecimal(0))) {
             System.out.println("USER NOT FOUND");

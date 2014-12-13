@@ -6,6 +6,7 @@
 package SessionBeans;
 
 import Entities.Post;
+import Entities.Usuario;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -30,9 +31,10 @@ public class PostFacade extends AbstractFacade<Post> {
         super(Post.class);
     }
     
-    public List<Post> getPostsByUser(BigDecimal n){
-        System.out.println("VOY A PETAR");
-        return em.createQuery("SELECT p FROM Post p").getResultList();
+    public List getPostsByUser(Usuario u){
+        return em.createQuery("SELECT p FROM Post p WHERE p.postedBy = :postedBy")
+                .setParameter("postedBy", u)
+                .getResultList();
     }
     
 }
