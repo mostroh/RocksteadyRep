@@ -5,12 +5,10 @@
  */
 package Servlets;
 
-import Entities.Usuario;
 import SessionBeans.AdminPageHelper;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,11 +21,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author EduardROckerse
  */
-@WebServlet(name = "AdminAllUsersServlet", urlPatterns = {"/AdminAllUsersServlet"})
-public class AdminAllUsersServlet extends HttpServlet {
+@WebServlet(name = "AdminUsersFilteredServlet", urlPatterns = {"/AdminUsersFilteredServlet"})
+public class AdminUsersFilteredServlet extends HttpServlet {
     @EJB
     private UsuarioFacade usuarioFacade;
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,7 +39,7 @@ public class AdminAllUsersServlet extends HttpServlet {
             throws ServletException, IOException {
         
         AdminPageHelper adminPageData = new AdminPageHelper();
-        adminPageData.setUserList(usuarioFacade.findAll());
+        adminPageData.setUserList(usuarioFacade.findByNameContaining(request.getParameter("usernameSearchFilter")));
         
         request.setAttribute("allData",adminPageData);
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/jsp/admin.jsp");

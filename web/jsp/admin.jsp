@@ -59,17 +59,17 @@
         <div id="main">
             <div class="container">
                 <header>
-                    <center><h2>Hello < admin >, select desired action to perform:</h2></center><br><br>
+                    <center><h2>Hello < ${allData.adminName} ></h2></center><br><br>
                 </header>
                 <div class="row">
 
                     <div class="3u">
                         <section>
-                            <form action="/AdminServletUserNameSearch">
+                            <form action="../AdminUsersFilteredServlet">
                                 <fieldset>
                                     <legend><b>Edit users</b></legend>
                                     Filter by:<br>
-                                    <input type="text" name="usernameSearch">
+                                    <input type="text" name="usernameSearchFilter">
                                     <br>
                                     <br><br>
                                     <input type="submit" value="Search"></fieldset>
@@ -78,11 +78,11 @@
                     </div>
                     <div class="3u">
                         <section>
-                            <form action="/AdminServletUserNameSearch">
+                            <form action="/AdminServletPostsByUser">
                                 <fieldset>
                                     <legend><b>Delete post</b></legend>
                                     From user:<br>
-                                    <input type="text" name="postsByUser">
+                                    <input type="text" name="postsByUserFilter">
                                     <br>
                                     <br><br>
                                     <input type="submit" value="Find posts"></fieldset>
@@ -91,11 +91,11 @@
                     </div>
                     <div class="3u">
                         <section>
-                            <form action="/AdminServletUserNameSearch">
+                            <form action="/AdminServletCommentsByUser">
                                 <fieldset>
                                     <legend><b>Delete comment</b></legend>
                                     From user:<br>
-                                    <input type="text" name="commentsByUser">
+                                    <input type="text" name="commentsByUserFilter">
                                     <br>
                                     <br><br>
                                     <input type="submit" value="Find comments"></fieldset>
@@ -103,13 +103,6 @@
                         </section>
                     </div>
                 </div>
-                <header>
-                    <br><br><center><h2>Registered users:</h2></center>
-                </header>
-
-                <c:forEach items="${allUsersList}" var="user">
-                    <li>${user.getUsername()}</li>
-                    </c:forEach>
 
             </div>
             <!-- Main -->
