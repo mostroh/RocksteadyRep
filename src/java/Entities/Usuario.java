@@ -241,6 +241,8 @@ public class Usuario implements Serializable {
     public void setComentarioCollection(Collection<Comentario> comentarioCollection) {
         this.comentarioCollection = comentarioCollection;
     }
+    
+    
 
     @Override
     public int hashCode() {
@@ -248,7 +250,7 @@ public class Usuario implements Serializable {
         hash += (userId != null ? userId.hashCode() : 0);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

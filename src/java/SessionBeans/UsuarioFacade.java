@@ -6,13 +6,14 @@
 package SessionBeans;
 
 import Entities.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Blackproxy
+ * @author EduardROckerse
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
@@ -26,6 +27,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    public List findByNameContaining(String s) {
+        return getEntityManager().createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
+                .setParameter("userName", "%"+s+"%")
+                .getResultList();
+    }
+    
+    public List findByNameBegining(String s){
+        return getEntityManager().createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
+                .setParameter("userName", s+"%")
+                .getResultList();
     }
     
 }
