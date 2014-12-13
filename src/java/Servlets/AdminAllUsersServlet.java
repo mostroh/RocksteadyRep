@@ -8,6 +8,7 @@ package Servlets;
 import Entities.Usuario;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author EduardROckerse
  */
-@WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
-public class AdminServlet extends HttpServlet {
+@WebServlet(name = "AdminAllUsersServlet", urlPatterns = {"/AdminAllUsersServlet"})
+public class AdminAllUsersServlet extends HttpServlet {
     @EJB
     private UsuarioFacade usuarioFacade;
 
@@ -37,14 +38,13 @@ public class AdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Usuario> userList= usuarioFacade.findByNameContaining("ac");
-        
-        
-        
-        request.setAttribute("filteredUserList",userList);
-        
-        RequestDispatcher rd;
-        rd = getServletContext().getRequestDispatcher("/jsp/admin.jsp");
+        response.setContentType("text/html;charset=UTF-8");
+         List<Usuario> userList= usuarioFacade.findAll();
+        for (Usuario u: userList){
+                System.out.println("Customer name: "+u.getName());
+            }
+        request.setAttribute("allUsersList",userList);
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/jsp/admin.jsp");
         rd.forward(request, response);
     }
 

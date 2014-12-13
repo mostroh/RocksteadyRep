@@ -35,6 +35,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
                 .getResultList();
     }
     
+    
     public List findByNameBegining(String s){
         return em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
                 .setParameter("userName", s+"%")
