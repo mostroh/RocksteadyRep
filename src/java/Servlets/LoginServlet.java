@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             if (user.getUserType().equals(1)) {
                 sesion.setAttribute("tipoUsuario", "Cliente");
-                //path = "jsp/admin.jsp";
+                //path = "/jsp/admin.jsp";
                 // prueba mientras corrijo el error de la variable path
                
 
