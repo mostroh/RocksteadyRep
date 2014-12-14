@@ -8,34 +8,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/ServletMap"})
-public class Servlet_map2 extends HttpServlet {
+@WebServlet(urlPatterns = {"/Servlet_World"})
+public class Servlet_World extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-
-            out.println("<style>");
-            out.println("html { height: 100% }");
-            out.println("body { height: 100%; margin: 0; padding: 0 }");
-            out.println("#map_canvas { height: 100% }");
+            out.println("<style type=\"text/css\">");
+            out.println("html{height:100%}");
+            out.println("body{height:100%; margin:0; padding:0}");
+            out.println("#map{height:100%}");
             out.println("</style>");
-
-            out.println("<script type=\"text/javascript\" src=\"http://maps.googleapis.com/maps/api/js?key=AIzaSyAgG5LgI0PmcY0nFxyecNOJEWhVIrQjdWs&sensor=false\"></script>");
-            out.println("<script type=\"text/javascript\" src=\"/js/maps_1.js\"></script>");
-
+            out.println("<title>Localizaciones de los post</title>");
+            out.println("<script src=\"http://maps.google.com/maps/api/js?sensor=false\" type=\"text/javascript\"></script>");
             out.println("</head>");
-            out.println("<body onload=\"initialize()\">");
-
-            out.println("<div id=\"map_canvas\" style=\"width:100%; height:100%\"></div>");
-
+            out.println("<body>");
+            out.println("<div id=\"map_world\" style=\"height: 100%; width: 100%;\"></div>");
+            out.println("<script type=\"text/javascript\" src=\"/js/world.js\"></script>");
             out.println("</body>");
             out.println("</html>");
         }
