@@ -12,7 +12,6 @@ import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import static java.util.Objects.isNull;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

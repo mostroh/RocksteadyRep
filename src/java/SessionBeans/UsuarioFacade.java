@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
+
     @PersistenceContext(unitName = "RocksteadyBlogPU")
     private EntityManager em;
 
@@ -29,24 +30,38 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
-    public List getUserByName(String s){
-        return  em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
+
+    public List getUserByName(String s) {
+        return em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
                 .setParameter("userName", s)
                 .getResultList();
     }
-    
+
     public List findByNameContaining(String s) {
         return em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
-                .setParameter("userName", "%"+s+"%")
+                .setParameter("userName", "%" + s + "%")
                 .getResultList();
     }
-    
-    
-    public List findByNameBegining(String s){
+
+    public List findByNameBegining(String s) {
         return em.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :userName")
-                .setParameter("userName", s+"%")
+                .setParameter("userName", s + "%")
                 .getResultList();
     }
-    
+
+    public Usuario getUserByNickname(String nick, String password) {
+
+        List<Usuario> usersList = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :nick and u.password = :password")
+                .setParameter("nick", nick)
+                .setParameter("password", password)
+                .getResultList();
+
+        if (usersList != null && usersList.size() > 0) {
+            return usersList.get(0);
+        } else {
+            return null;
+        }
+
+    }
+
 }
