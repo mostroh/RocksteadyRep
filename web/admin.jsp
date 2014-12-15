@@ -109,6 +109,13 @@
 
                     <c:when test="${allData.searchOption == 1}">
                         <c:choose>
+                            <c:when test="${empty allData.userList}">
+                                <br><br>
+                                <header>
+                                    <center>
+                                        <h2><font color="red">No users found</font></h2></center>
+                                </header>
+                            </c:when>
                             <c:when test="${not empty allData.userList}">
                                 <br><br>
                                 <header>
@@ -116,16 +123,42 @@
                                         <h2><font color="green">Users found:</font></h2>
                                     </center>
                                 </header>
-                                <c:forEach items="${allData.userList}" var="user">
-                                    <li>${user.username}</li>
+                                <table style="width:100%">
+                                    <tr>
+                                        <th><b>Username</b></th>
+                                        <th><b>User-level</b></th>
+                                        <th><b>Perform action</b></th>
+                                    </tr>
+                                    <c:forEach items="${allData.userList}" var="user">
+
+
+                                        <tr>
+                                            <td>${user.username}</td>
+                                            <c:choose>
+                                                <c:when test="${user.userType == 1}">
+                                                    <td>Admin</td>
+                                                </c:when>
+                                                <c:when test="${user.userType == 2}">
+                                                    <td>Writer</td>
+                                                </c:when>
+                                                <c:when test="${user.userType == 3}">
+                                                    <td>Registered</td>
+                                                </c:when>
+                                            </c:choose>
+
+                                            <td>
+                                                <select id="userEdit" onchange="AdminEditUserServlet">
+                                                    <option value="default">Select action...</option>
+                                                    <option value="setAdmin">Set Admin</option>
+                                                    <option value="setAdmin">Set Writer</option>
+                                                    <option value="setAdmin">Set Registered</option>
+                                                    <option value="deleteUser">Delete User</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+
                                     </c:forEach>
-                                </c:when>
-                                <c:when test="${empty allData.userList}">
-                                <br><br>
-                                <header>
-                                    <center>
-                                        <h2><font color="red">No users found</font></h2></center>
-                                </header>
+                                </table>
                             </c:when>
                         </c:choose>
 
@@ -181,7 +214,7 @@
                             </c:when>
                         </c:choose>
                     </c:when>
-                                    
+
                 </c:choose>
                 <!-- SEARCH RESULTS -->
 
