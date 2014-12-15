@@ -35,8 +35,8 @@ public class LogOutServlet extends HttpServlet {
         sesion.removeAttribute("usuario");
         sesion.removeAttribute("tipoUsuario");
        
-         String ruta = "/Login.jsp";
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(ruta);
+         String path = "/Login.jsp";
+        RequestDispatcher rd = getServletContext().getRequestDispatcher(path);
         rd.forward(request, response);
     }
 

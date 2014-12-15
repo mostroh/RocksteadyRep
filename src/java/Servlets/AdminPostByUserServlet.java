@@ -10,7 +10,6 @@ import SessionBeans.AdminPageHelper;
 import SessionBeans.PostFacade;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -55,16 +54,9 @@ public class AdminPostByUserServlet extends HttpServlet {
             user = (Usuario) resBusqueda.get(0);
             allData.setPostList(postFacade.getPostsByUser(user));
         }
-        /*if (user.getUserId().equals(new BigDecimal(0))) {
-            System.out.println("USER NOT FOUND");
-            allData.setPostList(null);
-        } else {
-            allData.setPostList(postFacade.getPostsByUser(user.getUserId()));
-        }*/
-        
         
         request.setAttribute("allData",allData);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/jsp/admin.jsp");
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin.jsp");
         rd.forward(request, response);
     }
 

@@ -19,7 +19,7 @@ public class AdminPageHelper {
     private int searchOption;
     private List<Usuario> userList;
     private List<Post> postList;
-    private List<Comentario> comentList;
+    private List<Comentario> commentList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class AdminPageHelper {
      *
      * @return
      */
-    public List<Comentario> getComentList() {
-        return comentList;
+    public List<Comentario> getCommentList() {
+        return commentList;
     }
 
     /**
      *
      * @param comentList
      */
-    public void setComentList(List<Comentario> comentList) {
-        this.comentList = comentList;
+    public void setCommentList(List<Comentario> comentList) {
+        this.commentList = comentList;
     }
     
     

@@ -1,5 +1,7 @@
 package Servlets;
 
+
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,17 +22,9 @@ public class Servlet_World extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<style type=\"text/css\">");
-            out.println("html{height:100%}");
-            out.println("body{height:100%; margin:0; padding:0}");
-            out.println("#map{height:100%}");
-            out.println("</style>");
             out.println("<title>Localizaciones de los post</title>");
-            out.println("<script src=\"http://maps.google.com/maps/api/js?sensor=false\" type=\"text/javascript\"></script>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<div id=\"map_world\" style=\"height: 100%; width: 100%;\"></div>");
-            out.println("<script type=\"text/javascript\" src=\"/js/world.js\"></script>");
             out.println("</body>");
             out.println("</html>");
         }

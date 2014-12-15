@@ -1,13 +1,12 @@
-function initialize(latitud,longitud,contentString) {
-
-    
+function coordenadas(latitud,longitud,contentString) {
+   
     var posicion = new google.maps.LatLng(latitud,longitud);
     var mapOptions = {
         zoom: 11,
         center: posicion
     };
 
-    var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
     
     var contentString;
 
@@ -29,8 +28,8 @@ function cargarMapa(idPost,gps,contentStr){
     var lat = gpsSplit[0];
     var long = gpsSplit[1];
     $("#mapa"+idPost.toString()).click(function(){
-        $("#mostrarMapa"+idPost.toString()).load("falsomapa.jsp");
+        $("#mostrarMapa"+idPost.toString()).load("/RocksteadyRep/jsp/maps.jsp?latitud=44&longitud=-2");
     });
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', coordenadas);

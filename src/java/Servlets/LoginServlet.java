@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
         String Password = (String) request.getParameter("pwd");
 
         Usuario user = usuarioFacade.getUserByNickname(Nombre, Password);
-        System.out.println("" + user.getLastName());
+       
 
         if (user != null) {
             if (user.getUserType().equals(1)) {
@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
             rd.forward(request, response);
         } else {
             //path = "/index.html";
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+          RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.forward(request, response);
 
         }

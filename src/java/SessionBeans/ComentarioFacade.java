@@ -6,6 +6,9 @@
 package SessionBeans;
 
 import Entities.Comentario;
+import Entities.Post;
+import Entities.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +29,12 @@ public class ComentarioFacade extends AbstractFacade<Comentario> {
 
     public ComentarioFacade() {
         super(Comentario.class);
+    }
+
+    public List<Comentario> getCommentsByUser(Usuario u) {
+        return em.createQuery("SELECT c FROM Comentario c WHERE c. = :commentedBy")
+                .setParameter("commentedBy", u)
+                .getResultList();
     }
     
 }

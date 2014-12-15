@@ -65,7 +65,7 @@
 
                     <div class="3u">
                         <section>
-                            <form action="../AdminUsersFilteredServlet">
+                            <form action="AdminUsersFilteredServlet">
                                 <fieldset>
                                     <legend><b>Edit users</b></legend>
                                     Filter by:<br>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="3u">
                         <section>
-                            <form action="../AdminPostByUserServlet">
+                            <form action="AdminPostByUserServlet">
                                 <fieldset>
                                     <legend><b>Delete post</b></legend>
                                     From user:<br>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="3u">
                         <section>
-                            <form action="/AdminServletCommentsByUser">
+                            <form action="AdminCommentByUserServlet">
                                 <fieldset>
                                     <legend><b>Delete comment</b></legend>
                                     From user:<br>
@@ -106,33 +106,36 @@
                 <!-- SEARCH RESULTS: -->
 
                 <c:choose>
-                <c:when test="${allData.searchOption == 1}"><header>
-                        <br><br><center><h2>User list:</h2></center>
-                    </header>
+                    <c:when test="${allData.searchOption == 1}"><header>
+                            <c:choose><c:when test="${not empty allData.userList}"><br><br><center><h2>User list:</h2></center>
+                                </header></c:when>
+                                <c:when test="${empty allData.userList}"><br><br><center><h2><font color="red">No users found</font></h2></center>
+                                </header></c:when>
+                            </c:choose>
 
-                    <c:forEach items="${allData.userList}" var="user">
-                        <li>${user.username}</li>
-                        </c:forEach>
-                    </c:when>
+                        <c:forEach items="${allData.userList}" var="user">
+                            <li>${user.username}</li>
+                            </c:forEach>
+                        </c:when>
 
-                <c:when test="${allData.searchOption == 2}"><header>
-                        <br><br><center><h2>Post list:</h2></center>
-                    </header>
+                    <c:when test="${allData.searchOption == 2}"><header>
+                            <br><br><center><h2>Post list:</h2></center>
+                        </header>
 
-                    <c:forEach items="${allData.postList}" var="post">
-                        <li>${post.postContent}</li>
-                        </c:forEach>
-                    </c:when>
-                        
-                        <c:when test="${allData.searchOption == 3}"><header>
-                        <br><br><center><h2>Post list:</h2></center>
-                    </header>
+                        <c:forEach items="${allData.postList}" var="post">
+                            <li>${post.postContent}</li>
+                            </c:forEach>
+                        </c:when>
 
-                    <c:forEach items="${allData.commentList}" var="c">
-                        <li>${c.commentContent}</li>
-                        </c:forEach>
-                    </c:when>
-                        </c:choose>
+                    <c:when test="${allData.searchOption == 3}"><header>
+                            <br><br><center><h2>Post list:</h2></center>
+                        </header>
+
+                        <c:forEach items="${allData.commentList}" var="c">
+                            <li>${c.commentContent}</li>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
 
                 <!-- SEARCH RESULTS -->
 
