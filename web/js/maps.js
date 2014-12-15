@@ -1,22 +1,14 @@
-function initialize() {
-
-    latitud = 43.267804;
-    longitud = -2.935055;
-    
+function coordenadas(latitud,longitud,contentString) {
+   
     var posicion = new google.maps.LatLng(latitud,longitud);
     var mapOptions = {
         zoom: 11,
         center: posicion
     };
 
-    var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
     
-    var contentString = '<div id="content">' + '<div id="siteNotice">' +
-            '</div>' + '<h1>BBK LIVE Bilbao</h1>' +
-            '<div id="bodyContent">' +
-            '<p>Enlace <a href=""</a></p>' +
-            '</div>' +
-            '</div>';
+    var contentString;
 
     var infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -31,4 +23,13 @@ function initialize() {
         infowindow.open(map, marker);
     });
 }
-google.maps.event.addDomListener(window, 'load', initialize);
+function cargarMapa(idPost,gps,contentStr){
+    var gpsSplit = gps.toString().split(",");
+    var lat = gpsSplit[0];
+    var long = gpsSplit[1];
+    $("#mapa"+idPost.toString()).click(function(){
+        $("#mostrarMapa"+idPost.toString()).load("/RocksteadyRep/jsp/maps.jsp?latitud=44&longitud=-2");
+    });
+}
+
+google.maps.event.addDomListener(window, 'load', coordenadas);

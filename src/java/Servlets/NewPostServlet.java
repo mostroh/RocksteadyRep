@@ -9,7 +9,7 @@ import Entities.Post;
 import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Blackproxy
  */
-@WebServlet(name = "PostServlet", urlPatterns = {"/PostServlet"})
-public class PostServlet extends HttpServlet {
+@WebServlet(name = "NewPostServlet", urlPatterns = {"/NewPostServlet"})
+public class NewPostServlet extends HttpServlet {
     @EJB
     private PostFacade postFacade;
 
@@ -37,9 +37,21 @@ public class PostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List <Post> postList = postFacade.getRecentPost();
-        request.setAttribute("postList", postList);
-        request.getServletContext().getRequestDispatcher("/blog.jsp").forward(request, response);
+        String postTitle = (String) request.getAttribute("postTitle");
+        String postContent = (String) request.getAttribute("postContent");
+        //Serializable postImage = (Serializable) request.getAttribute("postImage");
+        // Fecha del post sacada de la sesion ?
+        // Usuario = request.getSession(); sacar usuario logueado
+        // 
+        Post nuevoPost = new Post();
+        //nuevoPost.setPostDate();
+        //nuevoPost.setHeaderImage(nuevoPost);
+        //nuevoPost.setPostedBy();
+        //nuevoPost.setPostGps();
+        nuevoPost.setTitle(postTitle);
+        nuevoPost.setPostContent(postContent);
+        postFacade.create(nuevoPost);
+        request.getServletContext().getRequestDispatcher("blog.jsp").forward(request, response);
         
     }
 
