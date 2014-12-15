@@ -1,7 +1,5 @@
-function initialize() {
+function initialize(latitud,longitud,contentString) {
 
-    latitud = 43.267804;
-    longitud = -2.935055;
     
     var posicion = new google.maps.LatLng(latitud,longitud);
     var mapOptions = {
@@ -11,12 +9,7 @@ function initialize() {
 
     var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
     
-    var contentString = '<div id="content">' + '<div id="siteNotice">' +
-            '</div>' + '<h1>BBK LIVE Bilbao</h1>' +
-            '<div id="bodyContent">' +
-            '<p>Enlace <a href=""</a></p>' +
-            '</div>' +
-            '</div>';
+    var contentString;
 
     var infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -31,4 +24,13 @@ function initialize() {
         infowindow.open(map, marker);
     });
 }
+function cargarMapa(idPost,gps,contentStr){
+    var gpsSplit = gps.toString().split(",");
+    var lat = gpsSplit[0];
+    var long = gpsSplit[1];
+    $("#mapa"+idPost.toString()).click(function(){
+        $("#mostrarMapa"+idPost.toString()).load("falsomapa.jsp");
+    });
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);
