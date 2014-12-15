@@ -106,37 +106,118 @@
                 <!-- SEARCH RESULTS: -->
 
                 <c:choose>
-                    <c:when test="${allData.searchOption == 1}"><header>
-                            <c:choose><c:when test="${not empty allData.userList}"><br><br><center><h2>User list:</h2></center>
+
+                    <c:when test="${allData.searchOption == 1}">
+                        <c:choose>
+                            <c:when test="${empty allData.userList}">
+                                <br><br>
+                                <header>
+                                    <center>
+                                        <h2><font color="red">No users found</font></h2></center>
+                                </header>
+                            </c:when>
+                            <c:when test="${not empty allData.userList}">
+                                <br><br>
+                                <header>
+                                    <center>
+                                        <h2><font color="green">Users found:</font></h2>
+                                    </center>
+                                </header>
+                                <table style="width:100%">
+                                    <tr>
+                                        <th><b>Username</b></th>
+                                        <th><b>User-level</b></th>
+                                        <th><b>Perform action</b></th>
+                                    </tr>
+                                    <c:forEach items="${allData.userList}" var="user">
+
+
+                                        <tr>
+                                            <td>${user.username}</td>
+                                            <c:choose>
+                                                <c:when test="${user.userType == 1}">
+                                                    <td>Admin</td>
+                                                </c:when>
+                                                <c:when test="${user.userType == 2}">
+                                                    <td>Writer</td>
+                                                </c:when>
+                                                <c:when test="${user.userType == 3}">
+                                                    <td>Registered</td>
+                                                </c:when>
+                                            </c:choose>
+
+                                            <td>
+                                                <form action="AdminEditUserServlet">
+                                                    <select id="userEdit" onchange="this.form.submit()">
+                                                        <option value="default">Select action...</option>
+                                                        <option value="setAdmin">Set Admin</option>
+                                                        <option value="setAdmin">Set Writer</option>
+                                                        <option value="setAdmin">Set Registered</option>
+                                                        <option value="deleteUser">Delete User</option>
+                                                    </select>
+                                                </form>
+                                            </td>
+                                        </tr>
+
+                                    </c:forEach>
+                                </table>
+                            </c:when>
+                        </c:choose>
+
+
+                    </c:when>
+
+                    <c:when test="${allData.searchOption == 2}"><c:choose>
+                            <c:when test="${empty allData.postList}">
+                                <br><br>
+                                <header>
+                                    <center>
+                                        <h2><font color="red">No posts found.</font></h2>
+                                        <br>
+                                        <h5>Please make sure username is valid.</h5>
+                                    </center>
+                                </header>
+                            </c:when>
+                            <c:when test="${not empty allData.postList}">
+                                <br><br>
+                                <header>
+                                    <center>
+                                        <h2><font color="green">Post list:</font></h2>
+                                    </center>
+                                </header>
+
+                                <c:forEach items="${allData.postList}" var="post">
+                                    <li>${post.title}</li>
+                                    </c:forEach>
+                                </c:when>
+
+                        </c:choose>
+
+
+                    </c:when>
+
+                    <c:when test="${allData.searchOption == 3}">
+                        <c:choose>
+                            <c:when test="${empty allData.commentList}">
+                                <br><br>
+                                <header>
+                                    <center><h2><font color="red">No comments found.</font></h2>
+                                        <br><h5>Please make sure username is valid.</h5></center>
                                 </header></c:when>
-                                <c:when test="${empty allData.userList}"><br><br><center><h2><font color="red">No users found</font></h2></center>
-                                </header></c:when>
-                            </c:choose>
+                            <c:when test="${not empty allData.commentList}">
+                                <br><br>
+                                <header>
+                                    <center><h2><font color="green">Comments found:</font></h2></center>
+                                </header>
+                                <c:forEach items="${allData.commentList}" var="c">
+                                    <li>${c.commentContent}</li>
+                                    </c:forEach>
 
-                        <c:forEach items="${allData.userList}" var="user">
-                            <li>${user.username}</li>
-                            </c:forEach>
-                        </c:when>
+                            </c:when>
+                        </c:choose>
+                    </c:when>
 
-                    <c:when test="${allData.searchOption == 2}"><header>
-                            <br><br><center><h2>Post list:</h2></center>
-                        </header>
-
-                        <c:forEach items="${allData.postList}" var="post">
-                            <li>${post.postContent}</li>
-                            </c:forEach>
-                        </c:when>
-
-                    <c:when test="${allData.searchOption == 3}"><header>
-                            <br><br><center><h2>Post list:</h2></center>
-                        </header>
-
-                        <c:forEach items="${allData.commentList}" var="c">
-                            <li>${c.commentContent}</li>
-                            </c:forEach>
-                        </c:when>
-                    </c:choose>
-
+                </c:choose>
                 <!-- SEARCH RESULTS -->
 
             </div>

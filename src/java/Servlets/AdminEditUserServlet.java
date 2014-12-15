@@ -5,13 +5,8 @@
  */
 package Servlets;
 
-import Entities.Usuario;
-import SessionBeans.AdminPageHelper;
-import SessionBeans.ComentarioFacade;
-import SessionBeans.UsuarioFacade;
 import java.io.IOException;
-import java.util.List;
-import javax.ejb.EJB;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,12 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author inftel13
  */
-@WebServlet(name = "AdminCommentByUserServlet", urlPatterns = {"/AdminCommentByUserServlet"})
-public class AdminCommentByUserServlet extends HttpServlet {
-    @EJB
-    private UsuarioFacade usuarioFacade;
-    @EJB
-    private ComentarioFacade comentarioFacade;
+@WebServlet(name = "AdminEditUserServlet", urlPatterns = {"/AdminEditUserServlet"})
+public class AdminEditUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,22 +32,7 @@ public class AdminCommentByUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        AdminPageHelper allData = new AdminPageHelper();
-        allData.setSearchOption(3);
-        allData.setAdminName("comment deleting admin");
-        Usuario user;
-        List resBusqueda = usuarioFacade.getUserByName(request.getParameter("commentsByUserFilter"));
-        if(resBusqueda.isEmpty()){
-            System.out.println("IM HERE: USER NOT FOUND");
-            allData.setPostList(null);
-        }else{
-            user = (Usuario) resBusqueda.get(0);
-            allData.setCommentList(comentarioFacade.getCommentsByUser(user));
-        }
-
-        
-        request.setAttribute("allData",allData);
+        System.out.println("Voy a editar algo...");
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin.jsp");
         rd.forward(request, response);
     }
