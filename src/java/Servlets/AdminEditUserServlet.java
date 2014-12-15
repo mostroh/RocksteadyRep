@@ -32,7 +32,7 @@ public class AdminEditUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Voy a editar algo...");
+        System.out.println("Necesito saber la opción seleccionada..." + request.getParameter("userEdit"));
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin.jsp");
         rd.forward(request, response);
     }

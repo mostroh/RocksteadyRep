@@ -148,7 +148,7 @@
 
                                             <td>
                                                 <form action="AdminEditUserServlet">
-                                                    <select id="userEdit" onchange="this.form.submit()">
+                                                    <select name="userEdit" onchange="this.form.submit();">
                                                         <option value="default">Select action...</option>
                                                         <option value="setAdmin">Set Admin</option>
                                                         <option value="setAdmin">Set Writer</option>
