@@ -5,12 +5,9 @@
  */
 package Servlets;
 
-import Entities.Usuario;
 import SessionBeans.AdminPageHelper;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,11 +37,13 @@ public class AdminAllUsersServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        AdminPageHelper adminPageData = new AdminPageHelper();
-        adminPageData.setUserList(usuarioFacade.findAll());
+        AdminPageHelper allData = new AdminPageHelper();
+        allData.setSearchOption(1);
+        allData.setAdminName("userEditingAdmin"); // coger nombre de session
+        allData.setUserList(usuarioFacade.findAll());
         
-        request.setAttribute("allData",adminPageData);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/jsp/admin.jsp");
+        request.setAttribute("allData",allData);
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin.jsp");
         rd.forward(request, response);
     }
 

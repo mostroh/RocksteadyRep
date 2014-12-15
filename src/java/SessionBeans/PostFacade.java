@@ -32,7 +32,7 @@ public class PostFacade extends AbstractFacade<Post> {
     }
     
     public List getPostsByUser(Usuario u){
-        return em.createQuery("SELECT p FROM Post p WHERE p.postedBy = :postedBy")
+        return em.createQuery("SELECT p FROM Post p WHERE p.commentBy = :postedBy")
                 .setParameter("postedBy", u)
                 .getResultList();
     }
