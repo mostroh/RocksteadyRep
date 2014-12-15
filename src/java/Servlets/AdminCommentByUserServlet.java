@@ -8,10 +8,8 @@ package Servlets;
 import Entities.Usuario;
 import SessionBeans.AdminPageHelper;
 import SessionBeans.ComentarioFacade;
-import SessionBeans.PostFacade;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -48,9 +46,9 @@ public class AdminCommentByUserServlet extends HttpServlet {
         allData.setSearchOption(3);
         allData.setAdminName("comment deleting admin");
         Usuario user;
-        List resBusqueda = usuarioFacade.getUserByName(request.getParameter("postsByUserFilter"));
+        List resBusqueda = usuarioFacade.getUserByName(request.getParameter("commentsByUserFilter"));
         if(resBusqueda.isEmpty()){
-            System.out.println("USER NOT FOUND");
+            System.out.println("IM HERE: USER NOT FOUND");
             allData.setPostList(null);
         }else{
             user = (Usuario) resBusqueda.get(0);

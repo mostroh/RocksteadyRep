@@ -32,7 +32,7 @@ public class ComentarioFacade extends AbstractFacade<Comentario> {
     }
 
     public List<Comentario> getCommentsByUser(Usuario u) {
-        return em.createQuery("SELECT c FROM Comentario c WHERE c. = :commentedBy")
+        return em.createQuery("SELECT c FROM Comentario c WHERE c.commentBy = :commentedBy")
                 .setParameter("commentedBy", u)
                 .getResultList();
     }
