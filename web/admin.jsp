@@ -147,13 +147,15 @@
                                             </c:choose>
 
                                             <td>
-                                                <select id="userEdit" onchange="AdminEditUserServlet">
-                                                    <option value="default">Select action...</option>
-                                                    <option value="setAdmin">Set Admin</option>
-                                                    <option value="setAdmin">Set Writer</option>
-                                                    <option value="setAdmin">Set Registered</option>
-                                                    <option value="deleteUser">Delete User</option>
-                                                </select>
+                                                <form action="AdminEditUserServlet">
+                                                    <select id="userEdit" onchange="this.form.submit()">
+                                                        <option value="default">Select action...</option>
+                                                        <option value="setAdmin">Set Admin</option>
+                                                        <option value="setAdmin">Set Writer</option>
+                                                        <option value="setAdmin">Set Registered</option>
+                                                        <option value="deleteUser">Delete User</option>
+                                                    </select>
+                                                </form>
                                             </td>
                                         </tr>
 
