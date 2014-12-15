@@ -5,26 +5,26 @@
  */
 package Servlets;
 
-import Entities.Post;
-import SessionBeans.PostFacade;
+import Entities.Usuario;
+import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Blackproxy
+ * @author YSF
  */
-@WebServlet(name = "PostServlet", urlPatterns = {"/PostServlet"})
-public class PostServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
+
     @EJB
-    private PostFacade postFacade;
+    private UsuarioFacade usuarioFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,14 +37,43 @@ public class PostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List <Post> postList = postFacade.findAll();
-        System.out.println("hjfhjfhjfdfd");
-        request.setAttribute("postList", postList);
-        request.getServletContext().getRequestDispatcher("/jsp/mainblog.jsp").forward(request, response);
-        
+        HttpSession sesion = request.getSession();
+        //String path = null;
+        String Nombre = (String) request.getParameter("name");
+        String Password = (String) request.getParameter("pwd");
+
+        Usuario user = usuarioFacade.getUserByNickname(Nombre, Password);
+        System.out.println("" + user.getLastName());
+
+        if (user != null) {
+            if (user.getUserType().equals(1)) {
+                sesion.setAttribute("tipoUsuario", "Cliente");
+                //path = "/jsp/admin.jsp";
+                // prueba mientras corrijo el error de la variable path
+               
+
+            } else if (user.getUserType().equals(2)) {
+                sesion.setAttribute("tipoUsuario", "Escritor");
+               // path = "/index.html";
+              
+            } else if (user.getUserType().equals(3)) {
+                 sesion.setAttribute("tipoUsuario", "Administrador");
+                //path = "/index.html";
+               
+            }
+            sesion.setAttribute("usuario", user);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/blog.html");
+            rd.forward(request, response);
+        } else {
+            //path = "/index.html";
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+            rd.forward(request, response);
+
+        }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

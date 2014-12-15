@@ -50,12 +50,10 @@ public class Post implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     
     @Id
+    @Basic(optional = false)
+    @NotNull
     @GeneratedValue(strategy=TABLE, generator="CUST_GEN")
-    @Column(name="CUST_ID")
-//    @Id
-//    @Basic(optional = false)
-//    @NotNull
-//    @Column(name = "POST_ID")
+    @Column(name="POST_ID")
     private BigDecimal postId;
     @Column(name = "MVPOST")
     private Character mvpost;

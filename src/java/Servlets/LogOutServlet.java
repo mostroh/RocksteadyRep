@@ -5,26 +5,20 @@
  */
 package Servlets;
 
-import Entities.Post;
-import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Blackproxy
+ * @author YSF
  */
-@WebServlet(name = "PostServlet", urlPatterns = {"/PostServlet"})
-public class PostServlet extends HttpServlet {
-    @EJB
-    private PostFacade postFacade;
+public class LogOutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,11 +31,13 @@ public class PostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List <Post> postList = postFacade.findAll();
-        System.out.println("hjfhjfhjfdfd");
-        request.setAttribute("postList", postList);
-        request.getServletContext().getRequestDispatcher("/jsp/mainblog.jsp").forward(request, response);
-        
+          HttpSession sesion = request.getSession();
+        sesion.removeAttribute("usuario");
+        sesion.removeAttribute("tipoUsuario");
+       
+         String ruta = "/Login.jsp";
+        RequestDispatcher rd = getServletContext().getRequestDispatcher(ruta);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
