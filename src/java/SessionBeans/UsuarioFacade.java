@@ -7,6 +7,7 @@ package SessionBeans;
 
 import Entities.Usuario;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -74,6 +75,31 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         }
         
         return usuario;
+    }
+    
+    public void makeAdmin(BigDecimal userID){
+        Usuario u = em.find(Usuario.class, userID);
+        em.getTransaction().begin();
+        u.setUserType(BigInteger.ONE);
+        em.getTransaction().commit();
+    }
+    
+    public void makeRegistered(BigDecimal userID){
+        Usuario u = em.find(Usuario.class, userID);
+        em.getTransaction().begin();
+        u.setUserType(BigInteger.valueOf(3));
+        em.getTransaction().commit();
+    }
+    
+    public void makeWriter(BigDecimal userID){
+        Usuario u = em.find(Usuario.class, userID);
+        em.getTransaction().begin();
+        u.setUserType(BigInteger.valueOf(2));
+        em.getTransaction().commit();
+    }
+    
+    public void deleteUser(BigDecimal userID){
+        em.createQuery("DELETE ")
     }
 
 }

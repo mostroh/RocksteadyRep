@@ -5,8 +5,12 @@
  */
 package Servlets;
 
+import SessionBeans.AdminActionPerformedHelper;
+import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AdminEditUserServlet", urlPatterns = {"/AdminEditUserServlet"})
 public class AdminEditUserServlet extends HttpServlet {
+    @EJB
+    private UsuarioFacade usuarioFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,8 +38,26 @@ public class AdminEditUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Necesito saber la opción seleccionada..." + request.getParameter("userEdit"));
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin.jsp");
+        String option = request.getParameter("userEdit").replaceAll("[^a-zA-Z]","");
+        int userID = Integer.parseInt(request.getParameter("userEdit").replaceAll("[a-zA-Z]",""));
+        AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
+        adminActionData.setOption(option);
+        adminActionData.setUserID(userID);
+        
+        if(option.equals("setAdmin")){
+            usuarioFacade.makeAdmin(new BigDecimal(userID));
+        }else if(option.equals("setWriter")){
+            usuarioFacade.makeWriter(new BigDecimal(userID));
+        }else if(option.equals("setRegistered")){
+            usuarioFacade.makeRegistered(new BigDecimal(userID));
+        }else if(option.equals("deleteUser")){
+            usuarioFacade.deleteUser(new BigDecimal(userID));
+        }else{
+            //ERROR
+        }
+        
+        
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin_ok.jsp");
         rd.forward(request, response);
     }
 

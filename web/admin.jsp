@@ -150,10 +150,10 @@
                                                 <form action="AdminEditUserServlet">
                                                     <select name="userEdit" onchange="this.form.submit();">
                                                         <option value="default">Select action...</option>
-                                                        <option value="setAdmin">Set Admin</option>
-                                                        <option value="setAdmin">Set Writer</option>
-                                                        <option value="setAdmin">Set Registered</option>
-                                                        <option value="deleteUser">Delete User</option>
+                                                        <option value="setAdmin${user.userId}">Set Admin</option>
+                                                        <option value="setWriter${user.userId}">Set Writer</option>
+                                                        <option value="setRegistered${user.userId}">Set Registered</option>
+                                                        <option value="deleteUser${user.userId}">Delete User</font></option>
                                                     </select>
                                                 </form>
                                             </td>
