@@ -208,6 +208,8 @@
                 </form> 
                 </c:if>
                 
+                <a href="LoginServlet">mi enlace</a>
+                
             </div>
         </div>
 
