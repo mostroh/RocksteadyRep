@@ -20,6 +20,7 @@
         <script src="js/skel-panels.min.js"></script>
         <script src="js/init.js"></script>
         <script src="js/maps.js" type="text/javascript"></script>
+        <script src="js/initializeMAPS.js" type="text/javascript"></script>
         <noscript>
         <link rel="stylesheet" href="css/skel-noscript.css" />
         <link rel="stylesheet" href="css/style.css" />
@@ -83,26 +84,26 @@
                                 <p>${post.getPostContent()}</p>
                             </section>
                         </div>
+
                         <div id="mostrarMapa${post.getPostId()}">
-                            <a onclick="cargarMapa(${post.getPostId()},${post.getPostGps()})" href="#mapa${post.getPostId()}">SHOW MAP</a>
+                            <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">SHOW MAP</a>
                         </div>
-                        
+
                         <div>
-                                <c:forEach items="${post.getComentarioCollection()}" var="comentario">
-                                    <div class="row">
-                                        <div class="container">
-                                            <header>
-                                                <hr>
-                                                <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
-                                                <p>${comentario.getCommentContent()}</p>
-                                            </header>
-                                        </div>
+                            <c:forEach items="${post.getComentarioCollection()}" var="comentario">
+                                <div class="row">
+                                    <div class="container">
+                                        <header>
+                                            <hr>
+                                            <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
+                                            <p>${comentario.getCommentContent()}</p>
+                                        </header>
                                     </div>
-                                </c:forEach>
-                            </div>
+                                </div>
+                            </c:forEach>
+                        </div>
 
                         <!-- /Content -->
-
                     </div>
                 </c:forEach>
 
