@@ -85,8 +85,9 @@
                             </section>
                         </div>
 
-                        <div id="mostrarMapa${post.getPostId()}">
-                            <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">SHOW MAP</a>
+                        <div id="mostrarMapa${post.getPostId()}"><br>
+                            <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">
+                                <img border="0" src="images/Google-Maps-icon.png" width="50" height="50"> MAP </a>
                         </div>
 
                         <div>
