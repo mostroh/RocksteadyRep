@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Asynchronous Loading</title>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-        <meta charset="utf-8">
         <style>
             #map{
                 height: 400px;
@@ -14,32 +11,28 @@
         </style>
         <script>
             function initialize() {
-                var posicion = new google.maps.LatLng(${latitud}, ${longitud});
                 var mapOptions = {
                     zoom: 8,
-                    center: posicion
-                };
-                var map = new google.maps.Map(document.getElementById('map'),
-                        mapOptions);
-                var marker = new google.maps.Marker({
-                    position: posicion,
-                    map: map,
-                    title: 'Posicion'
-                });
+                    center: new google.maps.LatLng(-34.397, 150.644),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
             }
+
             function loadScript() {
-                var script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
-                        'callback=initialize';
+                var script = document.createElement("script");
+                script.type = "text/javascript";
+                script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyAgG5LgI0PmcY0nFxyecNOJEWhVIrQjdWs&sensor=false&callback=initialize";
                 document.body.appendChild(script);
             }
             window.onload = loadScript;
         </script>
     </head>
     <body>
-        <h1>MAPA</h1>
-        <div id="map" ></div>
+        <h1>LOCALIZACION</h1>
+        <div id="map"></div>
+        <img src="http://www.w3schools.com/images/w3schools_green.jpg">
+
     </body>
 </html>
 
