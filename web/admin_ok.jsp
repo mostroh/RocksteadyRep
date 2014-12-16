@@ -86,7 +86,7 @@
                                     <h2>deleted</h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'deleteComment'}">
-                                    Comment by <font color="green">${adminActionData.username}</font>: 
+                                    Comment succesfully 
                                     <br><br>
                                     <h2>deleted</h2>
                                 </c:when>

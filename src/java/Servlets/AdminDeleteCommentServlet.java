@@ -5,10 +5,13 @@
  */
 package Servlets;
 
+import Entities.Comentario;
+import SessionBeans.AdminActionPerformedHelper;
 import SessionBeans.ComentarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +38,16 @@ public class AdminDeleteCommentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
+        adminActionData.setOption("deleteComment");
+        Comentario c = comentarioFacade.find(new BigDecimal
+                                        (Integer.parseInt
+                                        (request.getParameter("commentIDtoDelete"))));
+        comentarioFacade.remove(c);
+        
+        request.setAttribute("adminActionData",adminActionData);
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin_ok.jsp");
+        rd.forward(request, response);
         
     }
 
