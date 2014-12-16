@@ -78,7 +78,7 @@
                                 <header>
                                     <hr id="hrGordo">
                                     <h2>${post.getTitle()}</h2>
-                                    <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()} | GPS link</span>
+                                    <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()}</span>
                                 </header>
                                 <p><a href="#" class="image full"><img src="images/pics02.jpg" alt=""></a></p>
                                 <p>${post.getPostContent()}</p>

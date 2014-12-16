@@ -39,20 +39,21 @@ public class NewPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String postTitle = (String) request.getAttribute("postTitle");
-        String postContent = (String) request.getAttribute("postContent");
+        String postTitle = (String) request.getParameter("postTitle");
+        String postContent = (String) request.getParameter("postContent");
         //Serializable postImage = (Serializable) request.getAttribute("postImage");
-        Usuario usuLogueado = (Usuario) request.getAttribute("usuarioLogueao");
-        String postGps = (String)request.getAttribute("postLat")+","+(String)request.getAttribute("postLong");
+        Usuario usuLogueado = (Usuario) request.getSession().getAttribute("usuario");
+        String postGps = (String)request.getParameter("postLat")+","+(String)request.getParameter("postLong");
         Post nuevoPost = new Post();
         nuevoPost.setPostDate(Calendar.getInstance().getTime());
         //nuevoPost.setHeaderImage(nuevoPost);
+        nuevoPost.setMvpost(Character.MIN_VALUE);
         nuevoPost.setPostedBy(usuLogueado);
         nuevoPost.setPostGps(postGps);
         nuevoPost.setTitle(postTitle);
         nuevoPost.setPostContent(postContent);
         postFacade.create(nuevoPost);
-        request.getServletContext().getRequestDispatcher("blog.jsp").forward(request, response);
+        request.getServletContext().getRequestDispatcher("/PostServlet").forward(request, response);
         
     }
 

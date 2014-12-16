@@ -4,6 +4,7 @@
     Author     : Blackproxy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,7 +40,7 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.jsp">Home</a></li>
                         <li class="active"><a href="/RocksteadyRep/PostServlet">Blog</a></li>
                     </ul>
                 </nav>
@@ -50,42 +51,49 @@
 
         <!-- Main -->
         <div id="main">
-            <div class="container">
-                <div class="row">
+            <c:if test="${not empty usuario}" >
+                <c:if test="${usuario.userType <= 2}">
+                    <div class="container">
+                        <div class="row">
 
-                    <!-- Content -->
-                    <div id="content" class="12u skel-cell-important">
-                        <section>
-                            <header>
-                                <h2>NEW POST</h2>
-                            </header>
-                            <form action="/RocksteadyRep/NewPostServlet">
-                                Title: <br>
-                                <input type="text" name="postTitle" value="" /><br>
-                                Ubication: <br>
-                                <input type="text" name="postGPS" value="" /><br>
-                                Latitude:<br>
-                                <input type="text" name="postLat" value="" /><br>
-                                Longitude:<br>
-                                <input type="text" name="postLong" value="" /><br>
-                                Image:<br>
-                                <input type="file" name="postImage" value="" /><br>
-                                Content:<br>
-                                <textarea name="postContent" rows="15" cols="100"></textarea><br>
-                                
-                                <input type="hidden" name="usuarioLogueao" value="${usuario}" />
-                                
-                                <input type="submit" value="POST" name="btnPost" />
-                                
-                            </form>
+                            <!-- Content -->
+                            <div id="content" class="12u skel-cell-important">
+                                <section>
+                                    <header>
+                                        <h2>NEW POST</h2>
+                                    </header>
+                                    <form action="/RocksteadyRep/NewPostServlet" method="post">
+                                        Title: <br>
+                                        <input type="text" name="postTitle"/><br>
+                                        Latitude:<br>
+                                        <input type="text" name="postLat"/><br>
+                                        Longitude:<br>
+                                        <input type="text" name="postLong"/><br>
+                                        Image:<br>
+                                        <input type="file" name="postImage"/><br>
+                                        Content:<br>
+                                        <textarea name="postContent" rows="15" cols="100"></textarea><br>
 
-                        </section>
+                                        <input type="submit" value="POST" name="btnPost" />
+
+                                    </form>
+
+                                </section>
+                            </div>
+                            <!-- /Content -->
+
+                        </div>
+
                     </div>
-                    <!-- /Content -->
+                </c:if>
+                <c:if test="${usuario.userType > 2}" >
+                    YOU HAVE NOT ENOUGH PERMISSION TO ACCESS THIS PAGE
+                </c:if> 
+            </c:if>
+            <c:if test="${empty usuario}">
+                <h2>YOU MUST BE LOGED IN TO ACCESS THIS PAGE</h2>
+            </c:if>
 
-                </div>
-
-            </div>
         </div>
         <!-- Main -->
 
