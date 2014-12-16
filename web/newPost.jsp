@@ -65,10 +65,9 @@
                                 Ubication: <br>
                                 <input type="text" name="postGPS" value="" /><br>
                                 Image:<br>
-                                <input type="file" name="postImage" value="" /> <br>
+                                <input type="file" name="postImage" value="" /><br>
                                 Content:<br>
-                                <textarea name="postContent" rows="15" cols="100">
-                                </textarea><br>
+                                <textarea name="postContent" rows="15" cols="100"></textarea><br>
                                 <input type="submit" value="POST" name="btnPost" />
                                 <form>
 

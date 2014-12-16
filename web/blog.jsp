@@ -72,6 +72,7 @@
                         <div id="content" class="12u skel-cell-important">
                             <section>
                                 <header>
+                                    <hr id="hrGordo">
                                     <h2>${post.getTitle()}</h2>
                                     <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()} | GPS link</span>
                                 </header>
@@ -82,6 +83,20 @@
                         <div id="mostrarMapa${post.getPostId()}">
                             <a onclick="cargarMapa(${post.getPostId()},${post.getPostGps()})" href="#mapa${post.getPostId()}">SHOW MAP</a>
                         </div>
+                        
+                        <div>
+                                <c:forEach items="${post.getComentarioCollection()}" var="comentario">
+                                    <div class="row">
+                                        <div class="container">
+                                            <header>
+                                                <hr>
+                                                <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
+                                                <p>${comentario.getCommentContent()}</p>
+                                            </header>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
 
                         <!-- /Content -->
 
