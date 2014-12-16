@@ -49,7 +49,7 @@
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="blog.jsp">Blog</a></li>
                         <c:if test="${usuario.userType == 1}">
-                        <li><a href="admin.jsp">Admin Area</a>
+                            <li><a href="admin.jsp">Admin Area</a>
                         </c:if>
                     </ul>
                 </nav>
@@ -201,6 +201,13 @@
         <div id="copyright">
             <div class="container">
                 Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+                <c:if test="${not empty usuario}">
+                    <form action="LogOutServlet">
+                    <button onclick="this.form.submit();">Logout</button>
+                    
+                </form> 
+                </c:if>
+                
             </div>
         </div>
 

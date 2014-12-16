@@ -56,7 +56,7 @@
             </div>
         </div>
         <!-- Header -->
-
+        <c:if test="${usuario.userType == 1}">
         <!-- Main -->
         <div id="main">
             <div class="container">
@@ -228,7 +228,7 @@
 
             </div>
             <!-- Main -->
-
+            </c:if>
 
             <!-- Copyright -->
             <div id="copyright">
