@@ -47,7 +47,7 @@
                 <nav id="nav">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
                     </ul>
                 </nav>
 

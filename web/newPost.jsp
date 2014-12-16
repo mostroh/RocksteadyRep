@@ -40,7 +40,7 @@
                 <nav id="nav">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="blog.html">Blog</a></li>
+                        <li class="active"><a href="/RocksteadyRep/PostServlet">Blog</a></li>
                     </ul>
                 </nav>
 
@@ -64,6 +64,10 @@
                                 <input type="text" name="postTitle" value="" /><br>
                                 Ubication: <br>
                                 <input type="text" name="postGPS" value="" /><br>
+                                Latitude:<br>
+                                <input type="text" name="postLat" value="" /><br>
+                                Longitude:<br>
+                                <input type="text" name="postLong" value="" /><br>
                                 Image:<br>
                                 <input type="file" name="postImage" value="" /><br>
                                 Content:<br>
