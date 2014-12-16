@@ -1,26 +1,42 @@
-<HTML>
-    <HEAD>
-        <TITLE>Prueba</TITLE>
-        <SCRIPT language="Javascript">
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Listening to DOM events</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+            html, body, #map-canvas {
+                height: 100%;
+                margin: 0px;
+                padding: 0px
+            }
+        </style>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+        <script>
+            function initialize() {
+                var mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(-34.397, 150.644)
+                };
+                var mapDiv = document.getElementById('map-canvas');
+                var map = new google.maps.Map(mapDiv, mapOptions);
 
-            function muestra() {
-                document.getElementById("Prueba").innerHTML = "Esto es una prueba de que se cambia al pulsar sobre el enlace";
-            };
-            
-        </SCRIPT>
-    </HEAD>
-    <BODY>
-        <TABLE border="1">
-            <TR><TD><B><U>Esto no se cambia:</U></B></TD></TR>
-            <TR>
-                <TD><DIV ID="Prueba" onclick="muestra();">
-                        Este texto es el normal y al pulsar encima de el se cambia.
-                    </DIV>
+                // We add a DOM event here to show an alert if the DIV containing the
+                // map is clicked. Note that we do this within the intialize function
+                // since the document object isn't loaded until after the window.load
+                // event.
+                google.maps.event.addDomListener(mapDiv, 'click', showAlert);
+            }
 
-                </TD>
-            </TR>
+            function showAlert() {
+                window.alert('DIV clicked');
+            }
 
-        </TABLE>
+            google.maps.event.addDomListener(window, 'load', initialize);
 
-    </BODY>
-</HTML> 
+        </script>
+    </head>
+    <body>
+        <div id="map-canvas"></div>
+    </body>
+</html>

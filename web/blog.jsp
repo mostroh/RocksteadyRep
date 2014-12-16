@@ -20,6 +20,7 @@
         <script src="js/skel-panels.min.js"></script>
         <script src="js/init.js"></script>
         <script src="js/maps.js" type="text/javascript"></script>
+        <script src="js/initializeMAPS.js" type="text/javascript"></script>
         <noscript>
         <link rel="stylesheet" href="css/skel-noscript.css" />
         <link rel="stylesheet" href="css/style.css" />
@@ -79,12 +80,13 @@
                                 <p>${post.getPostContent()}</p>
                             </section>
                         </div>
-                        <div id="mostrarMapa${post.getPostId()}">
-                            <a onclick="cargarMapa(${post.getPostId()},${post.getPostGps()})" href="#mapa${post.getPostId()}">SHOW MAP</a>
+
+                        <div>
+                            <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">SHOW MAP</a>
                         </div>
+                        <div id="mostrarMapa${post.getPostId()}"></div>
 
                         <!-- /Content -->
-
                     </div>
                 </c:forEach>
 
