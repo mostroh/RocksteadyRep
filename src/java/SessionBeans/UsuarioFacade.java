@@ -63,5 +63,17 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         }
 
     }
+    public Usuario getUsuarioByUserName(String userName){
+        List <Usuario> listaUsuarios =null;
+        Usuario usuario = null;
+        listaUsuarios = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :username")
+                .setParameter("username", userName)
+                .getResultList();
+        if(!listaUsuarios.isEmpty()){
+            usuario = listaUsuarios.get(0);
+        }
+        
+        return usuario;
+    }
 
 }
