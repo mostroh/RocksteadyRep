@@ -5,12 +5,12 @@
  */
 package Servlets;
 
-import Entities.Usuario;
+import Entities.Post;
 import SessionBeans.AdminActionPerformedHelper;
-import SessionBeans.UsuarioFacade;
+import SessionBeans.PostFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,10 +23,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author inftel13
  */
-@WebServlet(name = "AdminEditUserServlet", urlPatterns = {"/AdminEditUserServlet"})
-public class AdminEditUserServlet extends HttpServlet {
+@WebServlet(name = "AdminDeletePostServlet", urlPatterns = {"/AdminDeletePostServlet"})
+public class AdminDeletePostServlet extends HttpServlet {
     @EJB
-    private UsuarioFacade usuarioFacade;
+    private PostFacade postFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,33 +39,12 @@ public class AdminEditUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String option = request.getParameter("userEdit").replaceAll("[^a-zA-Z]","");
-        int userID = Integer.parseInt(request.getParameter("userEdit").replaceAll("[a-zA-Z]",""));
         AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
-        adminActionData.setOption(option);
-        
-        Usuario u = usuarioFacade.find(new BigDecimal(userID));
-        adminActionData.setUsername(u.getUsername());
-        switch (option) {
-            case "setAdmin":
-                u.setUserType(BigInteger.valueOf(1));
-                usuarioFacade.edit(u);
-                break;
-            case "setWriter":
-                u.setUserType(BigInteger.valueOf(2));
-                usuarioFacade.edit(u);
-                break;
-            case "setRegistered":
-                u.setUserType(BigInteger.valueOf(3));
-                usuarioFacade.edit(u);
-                break;
-            case "deleteUser":
-                usuarioFacade.remove(usuarioFacade.find(new BigDecimal(userID)));
-                break;
-            default:
-                //error, no deberiamos llegar nunca aquí.
-                break;
-        }
+        adminActionData.setOption("deletePost");
+        Post p = postFacade.find(new BigDecimal
+                                        (Integer.parseInt
+                                        (request.getParameter("postIDtoDelete"))));
+        postFacade.remove(p);
         
         request.setAttribute("adminActionData",adminActionData);
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin_ok.jsp");

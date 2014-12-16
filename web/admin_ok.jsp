@@ -59,9 +59,43 @@
         <div id="main">
             <div class="container">
                 <header>
-                    <center><h2>Action performed</h2></center><br><br>
+                    <center>
+                        <h3>
+                            <c:choose>
+                                <c:when test="${adminActionData.option eq 'setAdmin'}">
+                                    User <font color="green">${adminActionData.username}</font> is now: 
+                                    <br><br>
+                                    <h2>admin</h2>
+                                </c:when>
+                                <c:when test="${adminActionData.option eq 'setRegistered'}">
+                                    User <font color="green">${adminActionData.username}</font> is now: 
+                                    <br><br>
+                                    <h2>a registered user</h2>
+                                </c:when>
+                                <c:when test="${adminActionData.option eq 'setWriter'}">
+                                    User <font color="green">${adminActionData.username}</font> is now: 
+                                    <br><br>
+                                    <h2>writer</h2>
+                                </c:when>
+                                <c:when test="${adminActionData.option eq 'deleteUser'}">
+                                    User <font color="red">${adminActionData.username}</font> deleted: 
+                                </c:when>
+                                <c:when test="${adminActionData.option eq 'deletePost'}">
+                                    Post by <font color="green">${adminActionData.username}</font>: 
+                                    <br><br>
+                                    <h2>deleted</h2>
+                                </c:when>
+                                <c:when test="${adminActionData.option eq 'deleteComment'}">
+                                    Comment succesfully 
+                                    <br><br>
+                                    <h2>deleted</h2>
+                                </c:when>
+                            </c:choose>
+                        </h3>
+                    </center>
+                    <br><br>
                 </header>
-                
+
                 <center>
 
                     <div id="nav">
@@ -73,6 +107,7 @@
 
 
             </div>
+        </div>
             <!-- Main -->
 
 

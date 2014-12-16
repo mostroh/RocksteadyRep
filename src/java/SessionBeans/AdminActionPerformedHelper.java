@@ -7,12 +7,22 @@ package SessionBeans;
 
 /**
  *
- * @author inftel13
+ * @author EduardROckerse
  */
 public class AdminActionPerformedHelper {
     
     private String option;
-    private int userID;
+    private String username;
+    private int iDtoEdit;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     
     public AdminActionPerformedHelper(){
         
@@ -26,14 +36,15 @@ public class AdminActionPerformedHelper {
         this.option = option;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getiDtoEdit() {
+        return iDtoEdit;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setiDtoEdit(int iDtoEdit) {
+        this.iDtoEdit = iDtoEdit;
     }
-    
+
+   
     
     
 }
