@@ -82,23 +82,23 @@
                             </section>
                         </div>
 
-                        <div>
+                        <div id="mostrarMapa${post.getPostId()}">
                             <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">SHOW MAP</a>
                         </div>
-                        
+
                         <div>
-                                <c:forEach items="${post.getComentarioCollection()}" var="comentario">
-                                    <div class="row">
-                                        <div class="container">
-                                            <header>
-                                                <hr>
-                                                <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
-                                                <p>${comentario.getCommentContent()}</p>
-                                            </header>
-                                        </div>
+                            <c:forEach items="${post.getComentarioCollection()}" var="comentario">
+                                <div class="row">
+                                    <div class="container">
+                                        <header>
+                                            <hr>
+                                            <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
+                                            <p>${comentario.getCommentContent()}</p>
+                                        </header>
                                     </div>
-                                </c:forEach>
-                            </div>
+                                </div>
+                            </c:forEach>
+                        </div>
 
                         <!-- /Content -->
                     </div>
