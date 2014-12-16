@@ -41,20 +41,20 @@ public class SingUpServlet extends HttpServlet {
         //InputStream inputStream = filePart.getInputStream();
         //byte[] av = IOUtils.toByteArray(inputStream);
         
-        String password = request.getAttribute("password").toString();
-        String confirmpassword = request.getAttribute("confirmPassword").toString();
+        String password = request.getParameter("password");
+        String confirmpassword = request.getParameter("confirmPassword");
         if (password.equals(confirmpassword)) {
-            String nombreUsuario = request.getAttribute("username").toString();
+            String nombreUsuario = (String) request.getParameter("username");
             Usuario antiguoUsuario = usuarioFacade.getUsuarioByUserName(nombreUsuario);
             if (antiguoUsuario == null) {
-                String nombre = request.getAttribute("nombre").toString();
-                String apellidos = request.getAttribute("apellido").toString();
-                String email = request.getAttribute("email").toString();
-                String description = request.getAttribute("descriptionSingUp").toString();
-                String twitter = request.getAttribute("twitterSingUp").toString();
-                String facebook = request.getAttribute("facebookSingUp").toString();
-                String instagram = request.getAttribute("instagramSingUp").toString();
-                String linkedin = request.getAttribute("linkedinSingU").toString();
+                String nombre = request.getParameter("nombre");
+                String apellidos = request.getParameter("apellido");
+                String email = request.getParameter("email").toString();
+                String description = request.getParameter("descriptionSingUp");
+                String twitter = request.getParameter("twitterSingUp");
+                String facebook = request.getParameter("facebookSingUp");
+                String instagram = request.getParameter("instagramSingUp");
+                String linkedin = request.getParameter("linkedinSingU");
 //                
                 
                 Usuario nuevoUsuario = new Usuario(); // esto es solo de momento
