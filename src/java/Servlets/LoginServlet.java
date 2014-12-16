@@ -37,35 +37,18 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        //String path = null;
-        String Nombre = (String) request.getParameter("name");
-        String Password = (String) request.getParameter("pwd");
 
-        Usuario user = usuarioFacade.getUserByNickname(Nombre, Password);
-       
+        String nombre = (String) request.getParameter("name");
+        String password = (String) request.getParameter("pwd");
+
+        Usuario user = usuarioFacade.getUserByNickname(nombre, password);
 
         if (user != null) {
-            if (user.getUserType().equals(1)) {
-                sesion.setAttribute("tipoUsuario", "Cliente");
-                //path = "/jsp/admin.jsp";
-                // prueba mientras corrijo el error de la variable path
-               
-
-            } else if (user.getUserType().equals(2)) {
-                sesion.setAttribute("tipoUsuario", "Escritor");
-               // path = "/index.html";
-              
-            } else if (user.getUserType().equals(3)) {
-                 sesion.setAttribute("tipoUsuario", "Administrador");
-                //path = "/index.html";
-               
-            }
             sesion.setAttribute("usuario", user);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/blog.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         } else {
-            //path = "/index.html";
-          RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
 
         }

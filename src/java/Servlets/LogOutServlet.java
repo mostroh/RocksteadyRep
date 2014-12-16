@@ -33,10 +33,8 @@ public class LogOutServlet extends HttpServlet {
             throws ServletException, IOException {
           HttpSession sesion = request.getSession();
         sesion.removeAttribute("usuario");
-        sesion.removeAttribute("tipoUsuario");
        
-         String path = "/Login.jsp";
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(path);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }
 
