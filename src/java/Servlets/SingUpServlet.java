@@ -8,13 +8,17 @@ package Servlets;
 import Entities.Usuario;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
 
 /**
  *
@@ -37,9 +41,11 @@ public class SingUpServlet extends HttpServlet {
             throws ServletException, IOException {
         
         
-         // Part file = request.getPart("image");
-        //InputStream inputStream = filePart.getInputStream();
+         //Part file = request.getPart("image");
+        //InputStream inputStream = file.getInputStream();
         //byte[] av = IOUtils.toByteArray(inputStream);
+        int userType = 3;
+        int userId =3;
         
         String password = request.getParameter("password");
         String confirmpassword = request.getParameter("confirmPassword");
@@ -57,7 +63,9 @@ public class SingUpServlet extends HttpServlet {
                 String linkedin = request.getParameter("linkedinSingU");
 //                
                 
-                Usuario nuevoUsuario = new Usuario(); // esto es solo de momento
+                Usuario nuevoUsuario = new Usuario(); 
+                nuevoUsuario.setUserType( BigInteger.valueOf(userType));
+               nuevoUsuario.setUserId( new BigDecimal(userId));
                 nuevoUsuario.setUsername(nombreUsuario);
                 nuevoUsuario.setName(nombre);
                 nuevoUsuario.setLastName(apellidos);
