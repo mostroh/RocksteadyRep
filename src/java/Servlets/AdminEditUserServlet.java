@@ -44,16 +44,22 @@ public class AdminEditUserServlet extends HttpServlet {
         adminActionData.setOption(option);
         adminActionData.setUserID(userID);
         
-        if(option.equals("setAdmin")){
-            usuarioFacade.makeAdmin(new BigDecimal(userID));
-        }else if(option.equals("setWriter")){
-            usuarioFacade.makeWriter(new BigDecimal(userID));
-        }else if(option.equals("setRegistered")){
-            usuarioFacade.makeRegistered(new BigDecimal(userID));
-        }else if(option.equals("deleteUser")){
-            usuarioFacade.deleteUser(new BigDecimal(userID));
-        }else{
-            //ERROR
+        switch (option) {
+            case "setAdmin":
+                usuarioFacade.makeAdmin(new BigDecimal(userID));
+                break;
+            case "setWriter":
+                usuarioFacade.makeWriter(new BigDecimal(userID));
+                break;
+            case "setRegistered":
+                usuarioFacade.makeRegistered(new BigDecimal(userID));
+                break;
+            case "deleteUser":
+                usuarioFacade.remove(usuarioFacade.find(new BigDecimal(userID)));
+                break;
+            default:
+                //error, no deberiamos llegar nunca aquí.
+                break;
         }
         
         

@@ -65,7 +65,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     }
     public Usuario getUsuarioByUserName(String userName){
-        List <Usuario> listaUsuarios =null;
+        List <Usuario> listaUsuarios;
         Usuario usuario = null;
         listaUsuarios = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :username")
                 .setParameter("username", userName)
@@ -80,7 +80,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public void makeAdmin(BigDecimal userID){
         Usuario u = em.find(Usuario.class, userID);
         em.getTransaction().begin();
-        u.setUserType(BigInteger.ONE);
+        u.setUserType(BigInteger.valueOf(1));
         em.getTransaction().commit();
     }
     
@@ -96,10 +96,6 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         em.getTransaction().begin();
         u.setUserType(BigInteger.valueOf(2));
         em.getTransaction().commit();
-    }
-    
-    public void deleteUser(BigDecimal userID){
-        em.createQuery("DELETE ")
     }
 
 }
