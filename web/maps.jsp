@@ -1,17 +1,53 @@
-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <script type="text/javascript"
-                src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAgG5LgI0PmcY0nFxyecNOJEWhVIrQjdWs&sensor=false">
+        <title>Asynchronous Loading</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+            #map{
+                height: 400px;
+                width: 1200px;
+                margin: 0px;
+                padding: 0px
+            }
+        </style>
+        <script>
+            function initialize() {
+                var posicion = new google.maps.LatLng(${latitud}, ${longitud});
+                var mapOptions = {
+                    zoom: 8,
+                    center: posicion
+                };
+                var map = new google.maps.Map(document.getElementById('map'),
+                        mapOptions);
+                var marker = new google.maps.Marker({
+                    position: posicion,
+                    map: map,
+                    title: 'Posicion'
+                });
+            }
+            function loadScript() {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+                        'callback=initialize';
+                document.body.appendChild(script);
+            }
+            window.onload = loadScript;
         </script>
-        <script type="text/javascript" src="maps.js"></script>
-
     </head>
-    <!-- coordenadas(latitud,longitud,texto(String) -->
-    <body onload="coordenadas(${latitud},${longitud},'Titulo')">
-        <div id="map" style="width:1200px; height:400px"></div>
+    <body>
+        <h1>MAPA</h1>
+        <div id="map" ></div>
     </body>
 </html>
+
+
+
+
+
+
+
+
+

@@ -80,7 +80,7 @@
                             </section>
                         </div>
                                 <div id="mapa${post.getPostId()}">
-                                    <a onclick="cargarMapa(${post.getPostId()},${post.getPostGps()},'${post.getTitle()}')" href="#mapa${post.getPostId()}">SHOW MAP</a>
+                                    <a onclick="cargarMapa(${post.getPostId()},${post.getPostGps()})" href="#mapa${post.getPostId()}">SHOW MAP</a>
                             <div id="mostrarMapa${post.getPostId()}">
                             </div>
                         </div>
