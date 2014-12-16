@@ -7,13 +7,13 @@ package SessionBeans;
 
 /**
  *
- * @author inftel13
+ * @author EduardROckerse
  */
 public class AdminActionPerformedHelper {
     
     private String option;
     private String username;
-    private int userID;
+    private int iDtoEdit;
 
     public String getUsername() {
         return username;
@@ -36,14 +36,15 @@ public class AdminActionPerformedHelper {
         this.option = option;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getiDtoEdit() {
+        return iDtoEdit;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setiDtoEdit(int iDtoEdit) {
+        this.iDtoEdit = iDtoEdit;
     }
-    
+
+   
     
     
 }

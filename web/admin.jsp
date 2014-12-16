@@ -185,6 +185,9 @@
 
                                 <c:forEach items="${allData.postList}" var="post">
                                     <li>${post.title}</li>
+                                    <form action="AdminDeletePostServlet">
+                                        <button onclick="this.form.submit();" value="${post.postId}" name="postIDtoDelete">Delete comment</button>
+                                    </form> 
                                     </c:forEach>
                                 </c:when>
 
@@ -209,7 +212,7 @@
                                 <c:forEach items="${allData.commentList}" var="c">
                                     <li>${c.commentContent}
                                     <form action="AdminDeleteCommentServlet">
-                                        <input type="submit" value="Delete comment">
+                                        <button onclick="this.form.submit();" value="${c.commentId}" name="commentIDtoDelete">Delete comment</button>
                                     </form>  
                                     </li>
                                 </c:forEach>
