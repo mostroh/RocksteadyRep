@@ -72,27 +72,31 @@
                                 <input type="file" name="postImage" value="" /><br>
                                 Content:<br>
                                 <textarea name="postContent" rows="15" cols="100"></textarea><br>
+                                
+                                <input type="hidden" name="usuarioLogueao" value="${usuario}" />
+                                
                                 <input type="submit" value="POST" name="btnPost" />
-                                <form>
+                                
+                            </form>
 
-                                    </section>
-                                    </div>
-                                    <!-- /Content -->
+                        </section>
+                    </div>
+                    <!-- /Content -->
 
-                                    </div>
+                </div>
 
-                                    </div>
-                                    </div>
-                                    <!-- Main -->
+            </div>
+        </div>
+        <!-- Main -->
 
 
 
-                                    <!-- Copyright -->
-                                    <div id="copyright">
-                                        <div class="container">
-                                            Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-                                        </div>
-                                    </div>
+        <!-- Copyright -->
+        <div id="copyright">
+            <div class="container">
+                Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+            </div>
+        </div>
 
-                                    </body>
-                                    </html>
+    </body>
+</html>

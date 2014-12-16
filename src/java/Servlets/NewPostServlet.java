@@ -6,10 +6,12 @@
 package Servlets;
 
 import Entities.Post;
+import Entities.Usuario;
 import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,14 +42,13 @@ public class NewPostServlet extends HttpServlet {
         String postTitle = (String) request.getAttribute("postTitle");
         String postContent = (String) request.getAttribute("postContent");
         //Serializable postImage = (Serializable) request.getAttribute("postImage");
-        // Fecha del post sacada de la sesion ?
-        // Usuario = request.getSession(); sacar usuario logueado
-        // 
+        Usuario usuLogueado = (Usuario) request.getAttribute("usuarioLogueao");
+        String postGps = (String)request.getAttribute("postLat")+","+(String)request.getAttribute("postLong");
         Post nuevoPost = new Post();
-        //nuevoPost.setPostDate();
+        nuevoPost.setPostDate(Calendar.getInstance().getTime());
         //nuevoPost.setHeaderImage(nuevoPost);
-        //nuevoPost.setPostedBy();
-        //nuevoPost.setPostGps();
+        nuevoPost.setPostedBy(usuLogueado);
+        nuevoPost.setPostGps(postGps);
         nuevoPost.setTitle(postTitle);
         nuevoPost.setPostContent(postContent);
         postFacade.create(nuevoPost);
