@@ -5,11 +5,13 @@
  */
 package Servlets;
 
+import Entities.Usuario;
 import SessionBeans.AdminActionPerformedHelper;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,16 +45,19 @@ public class AdminEditUserServlet extends HttpServlet {
         AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
         adminActionData.setOption(option);
         adminActionData.setUserID(userID);
-        
+        Usuario u = usuarioFacade.find(new BigDecimal(userID));
         switch (option) {
             case "setAdmin":
-                usuarioFacade.makeAdmin(new BigDecimal(userID));
+                u.setUserType(BigInteger.valueOf(1));
+                usuarioFacade.edit(u);
                 break;
             case "setWriter":
-                usuarioFacade.makeWriter(new BigDecimal(userID));
+                u.setUserType(BigInteger.valueOf(2));
+                usuarioFacade.edit(u);
                 break;
             case "setRegistered":
-                usuarioFacade.makeRegistered(new BigDecimal(userID));
+                u.setUserType(BigInteger.valueOf(3));
+                usuarioFacade.edit(u);
                 break;
             case "deleteUser":
                 usuarioFacade.remove(usuarioFacade.find(new BigDecimal(userID)));
