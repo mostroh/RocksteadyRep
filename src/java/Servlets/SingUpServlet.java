@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 
@@ -39,33 +40,32 @@ public class SingUpServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
         
-        
-         //Part file = request.getPart("image");
+        //Part file = request.getPart("image");
         //InputStream inputStream = file.getInputStream();
         //byte[] av = IOUtils.toByteArray(inputStream);
         int userType = 3;
-        int userId =3;
+     
         
         String password = request.getParameter("password");
-        String confirmpassword = request.getParameter("confirmPassword");
+        String confirmpassword = request.getParameter("confirmpassword");
         if (password.equals(confirmpassword)) {
             String nombreUsuario = (String) request.getParameter("username");
             Usuario antiguoUsuario = usuarioFacade.getUsuarioByUserName(nombreUsuario);
             if (antiguoUsuario == null) {
                 String nombre = request.getParameter("nombre");
                 String apellidos = request.getParameter("apellido");
-                String email = request.getParameter("email").toString();
+                String email = request.getParameter("email");
                 String description = request.getParameter("descriptionSingUp");
                 String twitter = request.getParameter("twitterSingUp");
                 String facebook = request.getParameter("facebookSingUp");
                 String instagram = request.getParameter("instagramSingUp");
-                String linkedin = request.getParameter("linkedinSingU");
-//                
+                String linkedin = request.getParameter("linkedinSingU");               
                 
                 Usuario nuevoUsuario = new Usuario(); 
                 nuevoUsuario.setUserType( BigInteger.valueOf(userType));
-               nuevoUsuario.setUserId( new BigDecimal(userId));
+           
                 nuevoUsuario.setUsername(nombreUsuario);
                 nuevoUsuario.setName(nombre);
                 nuevoUsuario.setLastName(apellidos);
@@ -78,25 +78,20 @@ public class SingUpServlet extends HttpServlet {
                 nuevoUsuario.setLinkedin(linkedin);
                 
                 usuarioFacade.create(nuevoUsuario);
-                
-           
-
-            //Redireccionar a la pagina de login y dar mensaje que se ha registrado bien
-            //request.getServletContext().getRequestDispatcher("/jsp/loquesea.jsp").forward(request, response);
+                           
+                sesion.setAttribute("usuario", nuevoUsuario);
+                request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             } else {
                 
-            PrintWriter out=response.getWriter();
-            out.println("Error, ya existe usuario con ese nombre de usuario.");
-                
-            // Dar mensaje que ya existe usuario con ese nombre de usuario y redireccionar a mi mismo
-            response.sendRedirect("singup.jsp");
+
+            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);   
+
             }
         }
         else{
-            PrintWriter out=response.getWriter();
-            out.println("Error, las contraseñas no son iguales.");
-            response.sendRedirect("singup.jsp");
-            //las ocntraseñas no coinciden redireccionar a mi mismo
+            
+            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+
         }
 
     }
