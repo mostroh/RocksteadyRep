@@ -130,8 +130,6 @@
                                         <th><b>Perform action</b></th>
                                     </tr>
                                     <c:forEach items="${allData.userList}" var="user">
-
-
                                         <tr>
                                             <td>${user.username}</td>
                                             <c:choose>
@@ -155,10 +153,9 @@
                                                         <option value="setRegistered${user.userId}">Set Registered</option>
                                                         <option value="deleteUser${user.userId}">Delete User</font></option>
                                                     </select>
-                                                </form>
+                                                </form>   
                                             </td>
                                         </tr>
-
                                     </c:forEach>
                                 </table>
                             </c:when>
@@ -210,8 +207,12 @@
                                     <center><h2><font color="green">Comments found:</font></h2></center>
                                 </header>
                                 <c:forEach items="${allData.commentList}" var="c">
-                                    <li>${c.commentContent}</li>
-                                    </c:forEach>
+                                    <li>${c.commentContent}
+                                    <form action="AdminDeleteCommentServlet">
+                                        <input type="submit" value="Delete comment">
+                                    </form>  
+                                    </li>
+                                </c:forEach>
 
                             </c:when>
                         </c:choose>
