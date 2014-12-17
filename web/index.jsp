@@ -48,6 +48,17 @@
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
+                        <c:if test="${usuario.userType < 1 or 
+                              usuario.userType > 3}">
+                            <li>
+                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                             <li>
+                                 <a href="LogOutServlet">Logout</a>
+                             </li>
+                        </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
                         </c:if>
@@ -60,8 +71,6 @@
 
         <!-- Main -->
         <div id="main">
-            <!-- log in / register (optional) -->
-            
             <div id="main">
                 <div class="container">
                     
@@ -81,21 +90,17 @@
                             </header>
                             <div class="row">
                         <div class="3u" align="right">
-                            <section>
                                 <form action="LoginServlet" method="post" autocomplete="off">
                                     UserName:<input type="text" name="name"><br>
                                     Password: <input type="password" name="pwd"><br>
                                     <center><input type="submit" value="Log in"></center>
                                 </form>
                                 <div class="login-help">
-
                                     <p>Has olvidado tu contraseña? <a href="index2.html">Pulsa aqui para recuperar tu contraseña</a>.</p>
                                 </div>
-                            </section>
                         </div>
 
                         <div class="patata" align="right">
-                            <section>
                                 <form action="SingUpServlet" autocomplete="on">
                                     UserName:<input type="text" name="username"><br>
                                     First name:<input type="text" name="nombre"/><br>
@@ -109,13 +114,10 @@
                                     Facebook: <input type="text" name="facebookSingUp" value="" /><br>
                                     Instagram: <input type="text" name="instagramSingUp" value="" /><br>
                                     Linkedin: <input type="text" name="linkedinSingUp" value="" /><br>
-
                                     Select image: <input type = "file" name="image" /><br>
                                     <center><input type="submit" value="Register"></center>
                                 </form>
-                            </section>
                         </div>
-
                     </div>
                         </c:when>
                     </c:choose>
@@ -125,7 +127,6 @@
                     
                     <div class="divider"></div>
                 </div>
-
             </div>
 
             <!-- log in / register (optional) -->
@@ -200,15 +201,7 @@
         <!-- Copyright -->
         <div id="copyright">
             <div class="container">
-                Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-                <c:if test="${not empty usuario}">
-                    <form action="LogOutServlet">
-                    <button onclick="this.form.submit();">Logout</button>
-                    
-                </form> 
-                </c:if>
                 
-                <a href="LoginServlet">mi enlace</a>
                 
             </div>
         </div>
