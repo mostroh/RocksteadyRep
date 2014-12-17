@@ -44,11 +44,9 @@ public class AdminCommentByUserServlet extends HttpServlet {
        
         AdminPageHelper allData = new AdminPageHelper();
         allData.setSearchOption(3);
-        allData.setAdminName("comment deleting admin");
         Usuario user;
         List resBusqueda = usuarioFacade.getUserByName(request.getParameter("commentsByUserFilter"));
         if(resBusqueda.isEmpty()){
-            System.out.println("IM HERE: USER NOT FOUND");
             allData.setPostList(null);
         }else{
             user = (Usuario) resBusqueda.get(0);

@@ -6,6 +6,7 @@
 package Servlets;
 
 import Entities.Usuario;
+import SessionBeans.LogInHelper;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -40,7 +41,16 @@ public class LoginServlet extends HttpServlet {
 
         String nombre = (String) request.getParameter("name");
         String password = (String) request.getParameter("pwd");
-
+        LogInHelper lh = new LogInHelper();
+        //compruebo si existe usuario con nombre "name"
+        
+        //sino false y hago request.setAttribute("lh",lh);
+        
+        //si existe lh.setUserexists(true);
+        //y sigo:
+        // si null = contraseña mal -> lh.setWrongPassword(false)
+        
+        
         Usuario user = usuarioFacade.getUserByNickname(nombre, password);
 
         if (user != null) {

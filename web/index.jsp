@@ -72,12 +72,12 @@
         <div id="main">
             <div id="main">
                 <div class="container">
-
                     <c:choose>
                         <c:when test="${not empty usuario}">
                             <header>
                                 <center>
-                                    <h2>Welcome ${usuario.username}</h2>
+                                    <h2>Welcome <font color="orange">${usuario.username}</font>
+                                    </h2>
                                 </center>
                             </header>
                         </c:when>

@@ -146,6 +146,7 @@
                                             <th><b>Perform action</b></th>
                                         </tr>
                                         <c:forEach items="${allData.userList}" var="user">
+                                            <c:if test="${user.userId ne usuario.userId}">
                                             <tr>
                                                 <td>${user.username}</td>
                                                 <c:choose>
@@ -172,6 +173,7 @@
                                                     </form>   
                                                 </td>
                                             </tr>
+                                            </c:if>
                                         </c:forEach>
                                     </table>
                                 </c:when>
@@ -252,9 +254,9 @@
                                 <h2>
                                     <font color="red">
                                     You're not an admin.
-                                    <br>
+                                    <br><br><br>
                                     Get out.
-                                    <br>
+                                    <meta http-equiv="refresh" content="5;url=http://www.keepcalmandposters.com/posters/2566862.png">
                                     </font> 
                                 </h2>
                             </center>

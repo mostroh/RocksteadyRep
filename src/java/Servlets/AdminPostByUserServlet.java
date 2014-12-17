@@ -44,11 +44,9 @@ public class AdminPostByUserServlet extends HttpServlet {
             throws ServletException, IOException {
         AdminPageHelper allData = new AdminPageHelper();
         allData.setSearchOption(2);
-        allData.setAdminName("post deleting admin");
         Usuario user;
         List resBusqueda = usuarioFacade.getUserByName(request.getParameter("postsByUserFilter"));
         if(resBusqueda.isEmpty()){
-            System.out.println("USER NOT FOUND");
             allData.setPostList(null);
         }else{
             user = (Usuario) resBusqueda.get(0);
