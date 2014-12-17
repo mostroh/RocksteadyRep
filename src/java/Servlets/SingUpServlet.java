@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Entities.Usuario;
@@ -26,7 +21,6 @@ import org.apache.commons.io.IOUtils;
  * @author YSF
  */
 public class SingUpServlet extends HttpServlet {
-
     @EJB
     private UsuarioFacade usuarioFacade;
 
@@ -42,14 +36,14 @@ public class SingUpServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-
+        
         //Part file = request.getPart("image");
         //InputStream inputStream = file.getInputStream();
         //byte[] av = IOUtils.toByteArray(inputStream);
         int userType = 3;
-
+     
         String password = request.getParameter("password");
-        String confirmpassword = request.getParameter("confirmpassword");
+        String confirmpassword = request.getParameter("confirmPassword");
         if (password.equals(confirmpassword)) {
             String nombreUsuario = (String) request.getParameter("username");
             Usuario antiguoUsuario = usuarioFacade.getUsuarioByUserName(nombreUsuario);
@@ -61,15 +55,13 @@ public class SingUpServlet extends HttpServlet {
                 String twitter = request.getParameter("twitterSingUp");
                 String facebook = request.getParameter("facebookSingUp");
                 String instagram = request.getParameter("instagramSingUp");
-                String linkedin = request.getParameter("linkedinSingU");
-
-                Part filePart = request.getPart("image");
+                String linkedin = request.getParameter("linkedinSingU");               
+                 Part filePart = request.getPart("image");
                 InputStream f = filePart.getInputStream();
                 byte[] perfil = IOUtils.toByteArray(f);
-
-                Usuario nuevoUsuario = new Usuario();
-                nuevoUsuario.setUserType(BigInteger.valueOf(userType));
-
+                Usuario nuevoUsuario = new Usuario(); 
+                nuevoUsuario.setUserType( BigInteger.valueOf(userType));
+           
                 nuevoUsuario.setUsername(nombreUsuario);
                 nuevoUsuario.setName(nombre);
                 nuevoUsuario.setLastName(apellidos);
@@ -81,19 +73,22 @@ public class SingUpServlet extends HttpServlet {
                 nuevoUsuario.setInstagram(instagram);
                 nuevoUsuario.setLinkedin(linkedin);
                 nuevoUsuario.setImg(perfil);
-
+                System.out.println("metiendo usuario");
                 usuarioFacade.create(nuevoUsuario);
-
+                System.out.println("fin metiendo usuario");           
                 sesion.setAttribute("usuario", nuevoUsuario);
                 request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                
             } else {
-
-                request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                
+                request.setAttribute("Error", " Ya existe ese Usuario");
+                request.getServletContext().getRequestDispatcher("/SingUp.jsp").forward(request, response);   
 
             }
-        } else {
-
-            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+        else{
+            request.setAttribute("Error", " El Password y el Confirm Password no coinciden");
+            request.getServletContext().getRequestDispatcher("/SingUp.jsp").forward(request, response);
 
         }
 
@@ -139,3 +134,4 @@ public class SingUpServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+>>>>>>> origin/master

@@ -42,21 +42,23 @@
             <div class="container">
                 <div class="patata" align="center">
                         <form action="SingUpServlet" autocomplete="on">
-                            UserName:<input type="text" name="username" value="" required="true"><br>
-                            First name:<input type="text" name="nombre" value="" required="true"/><br>
-                            Last name:<input type="text" name="apellido" value="" required="true"/><br>
-                            Email:<input type="email" name="email" value="" required="true" /><br>
-                            Password : <input type="password" name="password" pattern=".{6,}" required title="6 characters minimum"/><br>
-                            Confirm Password: <input type="password" name="confirmPassword" pattern=".{6,}" required title="6 characters minimum"/><br>
-                            WebSite: <input type="text" name="website" value="" /><br>
-                            Description: <input type="text" name="descriptionSingUp" value="" /><br>
-                            Twitter: <input type="text" name="twitterSingUp" value="" /><br>
-                            Facebook: <input type="text" name="facebookSingUp" value="" /><br>
-                            Instagram: <input type="text" name="instagramSingUp" value="" /><br>
-                            Linkedin: <input type="text" name="linkedinSingUp" value="" /><br><br>
-
-                            Select image: <input type = "file" name="image" /><br>
+                            <div class="3u" align="right">
+                                UserName: <input type="text" name="username" value="" required="true"><br>
+                                First name: <input type="text" name="nombre" value="" required="true"/><br>
+                                Last name: <input type="text" name="apellido" value="" required="true"/><br>
+                                Email: <input type="email" name="email" value="" required="true" /><br>
+                                Password : <input type="password" name="password" pattern=".{6,}" required title="6 characters minimum"/><br>
+                                Confirm Password: <input type="password" name="confirmPassword" pattern=".{6,}" required title="6 characters minimum"/><br>
+                                WebSite: <input type="text" name="website" value="" /><br>
+                                Description: <input type="text" name="descriptionSingUp" value="" /><br>
+                                Twitter: <input type="text" name="twitterSingUp" value="" /><br>
+                                Facebook: <input type="text" name="facebookSingUp" value="" /><br>
+                                Instagram: <input type="text" name="instagramSingUp" value="" /><br>
+                                Linkedin: <input type="text" name="linkedinSingUp" value="" /><br><br>
+                                Select image: <input type = "file" name="image" /><br> 
+                            </div>    
                             <center><input type="submit" value="Register"></center>
+                            ${Error}
                         </form>
                 </div>
             </div>
