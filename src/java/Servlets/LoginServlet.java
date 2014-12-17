@@ -42,27 +42,35 @@ public class LoginServlet extends HttpServlet {
         String nombre = request.getParameter("name");
         String password = request.getParameter("pwd");
         LogInHelper lh = new LogInHelper();
+
         //compruebo si existe usuario con nombre "name"
-        
         //sino false y hago request.setAttribute("lh",lh);
-        
         //si existe lh.setUserexists(true);
         //y sigo:
         // si null = contraseña mal -> lh.setWrongPassword(false)
-        
-        
-        Usuario user = usuarioFacade.getUserByNickname(nombre, password);
+        //Usuario user = usuarioFacade.getUserByNickname(nombre, password);
+        Usuario user = usuarioFacade.getUsuarioByUserName(nombre);
 
         if (user != null) {
-            sesion.setAttribute("usuario", user);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
+
+            lh.setUserexists(true);
+
+            if (user.getPassword().equals(password)) {
+                lh.setWrongpassword(false);
+                sesion.setAttribute("usuario", user);
+
+            } else {
+
+                lh.setWrongpassword(true);
+                ;
+            }
         } else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
+            lh.setUserexists(false);
 
         }
-
+        request.setAttribute("lh", lh);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

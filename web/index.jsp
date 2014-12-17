@@ -91,8 +91,8 @@
 
                                 <div class="3u" align="right">
                                     <form action="LoginServlet" method="post" autocomplete="off">
-                                        UserName:<input type="text" name="name"><br><br>
-                                        Password: <input type="password" name="pwd"><br>
+                                        UserName:<input type="text" name="name" required="true"><br><br>
+                                        Password: <input type="password" name="pwd"required="true"><br>
                                         <input type="submit" value="Log in">
                                     </form>
 

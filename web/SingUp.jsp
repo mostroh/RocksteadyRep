@@ -1,0 +1,69 @@
+<%-- 
+    Document   : SingUp
+    Created on : 17-dic-2014, 14:16:39
+    Author     : inftel12
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home - Rocksteady Blog</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="js/skel.min.js"></script>
+        <script src="js/skel-panels.min.js"></script>
+        <script src="js/init.js"></script>
+        <noscript>
+        <link rel="stylesheet" href="css/skel-noscript.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        </noscript>
+    </head>
+    <body>
+        <div id="header">
+            <div class="container">
+                <div id="logo">
+                    <h1><a href="index.html">Rocksteady</a></h1>
+                    <span>BLOG</span>
+                </div>
+                <nav id="nav">
+                    <ul>
+                        <li class="active"><a href="index.jsp">Home</a></li>
+                        <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
+                        <li><a href="/RocksteadyRep/SingUp.html">SingUp</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div id="main">
+            <div class="container">
+                <div class="patata" align="center">
+                        <form action="SingUpServlet" autocomplete="on">
+                            UserName:<input type="text" name="username" value="" required="true"><br>
+                            First name:<input type="text" name="nombre" value="" required="true"/><br>
+                            Last name:<input type="text" name="apellido" value="" required="true"/><br>
+                            Email:<input type="email" name="email" value="" required="true" /><br>
+                            Password : <input type="password" name="password" value="" required="true"/><br>
+                            Confirm Password: <input type="password" name="confirmPassword" required="true"/><br>
+                            WebSite: <input type="text" name="website" value="" /><br>
+                            Description: <input type="text" name="descriptionSingUp" value="" /><br>
+                            Twitter: <input type="text" name="twitterSingUp" value="" /><br>
+                            Facebook: <input type="text" name="facebookSingUp" value="" /><br>
+                            Instagram: <input type="text" name="instagramSingUp" value="" /><br>
+                            Linkedin: <input type="text" name="linkedinSingUp" value="" /><br><br>
+
+                            Select image: <input type = "file" name="image" /><br>
+                            <center><input type="submit" value="Register"></center>
+                        </form>
+                </div>
+            </div>
+        </div>
+        <div id="copyright">
+            <div class="container">
+            </div>
+        </div>
+    </body>
+</html>
