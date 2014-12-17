@@ -39,7 +39,6 @@ public class AdminAllUsersServlet extends HttpServlet {
         
         AdminPageHelper allData = new AdminPageHelper();
         allData.setSearchOption(1);
-        allData.setAdminName("userEditingAdmin"); // coger nombre de session
         allData.setUserList(usuarioFacade.findAll());
         
         request.setAttribute("allData",allData);

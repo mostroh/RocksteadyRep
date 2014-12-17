@@ -42,9 +42,6 @@ public class AdminUsersFilteredServlet extends HttpServlet {
         
         adminPageData.setUserList(usuarioFacade.findByNameContaining(request.getParameter("usernameSearchFilter")));
         adminPageData.setSearchOption(1);
-        adminPageData.setAdminName("admin editing users"); // coger nombre de session
-        
-        
         request.setAttribute("allData",adminPageData);
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin.jsp");
         rd.forward(request, response);

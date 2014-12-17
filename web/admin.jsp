@@ -55,8 +55,8 @@
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
-                        </c:if>
-                        <c:if test="${not empty usuario}">
+                            </c:if>
+                            <c:if test="${not empty usuario}">
                             <li>
                                 <a href="LogOutServlet">Logout</a>
                             </li>
@@ -146,6 +146,7 @@
                                             <th><b>Perform action</b></th>
                                         </tr>
                                         <c:forEach items="${allData.userList}" var="user">
+
                                             <tr>
                                                 <td>${user.username}</td>
                                                 <c:choose>
@@ -161,17 +162,25 @@
                                                 </c:choose>
 
                                                 <td>
-                                                    <form action="AdminEditUserServlet">
-                                                        <select name="userEdit" onchange="this.form.submit();">
-                                                            <option value="default">Select action...</option>
-                                                            <option value="setAdmin${user.userId}">Set Admin</option>
-                                                            <option value="setWriter${user.userId}">Set Writer</option>
-                                                            <option value="setRegistered${user.userId}">Set Registered</option>
-                                                            <option value="deleteUser${user.userId}">Delete User</font></option>
-                                                        </select>
-                                                    </form>   
+                                                    <c:if test="${user.userId ne usuario.userId}">
+                                                        <form action="AdminEditUserServlet">
+                                                            <select name="userEdit" onchange="this.form.submit();">
+                                                                <option value="default">Select action...</option>
+                                                                <option value="setAdmin${user.userId}">Set Admin</option>
+                                                                <option value="setWriter${user.userId}">Set Writer</option>
+                                                                <option value="setRegistered${user.userId}">Set Registered</option>
+                                                                <option value="deleteUser${user.userId}">Delete User</font></option>
+                                                            </select>
+                                                        </form>   
+                                                    </c:if>
+                                                    <c:if test="${user.userId eq usuario.userId}">
+                                                        <font color="red">
+                                                        This is me
+                                                        </font>
+                                                    </c:if>
                                                 </td>
                                             </tr>
+
                                         </c:forEach>
                                     </table>
                                 </c:when>
@@ -200,10 +209,14 @@
                                     </header>
 
                                     <c:forEach items="${allData.postList}" var="post">
-                                        <li>${post.title}</li>
+                                        <li><b> ${post.title}</b>
+                                            <br>
+                                            ${post.postDate}
+                                        </li>
                                         <form action="AdminDeletePostServlet">
-                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtoDelete">Delete comment</button>
+                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtoDelete">Delete post</button>
                                         </form> 
+                                        <br>
                                     </c:forEach>
                                 </c:when>
 
@@ -250,7 +263,12 @@
                         <header>
                             <center>
                                 <h2>
-                                    <font color="red">You're not an admin.</font> 
+                                    <font color="red">
+                                    You're not an admin.
+                                    <br><br><br>
+                                    Get out.
+                                    <meta http-equiv="refresh" content="5;url=http://www.keepcalmandposters.com/posters/2566862.png">
+                                    </font> 
                                 </h2>
                             </center>
                         </header>
@@ -262,7 +280,7 @@
 
             <!-- Copyright -->
             <div id="copyright">
-                    Trabajo Java EE - Máster INFTEL
+                Trabajo Java EE - Máster INFTEL
             </div>
 
     </body>

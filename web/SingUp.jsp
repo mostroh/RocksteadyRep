@@ -1,4 +1,11 @@
-<!DOCTYPE HTML>
+<%-- 
+    Document   : SingUp
+    Created on : 17-dic-2014, 14:16:39
+    Author     : inftel12
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Home - Rocksteady Blog</title>
@@ -24,9 +31,9 @@
                 </div>
                 <nav id="nav">
                     <ul>
-                        <li class="active"><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp">Home</a></li>
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                        <li><a href="/RocksteadyRep/SingUp.html">SingUp</a></li>
+                        <li class="active"><a href="/RocksteadyRep/SingUp.html">SingUp</a></li>
                     </ul>
                 </nav>
             </div>
@@ -35,12 +42,12 @@
             <div class="container">
                 <div class="patata" align="center">
                         <form action="SingUpServlet" autocomplete="on">
-                            UserName:<input type="text" name="username"><br>
-                            First name:<input type="text" name="nombre"/><br>
-                            Last name:<input type="text" name="apellido" value="" /><br>
-                            Email:<input type="email" name="email" value="" /><br>
-                            Password : <input type="password" name="password" value="" /><br>
-                            Confirm Password: <input type="password" name="confirmPassword"/><br>
+                            UserName:<input type="text" name="username" value="" required="true"><br>
+                            First name:<input type="text" name="nombre" value="" required="true"/><br>
+                            Last name:<input type="text" name="apellido" value="" required="true"/><br>
+                            Email:<input type="email" name="email" value="" required="true" /><br>
+                            Password : <input type="password" name="password" value="" required="true"/><br>
+                            Confirm Password: <input type="password" name="confirmPassword" required="true"/><br>
                             WebSite: <input type="text" name="website" value="" /><br>
                             Description: <input type="text" name="descriptionSingUp" value="" /><br>
                             Twitter: <input type="text" name="twitterSingUp" value="" /><br>

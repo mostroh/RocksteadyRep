@@ -71,13 +71,20 @@
         <div id="main">
 
             <div class="container">
-                <div >
-                    <a href="newPost.jsp">NEW POST</a>
-
-
-                </div>
-
-
+                <c:if test="${usuario.userType <= 2}">
+                    <center>
+                        <div id="nav">
+                            <ul> 
+                                <li class="newPost">
+                                    <a href="newPost.jsp">New post</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </center>
+                    <br><br>
+                </c:if>
+                
                 <c:forEach items="${postList}" var="post">
                     <div class="row">
                         <br>
