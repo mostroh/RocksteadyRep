@@ -99,7 +99,7 @@
 
                         </c:if>
                         <c:if test="${usuario.userType > 2}" >
-                            <center><h2>YOU HAVE NOT ENOUGH PERMISSIONs TO ACCESS THIS PAGE</h2></center>
+                            <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
                         </c:if> 
                     </c:if>
                     <c:if test="${empty usuario}">
