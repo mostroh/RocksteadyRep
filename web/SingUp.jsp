@@ -46,8 +46,8 @@
                             First name:<input type="text" name="nombre" value="" required="true"/><br>
                             Last name:<input type="text" name="apellido" value="" required="true"/><br>
                             Email:<input type="email" name="email" value="" required="true" /><br>
-                            Password : <input type="password" name="password" value="" required="true"/><br>
-                            Confirm Password: <input type="password" name="confirmPassword" required="true"/><br>
+                            Password : <input type="password" name="password" pattern=".{6,}" required title="6 characters minimum"/><br>
+                            Confirm Password: <input type="password" name="confirmPassword" pattern=".{6,}" required title="6 characters minimum"/><br>
                             WebSite: <input type="text" name="website" value="" /><br>
                             Description: <input type="text" name="descriptionSingUp" value="" /><br>
                             Twitter: <input type="text" name="twitterSingUp" value="" /><br>
