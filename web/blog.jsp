@@ -51,8 +51,8 @@
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
-                        </c:if>
-                        <c:if test="${not empty usuario}">
+                            </c:if>
+                            <c:if test="${not empty usuario}">
                             <li>
                                 <a href="LogOutServlet">Logout</a>
                             </li>
@@ -69,15 +69,15 @@
 
         <!-- Main -->
         <div id="main">
-            
+
             <div class="container">
-                
-<!--                <div class="row">-->
-<!--                    <div id="content" class="12u skel-cell-important">-->
-                        <header>
-                            <center><h2>POST LIST</h2></center>
-                        </header>
-                    <!--</div>-->
+
+                <!--                <div class="row">-->
+                <!--                    <div id="content" class="12u skel-cell-important">-->
+                <header>
+                    <center><h2>POST LIST</h2></center>
+                </header>
+                <!--</div>-->
                 <!--</div>-->
                 <c:if test="${usuario.userType <= 2}">
                     <div >
@@ -94,7 +94,6 @@
                         <div id="content" class="12u skel-cell-important">
                             <section>
                                 <header>
-                                    <hr id="hrGordo">
                                     <h2>${post.getTitle()}</h2>
                                     <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()}</span>
                                 </header>
@@ -102,26 +101,33 @@
                                 <p>${post.getPostContent()}</p>
                             </section>
                         </div>
-
-                        <div id="mostrarMapa${post.getPostId()}"><br>
-                            <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">
-                                <img border="0" src="images/Google-Maps-icon.png" width="50" height="50"> MAP </a>
-                        </div>
-
                         <div>
-                            <c:forEach items="${post.getComentarioCollection()}" var="comentario">
-                                <div class="row">
-                                    <div class="container">
-                                        <header>
-                                            <hr>
-                                            <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
-                                            <p>${comentario.getCommentContent()}</p>
-                                        </header>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
+                            <div id="mostrarMapa${post.getPostId()}"><br>
+                                <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">
+                                    <img border="0" src="images/Google-Maps-icon.png" width="50" height="50"> MAP </a><br>
+                            </div>
 
+                            <c:if test="${not empty usuario}">
+                                    <c:forEach items="${post.getComentarioCollection()}" var="comentario">
+                                            <div class="container">
+                                                <header>
+                                                    <p><hr></p>
+                                                    <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
+                                                    <p>${comentario.getCommentContent()}</p>
+                                                </header>
+                                            </div>
+                                    </c:forEach>
+                                <form action="/RocksteadyRep/CommentServlet" method="post">
+                                    Comment:<br>
+                                    <textarea name="commentContent" rows="4" cols="100"></textarea><br>
+                                    <input type="hidden" name="postCommented" value="${post.getPostId()}"/>
+                                    <input type="submit" value="Add comment" name="btnComment${post.getPostId()}" />
+                                </form>
+                            </c:if>
+                            <c:if test="${empty usuario}">
+                                <h3>ONLY REGISTERED MEMBERS CAN SEE COMMENTS</h3>
+                            </c:if>
+                        </div>
                         <!-- /Content -->
                     </div>
                 </c:forEach>
