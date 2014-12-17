@@ -15,7 +15,6 @@ import java.util.List;
  * @author EduardROckerse
  */
 public class AdminPageHelper {
-    private String adminName = "admin name from session";
     private int searchOption;
     private List<Usuario> userList;
     private List<Post> postList;
@@ -25,22 +24,6 @@ public class AdminPageHelper {
      *
      */
     public AdminPageHelper() {
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public String getAdminName() {
-        return adminName;
-    }
-
-    /**
-     *
-     * @param adminName
-     */
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
     }
 
     /**
@@ -108,8 +91,6 @@ public class AdminPageHelper {
      */
     public void setCommentList(List<Comentario> comentList) {
         this.commentList = comentList;
-    }
-    
-    
+    } 
     
 }

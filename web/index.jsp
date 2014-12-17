@@ -50,7 +50,7 @@
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
                             <c:if test="${empty usuario}">
                             <li>
-                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                                <a href="/RocksteadyRep/SingUp.jsp">Sign Up</a>
                             </li>
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
@@ -72,12 +72,12 @@
         <div id="main">
             <div id="main">
                 <div class="container">
-
                     <c:choose>
                         <c:when test="${not empty usuario}">
                             <header>
                                 <center>
-                                    <h2>Welcome ${usuario.username}</h2>
+                                    <h2>Welcome <font color="orange">${usuario.username}</font>
+                                    </h2>
                                 </center>
                             </header>
                         </c:when>
@@ -91,8 +91,8 @@
 
                                 <div class="3u" align="right">
                                     <form action="LoginServlet" method="post" autocomplete="off">
-                                        UserName:<input type="text" name="name"><br><br>
-                                        Password: <input type="password" name="pwd"><br>
+                                        UserName:<input type="text" name="name" required="true"><br><br>
+                                        Password: <input type="password" name="pwd"required="true"><br>
                                         <input type="submit" value="Log in">
                                     </form>
 
