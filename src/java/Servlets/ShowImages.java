@@ -5,6 +5,7 @@ import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +26,7 @@ public class ShowImages extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Integer postId = Integer.parseInt(request.getParameter("postId"));
+        BigDecimal postId =  new BigDecimal(Integer.parseInt(request.getParameter("postId")));
         Post post = postFacade.find(postId);
         byte[] file = post.getHeaderImage();
         response.setContentType("image/jpg");

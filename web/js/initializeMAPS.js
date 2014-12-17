@@ -5,7 +5,7 @@ function cargarMapa(idPost, gps) {
     $("#mostrarMapa" + idPost).load('/RocksteadyRep/maps.jsp?latitud=' + lat + '&longitud=' + long);
 }
 
-function initialize() {
+function initialize(latitud,longitud) {
     
     var posicion = new google.maps.LatLng(latitud,longitud);
     var mapOptions = {
