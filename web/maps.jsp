@@ -23,7 +23,7 @@
                 document.body.appendChild(script);
             }
             window.onload = loadScript;
-            google.maps.event.addDomListener(window, 'load', initialize())
+            google.maps.event.addDomListener(window, 'load', initialize());
         </script>
     </head>
     <body>

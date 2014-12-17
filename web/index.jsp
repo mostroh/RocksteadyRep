@@ -48,8 +48,18 @@
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
+                            <c:if test="${empty usuario}">
+                            <li>
+                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                            </li>
+                        </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                            <li>
+                                <a href="LogOutServlet">Logout</a>
+                            </li>
                         </c:if>
                     </ul>
                 </nav>
@@ -60,72 +70,42 @@
 
         <!-- Main -->
         <div id="main">
-            <!-- log in / register (optional) -->
-            
             <div id="main">
                 <div class="container">
-                    
+
                     <c:choose>
                         <c:when test="${not empty usuario}">
                             <header>
-                            <center>
-                                <h2>Welcome ${usuario.username}</h2>
-                            </center>
+                                <center>
+                                    <h2>Welcome ${usuario.username}</h2>
+                                </center>
                             </header>
                         </c:when>
                         <c:when test="${empty usuario}">
                             <header>
-                            <center>
-                                <h2>Log in / register</h2>
-                            </center>
+                                <center>
+                                    <h2>Log in</h2>
+                                </center>
                             </header>
-                            <div class="row">
-                        <div class="3u" align="right">
-                            <section>
-                                <form action="LoginServlet" method="post" autocomplete="off">
-                                    UserName:<input type="text" name="name"><br>
-                                    Password: <input type="password" name="pwd"><br>
-                                    <center><input type="submit" value="Log in"></center>
-                                </form>
-                                <div class="login-help">
+                            <center>
 
-                                    <p>Has olvidado tu contraseña? <a href="index2.html">Pulsa aqui para recuperar tu contraseña</a>.</p>
+                                <div class="3u" align="right">
+                                    <form action="LoginServlet" method="post" autocomplete="off">
+                                        UserName:<input type="text" name="name"><br><br>
+                                        Password: <input type="password" name="pwd"><br>
+                                        <input type="submit" value="Log in">
+                                    </form>
+
                                 </div>
-                            </section>
-                        </div>
-
-                        <div class="patata" align="right">
-                            <section>
-                                <form action="SingUpServlet" autocomplete="on">
-                                    UserName:<input type="text" name="username"><br>
-                                    First name:<input type="text" name="nombre"/><br>
-                                    Last name:<input type="text" name="apellido" value="" /><br>
-                                    Email:<input type="email" name="email" value="" /><br>
-                                    Password : <input type="password" name="password" value="" /><br>
-                                    Confirm Password: <input type="password" name="confirmPassword"/><br>
-                                    WebSite: <input type="text" name="website" value="" /><br>
-                                    Description: <input type="text" name="descriptionSingUp" value="" /><br>
-                                    Twitter: <input type="text" name="twitterSingUp" value="" /><br>
-                                    Facebook: <input type="text" name="facebookSingUp" value="" /><br>
-                                    Instagram: <input type="text" name="instagramSingUp" value="" /><br>
-                                    Linkedin: <input type="text" name="linkedinSingUp" value="" /><br>
-
-                                    Select image: <input type = "file" name="image" /><br>
-                                    <center><input type="submit" value="Register"></center>
-                                </form>
-                            </section>
-                        </div>
-
-                    </div>
+                            </center>
                         </c:when>
                     </c:choose>
-                        
-                        
-                    
-                    
+
+
+
+
                     <div class="divider"></div>
                 </div>
-
             </div>
 
             <!-- log in / register (optional) -->
@@ -200,16 +180,8 @@
         <!-- Copyright -->
         <div id="copyright">
             <div class="container">
-                Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-                <c:if test="${not empty usuario}">
-                    <form action="LogOutServlet">
-                    <button onclick="this.form.submit();">Logout</button>
-                    
-                </form> 
-                </c:if>
-                
-                <a href="LoginServlet">mi enlace</a>
-                
+
+
             </div>
         </div>
 

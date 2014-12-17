@@ -41,7 +41,20 @@
                 <nav id="nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
-                        <li class="active"><a href="/RocksteadyRep/PostServlet">Blog</a></li>
+                        <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
+                            <c:if test="${empty usuario}">
+                            <li>
+                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${usuario.userType == 1}">
+                            <li><a href="admin.jsp">Admin Area</a>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                            <li>
+                                <a href="LogOutServlet">Logout</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </nav>
 
