@@ -31,9 +31,9 @@
                 </div>
                 <nav id="nav">
                     <ul>
-                        <li class="active"><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp">Home</a></li>
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                        <li><a href="/RocksteadyRep/SingUp.html">SingUp</a></li>
+                        <li class="active"><a href="/RocksteadyRep/SingUp.html">SingUp</a></li>
                     </ul>
                 </nav>
             </div>
