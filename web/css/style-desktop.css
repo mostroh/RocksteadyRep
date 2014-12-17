@@ -139,6 +139,11 @@
 			{
 				color: #FFF;
 			}
+                        
+                        #nav li.newPost a
+			{
+				color: #51bb17;
+			}
 
 			#nav > ul > li > ul
 			{

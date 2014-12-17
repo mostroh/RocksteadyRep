@@ -39,8 +39,8 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
 
-        String nombre = (String) request.getParameter("name");
-        String password = (String) request.getParameter("pwd");
+        String nombre = request.getParameter("name");
+        String password = request.getParameter("pwd");
         LogInHelper lh = new LogInHelper();
         //compruebo si existe usuario con nombre "name"
         

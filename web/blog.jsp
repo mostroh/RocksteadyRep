@@ -51,8 +51,8 @@
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
-                        </c:if>
-                        <c:if test="${not empty usuario}">
+                            </c:if>
+                            <c:if test="${not empty usuario}">
                             <li>
                                 <a href="LogOutServlet">Logout</a>
                             </li>
@@ -69,23 +69,22 @@
 
         <!-- Main -->
         <div id="main">
-            
+
             <div class="container">
-                
-<!--                <div class="row">-->
-<!--                    <div id="content" class="12u skel-cell-important">-->
-                        <header>
-                            <center><h2>POST LIST</h2></center>
-                        </header>
-                    <!--</div>-->
-                <!--</div>-->
                 <c:if test="${usuario.userType <= 2}">
-                    <div >
-                        <a href="newPost.jsp">NEW POST</a>
-                    </div>
+                    <center>
+                        <div id="nav">
+                            <ul> 
+                                <li class="newPost">
+                                    <a href="newPost.jsp">New post</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </center>
+                    <br><br>
                 </c:if>
-
-
+                
                 <c:forEach items="${postList}" var="post">
                     <div class="row">
                         <br>
