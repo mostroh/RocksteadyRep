@@ -69,13 +69,21 @@
 
         <!-- Main -->
         <div id="main">
-
+            
             <div class="container">
-                <div >
-                    <a href="newPost.jsp">NEW POST</a>
-
-
-                </div>
+                
+<!--                <div class="row">-->
+<!--                    <div id="content" class="12u skel-cell-important">-->
+                        <header>
+                            <center><h2>POST LIST</h2></center>
+                        </header>
+                    <!--</div>-->
+                <!--</div>-->
+                <c:if test="${usuario.userType <= 2}">
+                    <div >
+                        <a href="newPost.jsp">NEW POST</a>
+                    </div>
+                </c:if>
 
 
                 <c:forEach items="${postList}" var="post">

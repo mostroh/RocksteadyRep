@@ -64,13 +64,14 @@
 
         <!-- Main -->
         <div id="main">
-            <c:if test="${not empty usuario}" >
-                <c:if test="${usuario.userType <= 2}">
-                    <div class="container">
-                        <div class="row">
+            <div class="row">
 
-                            <!-- Content -->
-                            <div id="content" class="12u skel-cell-important">
+                <!-- Content -->
+                <div id="content" class="12u skel-cell-important">
+                    <c:if test="${not empty usuario}" >
+                        <c:if test="${usuario.userType <= 2}">
+                            <div class="container">
+
                                 <section>
                                     <header>
                                         <h2>NEW POST</h2>
@@ -95,17 +96,18 @@
                             </div>
                             <!-- /Content -->
 
-                        </div>
 
-                    </div>
-                </c:if>
-                <c:if test="${usuario.userType > 2}" >
-                    YOU HAVE NOT ENOUGH PERMISSION TO ACCESS THIS PAGE
-                </c:if> 
-            </c:if>
-            <c:if test="${empty usuario}">
-                <h2>YOU MUST BE LOGED IN TO ACCESS THIS PAGE</h2>
-            </c:if>
+                        </c:if>
+                        <c:if test="${usuario.userType > 2}" >
+                            <center><h2>YOU HAVE NOT ENOUGH PERMISSIONs TO ACCESS THIS PAGE</h2></center>
+                        </c:if> 
+                    </c:if>
+                    <c:if test="${empty usuario}">
+                        <center><h2>YOU MUST BE LOGED IN TO ACCESS THIS PAGE</h2></center>
+                    </c:if>
+                </div>
+
+            </div>
 
         </div>
         <!-- Main -->
