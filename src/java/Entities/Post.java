@@ -62,7 +62,7 @@ public class Post implements Serializable {
     private Character mvpost;
     @Lob
     @Column(name = "HEADER_IMAGE")
-    private Serializable headerImage;
+    private byte[] headerImage;
     @Size(max = 25)
     @Column(name = "TITLE")
     private String title;
@@ -104,11 +104,11 @@ public class Post implements Serializable {
         this.mvpost = mvpost;
     }
 
-    public Serializable getHeaderImage() {
+    public byte[] getHeaderImage() {
         return headerImage;
     }
 
-    public void setHeaderImage(Serializable headerImage) {
+    public void setHeaderImage(byte[] headerImage) {
         this.headerImage = headerImage;
     }
 

@@ -8,6 +8,7 @@ package Servlets;
 import Entities.Post;
 import SessionBeans.PostFacade;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
@@ -37,6 +38,7 @@ public class PostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         List <Post> postList = postFacade.getRecentPost();
         request.setAttribute("postList", postList);
         request.getServletContext().getRequestDispatcher("/blog.jsp").forward(request, response);

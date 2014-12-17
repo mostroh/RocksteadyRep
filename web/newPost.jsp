@@ -75,7 +75,7 @@
                                     <header>
                                         <h2>NEW POST</h2>
                                     </header>
-                                    <form action="/RocksteadyRep/NewPostServlet" method="post">
+                                    <form action="/RocksteadyRep/NewPostServlet" method="post" enctype="multipart/form-data">
                                         Title: <br>
                                         <input type="text" name="postTitle"/><br>
                                         Latitude:<br>

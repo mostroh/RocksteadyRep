@@ -9,20 +9,26 @@ import Entities.Post;
 import Entities.Usuario;
 import SessionBeans.PostFacade;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import sun.nio.ch.IOUtil;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author Blackproxy
  */
+@MultipartConfig
 @WebServlet(name = "NewPostServlet", urlPatterns = {"/NewPostServlet"})
 public class NewPostServlet extends HttpServlet {
     @EJB
@@ -39,20 +45,26 @@ public class NewPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String postTitle = (String) request.getParameter("postTitle");
         String postContent = (String) request.getParameter("postContent");
-        //Serializable postImage = (Serializable) request.getAttribute("postImage");
         Usuario usuLogueado = (Usuario) request.getSession().getAttribute("usuario");
         String postGps = (String)request.getParameter("postLat")+","+(String)request.getParameter("postLong");
+        
+        Part filePart = request.getPart("postImage");
+        InputStream f = filePart.getInputStream();
+        byte[] img = IOUtils.toByteArray(f);
+        
         Post nuevoPost = new Post();
         nuevoPost.setPostDate(Calendar.getInstance().getTime());
-        //nuevoPost.setHeaderImage(nuevoPost);
         nuevoPost.setMvpost(Character.MIN_VALUE);
         nuevoPost.setPostedBy(usuLogueado);
         nuevoPost.setPostGps(postGps);
         nuevoPost.setTitle(postTitle);
         nuevoPost.setPostContent(postContent);
+        nuevoPost.setHeaderImage(img);
         postFacade.create(nuevoPost);
+        
         request.getServletContext().getRequestDispatcher("/PostServlet").forward(request, response);
         
     }

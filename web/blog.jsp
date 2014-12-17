@@ -51,8 +51,8 @@
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
-                        </c:if>
-                        <c:if test="${not empty usuario}">
+                            </c:if>
+                            <c:if test="${not empty usuario}">
                             <li>
                                 <a href="LogOutServlet">Logout</a>
                             </li>
@@ -90,14 +90,17 @@
                                     <h2>${post.getTitle()}</h2>
                                     <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()}</span>
                                 </header>
-                                <p><a href="#" class="image full"><img src="images/pics02.jpg" alt=""></a></p>
+
+                                <p><a href="#" class="image full">
+                                        <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt=""></a></p>
                                 <p>${post.getPostContent()}</p>
+
                             </section>
                         </div>
 
                         <div id="mostrarMapa${post.getPostId()}"><br>
                             <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">
-                                <img border="0" src="images/Google-Maps-icon.png" width="50" height="50"> MAP </a>
+                                <img border="0" src="images/Google-Maps-icon.png" width="50" height="50"></a>
                         </div>
 
                         <div>
