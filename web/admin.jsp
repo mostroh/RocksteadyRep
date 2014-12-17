@@ -250,7 +250,12 @@
                         <header>
                             <center>
                                 <h2>
-                                    <font color="red">You're not an admin.</font> 
+                                    <font color="red">
+                                    You're not an admin.
+                                    <br>
+                                    Get out.
+                                    <br>
+                                    </font> 
                                 </h2>
                             </center>
                         </header>
