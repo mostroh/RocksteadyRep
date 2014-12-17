@@ -48,19 +48,18 @@
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                        <c:if test="${usuario.userType < 1 or 
-                              usuario.userType > 3}">
+                            <c:if test="${empty usuario}">
                             <li>
                                 <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
                             </li>
                         </c:if>
-                        <c:if test="${not empty usuario}">
-                             <li>
-                                 <a href="LogOutServlet">Logout</a>
-                             </li>
-                        </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                            <li>
+                                <a href="LogOutServlet">Logout</a>
+                            </li>
                         </c:if>
                     </ul>
                 </nav>
@@ -73,58 +72,38 @@
         <div id="main">
             <div id="main">
                 <div class="container">
-                    
+
                     <c:choose>
                         <c:when test="${not empty usuario}">
                             <header>
-                            <center>
-                                <h2>Welcome ${usuario.username}</h2>
-                            </center>
+                                <center>
+                                    <h2>Welcome ${usuario.username}</h2>
+                                </center>
                             </header>
                         </c:when>
                         <c:when test="${empty usuario}">
                             <header>
-                            <center>
-                                <h2>Log in / register</h2>
-                            </center>
+                                <center>
+                                    <h2>Log in</h2>
+                                </center>
                             </header>
-                            <div class="row">
-                        <div class="3u" align="right">
-                                <form action="LoginServlet" method="post" autocomplete="off">
-                                    UserName:<input type="text" name="name"><br>
-                                    Password: <input type="password" name="pwd"><br>
-                                    <center><input type="submit" value="Log in"></center>
-                                </form>
-                                <div class="login-help">
-                                    <p>Has olvidado tu contraseña? <a href="index2.html">Pulsa aqui para recuperar tu contraseña</a>.</p>
-                                </div>
-                        </div>
+                            <center>
 
-                        <div class="patata" align="right">
-                                <form action="SingUpServlet" autocomplete="on">
-                                    UserName:<input type="text" name="username"><br>
-                                    First name:<input type="text" name="nombre"/><br>
-                                    Last name:<input type="text" name="apellido" value="" /><br>
-                                    Email:<input type="email" name="email" value="" /><br>
-                                    Password : <input type="password" name="password" value="" /><br>
-                                    Confirm Password: <input type="password" name="confirmPassword"/><br>
-                                    WebSite: <input type="text" name="website" value="" /><br>
-                                    Description: <input type="text" name="descriptionSingUp" value="" /><br>
-                                    Twitter: <input type="text" name="twitterSingUp" value="" /><br>
-                                    Facebook: <input type="text" name="facebookSingUp" value="" /><br>
-                                    Instagram: <input type="text" name="instagramSingUp" value="" /><br>
-                                    Linkedin: <input type="text" name="linkedinSingUp" value="" /><br>
-                                    Select image: <input type = "file" name="image" /><br>
-                                    <center><input type="submit" value="Register"></center>
-                                </form>
-                        </div>
-                    </div>
+                                <div class="3u" align="right">
+                                    <form action="LoginServlet" method="post" autocomplete="off">
+                                        UserName:<input type="text" name="name"><br><br>
+                                        Password: <input type="password" name="pwd"><br>
+                                        <input type="submit" value="Log in">
+                                    </form>
+
+                                </div>
+                            </center>
                         </c:when>
                     </c:choose>
-                        
-                        
-                    
-                    
+
+
+
+
                     <div class="divider"></div>
                 </div>
             </div>
@@ -201,8 +180,8 @@
         <!-- Copyright -->
         <div id="copyright">
             <div class="container">
-                
-                
+
+
             </div>
         </div>
 

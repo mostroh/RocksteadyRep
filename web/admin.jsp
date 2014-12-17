@@ -47,10 +47,20 @@
                 <nav id="nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
-                        <li><a href="blog.jsp">Blog</a></li>
-                            <c:if test="${usuario.userType == 1}">
+                        <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
+                            <c:if test="${empty usuario}">
+                            <li>
+                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
-                            </c:if>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                            <li>
+                                <a href="LogOutServlet">Logout</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>
@@ -61,7 +71,11 @@
             <div id="main">
                 <div class="container">
                     <header>
-                        <center><h2>Hello < ${allData.adminName} ></h2></center><br><br>
+                        <center>
+                            <h2>Hello <font color="orange"> ${usuario.username}</font>
+                            </h2>
+                        </center>
+                        <br><br>
                     </header>
                     <div class="row">
 
