@@ -19,13 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author YSF
  */
 public class SingUpServlet extends HttpServlet {
+
     @EJB
     private UsuarioFacade usuarioFacade;
 
@@ -41,13 +42,12 @@ public class SingUpServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        
+
         //Part file = request.getPart("image");
         //InputStream inputStream = file.getInputStream();
         //byte[] av = IOUtils.toByteArray(inputStream);
         int userType = 3;
-     
-        
+
         String password = request.getParameter("password");
         String confirmpassword = request.getParameter("confirmpassword");
         if (password.equals(confirmpassword)) {
@@ -61,11 +61,15 @@ public class SingUpServlet extends HttpServlet {
                 String twitter = request.getParameter("twitterSingUp");
                 String facebook = request.getParameter("facebookSingUp");
                 String instagram = request.getParameter("instagramSingUp");
-                String linkedin = request.getParameter("linkedinSingU");               
-                
-                Usuario nuevoUsuario = new Usuario(); 
-                nuevoUsuario.setUserType( BigInteger.valueOf(userType));
-           
+                String linkedin = request.getParameter("linkedinSingU");
+
+                Part filePart = request.getPart("image");
+                InputStream f = filePart.getInputStream();
+                byte[] perfil = IOUtils.toByteArray(f);
+
+                Usuario nuevoUsuario = new Usuario();
+                nuevoUsuario.setUserType(BigInteger.valueOf(userType));
+
                 nuevoUsuario.setUsername(nombreUsuario);
                 nuevoUsuario.setName(nombre);
                 nuevoUsuario.setLastName(apellidos);
@@ -76,20 +80,19 @@ public class SingUpServlet extends HttpServlet {
                 nuevoUsuario.setFacebook(facebook);
                 nuevoUsuario.setInstagram(instagram);
                 nuevoUsuario.setLinkedin(linkedin);
-                
+                nuevoUsuario.setImg(perfil);
+
                 usuarioFacade.create(nuevoUsuario);
-                           
+
                 sesion.setAttribute("usuario", nuevoUsuario);
                 request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             } else {
-                
 
-            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);   
+                request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
             }
-        }
-        else{
-            
+        } else {
+
             request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
         }

@@ -81,7 +81,7 @@ public class Usuario implements Serializable {
     private String password;
     @Lob
     @Column(name = "IMG")
-    private Byte[] img;
+    private byte[] img;
     @Size(max = 40)
     @Column(name = "WEBSITE")
     private String website;
@@ -173,11 +173,11 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    public Byte[] getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(Byte[] img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 

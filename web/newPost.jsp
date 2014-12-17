@@ -84,6 +84,7 @@
                                         Longitude:<br>
                                         <input type="text" name="postLong"/><br>
                                         Image:<br>
+                                        <h6 style="color:red"> 2040 x 240 px</h6>
                                         <input type="file" name="postImage"/><br>
                                         Content:<br>
                                         <textarea name="postContent" rows="15" cols="100"></textarea><br>

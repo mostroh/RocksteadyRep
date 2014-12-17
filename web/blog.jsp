@@ -45,7 +45,7 @@
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
                             <c:if test="${empty usuario}">
                             <li>
-                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                                <a href="/RocksteadyRep/SingUp.jsp">Sign Up</a>
                             </li>
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
@@ -101,25 +101,29 @@
                             <section>
                                 <header>
                                     <h2>${post.getTitle()}</h2>
-                                    <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()}</span>
+                                    <span class="byline">
+                                        <img height = "25px" width = "25px" src="images/default-user.png">
+                                        ${post.getPostedBy().getUsername()} | ${post.getPostDate()}</span>
                                 </header>
-                                    <p><a href="#" class="image full">
-                                            <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
+                                <p><a href="#" class="image full">
+                                        <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
                                 <p>${post.getPostContent()}</p>
                             </section>
-                        </div>
-                        <div>
+                            
                             <div id="mostrarMapa${post.getPostId()}"><br>
                                 <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">
-                                    <img border="0" src="images/Google-Maps-icon.png" width="120" height="70" alt="Icono mapa" ></a><br>
+                                    <center><img lborder="0" src="images/Google-Maps-icon.png" width="120" height="70" alt="Icono mapa" ></a></center><br>
                             </div>
+                        </div>
 
+                        <div>
                             <c:if test="${not empty usuario}">
                                 <c:forEach items="${post.getComentarioCollection()}" var="comentario">
                                     <div class="container">
                                         <header>
                                             <p><hr></p>
-                                            <h4>${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
+                                            
+                                            <h4><img height = "30px" width = "30px" src="images/default-user.png"> ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}</h4>
                                             <p>${comentario.getCommentContent()}</p>
                                         </header>
                                     </div>
@@ -135,22 +139,22 @@
                                 <h5>ONLY REGISTERED MEMBERS CAN SEE COMMENTS</h5>
                             </c:if>
                         </div>
-                        <!-- /Content -->
+                                    <!-- /Content -->
+                            </div>
+                        </c:forEach>
+
+
                     </div>
-                </c:forEach>
-
-
-            </div>
-        </div>
-        <!-- Main -->
+                </div>
+                <!-- Main -->
 
 
 
-        <!-- Copyright -->
-        <div id="copyright">
-            <div class="container">
-            </div>
-        </div>
+                <!-- Copyright -->
+                <div id="copyright">
+                    <div class="container">
+                    </div>
+                </div>
 
-    </body>
-</html>
+                </body>
+                </html>
