@@ -6,7 +6,7 @@
                 var posicion = new google.maps.LatLng(${param.latitud}, ${param.longitud});
                 var mapOptions = {
                     zoom: 4,
-                    center: posicion
+                    center: posicion,
                 };
                 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
                 var marker = new google.maps.Marker({
@@ -14,7 +14,6 @@
                     map: map,
                     title: 'Posicion'
                 });
-                map.style.display = "block";
             }
             function loadScript() {
                 var script = document.createElement("script");

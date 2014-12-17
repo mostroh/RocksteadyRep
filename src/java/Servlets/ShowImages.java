@@ -29,9 +29,9 @@ public class ShowImages extends HttpServlet {
         Post post = postFacade.find(postId);
         byte[] file = post.getHeaderImage();
         response.setContentType("image/jpg");
-        try (OutputStream o = response.getOutputStream()){
-            o.write(file);
-            o.flush();
+        try (OutputStream out = response.getOutputStream()){
+            out.write(file);
+            out.flush();
         }
                
     }

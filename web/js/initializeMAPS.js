@@ -1,3 +1,10 @@
+function cargarMapa(idPost, gps) {
+    var gpsSplit = gps.toString().split(",");
+    var lat = gpsSplit[0];
+    var long = gpsSplit[1];
+    $("#mostrarMapa" + idPost).load('/RocksteadyRep/maps.jsp?latitud=' + lat + '&longitud=' + long);
+}
+
 function initialize() {
     
     var posicion = new google.maps.LatLng(latitud,longitud);
@@ -11,10 +18,7 @@ function initialize() {
         map: map,
         title: 'Posicion'
     });
-
-    map.style.display = "block";
 }
-
 function loadScript() {
     var script = document.createElement("script");
     script.type = "text/javascript";

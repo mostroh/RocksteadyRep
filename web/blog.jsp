@@ -19,7 +19,6 @@
         <script src="js/skel.min.js"></script>
         <script src="js/skel-panels.min.js"></script>
         <script src="js/init.js"></script>
-        <script src="js/maps.js" type="text/javascript"></script>
         <script src="js/initializeMAPS.js" type="text/javascript"></script>
         <noscript>
         <link rel="stylesheet" href="css/skel-noscript.css" />
@@ -105,7 +104,7 @@
                                     <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()}</span>
                                 </header>
                                     <p><a href="#" class="image full">
-                                            <img height = "300px" width = "1200px" src="ShowImages?${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
+                                            <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
                                 <p>${post.getPostContent()}</p>
                             </section>
                         </div>
