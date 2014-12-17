@@ -55,8 +55,8 @@
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
-                        </c:if>
-                        <c:if test="${not empty usuario}">
+                            </c:if>
+                            <c:if test="${not empty usuario}">
                             <li>
                                 <a href="LogOutServlet">Logout</a>
                             </li>
@@ -99,8 +99,26 @@
                                 </div>
                             </center>
                         </c:when>
-                    </c:choose>
 
+                    </c:choose>
+                    <c:if test="${not empty lh}">
+                        <center>
+                            <c:choose>
+                                <c:when test="${not lh.userexists}">
+                                    <center>
+                                        <h2><font color="red">Invalid username</font>
+                                        </h2>
+                                    </center>
+                                </c:when>
+                                <c:when test="${lh.wrongpassword}">
+                                    <center>
+                                        <h2><font color="red">Wrong password</font>
+                                        </h2>
+                                    </center>
+                                </c:when>
+                            </c:choose>
+                        </center>
+                    </c:if>
 
 
 
