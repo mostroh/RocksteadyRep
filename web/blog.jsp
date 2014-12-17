@@ -104,15 +104,17 @@
                                     <h2>${post.getTitle()}</h2>
                                     <span class="byline">${post.getPostedBy().getUsername()} | ${post.getPostDate()}</span>
                                 </header>
-                                <p><a href="#" class="image full">
-                                        <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt=""></a></p>
+                                <center>
+                                    <p><a href="#" class="image full">
+                                            <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post"></a></p>
+                                </center>
                                 <p>${post.getPostContent()}</p>
                             </section>
                         </div>
                         <div>
                             <div id="mostrarMapa${post.getPostId()}"><br>
                                 <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">
-                                    <img border="0" src="images/Google-Maps-icon.png" width="50" height="50"> MAP </a><br>
+                                    <img border="0" src="images/Google-Maps-icon.png" width="200" height="120" alt="Icono mapa" ></a><br>
                             </div>
 
                             <c:if test="${not empty usuario}">
