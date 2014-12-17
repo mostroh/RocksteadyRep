@@ -49,7 +49,7 @@ public class SingUpServlet extends HttpServlet {
      
         
         String password = request.getParameter("password");
-        String confirmpassword = request.getParameter("confirmpassword");
+        String confirmpassword = request.getParameter("confirmPassword");
         if (password.equals(confirmpassword)) {
             String nombreUsuario = (String) request.getParameter("username");
             Usuario antiguoUsuario = usuarioFacade.getUsuarioByUserName(nombreUsuario);
@@ -76,21 +76,22 @@ public class SingUpServlet extends HttpServlet {
                 nuevoUsuario.setFacebook(facebook);
                 nuevoUsuario.setInstagram(instagram);
                 nuevoUsuario.setLinkedin(linkedin);
-                
+                System.out.println("metiendo usuario");
                 usuarioFacade.create(nuevoUsuario);
-                           
+                System.out.println("fin metiendo usuario");           
                 sesion.setAttribute("usuario", nuevoUsuario);
                 request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                
             } else {
                 
-
-            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);   
+                request.setAttribute("Error", " Ya existe ese Usuario");
+                request.getServletContext().getRequestDispatcher("/SingUp.jsp").forward(request, response);   
 
             }
         }
         else{
-            
-            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            request.setAttribute("Error", " El Password y el Confirm Password no coinciden");
+            request.getServletContext().getRequestDispatcher("/SingUp.jsp").forward(request, response);
 
         }
 
