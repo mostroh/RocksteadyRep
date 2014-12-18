@@ -61,6 +61,11 @@
                                 <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
+                            <c:if test="${not empty usuario}">
+                            <li>
+                                <a href="editPerfil.jsp">Edit Perfil</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </nav>
 
