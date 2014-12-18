@@ -102,7 +102,7 @@
                                 <header>
                                     <h2>${post.getTitle()}</h2>
                                     <span class="byline">
-                                        <img height = "25px" width = "25px" src="images/default-user.png">
+                                        <img height = "30px" width = "30px" src="ShowUserImage?userId=${post.postedBy.userId}">
                                         ${post.postedBy.username} | ${post.postDate}
                                         <c:if test="${post.postedBy.userId eq usuario.userId}"> |
                                             <form style='display:inline;' action="/RocksteadyRep/EditPostServlet" method="post">
@@ -139,7 +139,7 @@
                                         <div class="container">
                                             <header>
                                                 <p><hr></p>
-                                                <h4><img height = "30px" width = "30px" src="images/default-user.png"> 
+                                                <h4><img height = "20px" width = "20px" src="ShowUserImage?userId=${comentario.commentBy.userId}"> 
                                                     ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}  
                                                     <c:if test="${comentario.commentBy.userId eq usuario.userId}"> |
                                                         <form style='display:inline;' action="/RocksteadyRep/AdminDeleteCommentServlet" method="post">
