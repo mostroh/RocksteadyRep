@@ -62,7 +62,6 @@ public class LoginServlet extends HttpServlet {
             } else {
 
                 lh.setWrongpassword(true);
-                ;
             }
         } else {
             lh.setUserexists(false);
