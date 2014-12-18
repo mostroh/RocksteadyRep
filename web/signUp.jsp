@@ -33,24 +33,25 @@
                 <nav id="nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
-                        <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                            <c:if test="${empty usuario}">
+                        <li><a href="PostServlet">Blog</a></li>
+                        <c:if test="${empty usuario}">
                             <li>
-                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                                <a href="signUp.jsp">Sign Up</a>
                             </li>
                         </c:if>
-                        <c:if test="${usuario.userType == 1}">
-                            <li><a href="admin.jsp">Admin Area</a>
+                        <c:if test="${not empty usuario}">
+                            <c:if test="${usuario.userType == 1}">
+                            <li>
+                                <a href="admin.jsp">Admin Area</a>
                             </c:if>
-                            <c:if test="${not empty usuario}">
                             <li>
                                 <a href="editProfile.jsp">Edit Profile</a>
                             </li>
                             <li>
-                                
                                 <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
+                        
                     </ul>
                 </nav>
             </div>
