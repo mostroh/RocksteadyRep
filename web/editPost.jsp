@@ -82,21 +82,18 @@
                                     <header>
                                         <h2>EDIT POST</h2>
                                     </header>
-                                    <form action="/RocksteadyRep/ConfirmEditPostServlet" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="postId" value="${postToEdit.getPostId()}"
-                                               Title: <br>
-                                        <input type="text" name="postTitle" required="true" value="${postToEdit.getTitle()}"/><br>
+                                    <form action="/RocksteadyRep/ConfirmEditPostServlet">
+                                        <input type="hidden" name="postId" value="${postToEdit.postId}"/>
+                                        Title: <br>
+                                        <input type="text" name="editTitle" required="true" value="${postToEdit.getTitle()}"/><br>
                                         Latitude:<br>
-                                        <input type="text" name="postLat" value="${postLat}"/><br>
+                                        <input type="text" name="editLat" value="${postLat}"/><br>
                                         Longitude:<br>
-                                        <input type="text" name="postLong" value="${postLong}"/><br>
-                                        Image:<br>
-                                        <h6 style="color:red"> 2040 x 240 px</h6>
-                                        <input type="file" name="postImage" accept="image/*" ><br>
+                                        <input type="text" name="editLong" value="${postLong}"/><br>
                                         Content:<br>
-                                        <textarea name="postContent" rows="15" cols="100" required="true">${postToEdit.getPostContent()}</textarea><br>
+                                        <textarea name="editContent" rows="15" cols="100" required="true">${postToEdit.getPostContent()}</textarea><br>
 
-                                        <input type="submit" value="EDIT POST" name="btnPost" />
+                                        <input type="submit" value="EDIT POST" name="btnEditPost" />
 
                                     </form>
 

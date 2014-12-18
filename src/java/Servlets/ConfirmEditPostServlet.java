@@ -13,7 +13,9 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Enumeration;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,29 +45,34 @@ public class ConfirmEditPostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String postTitle = request.getParameter("postTitle")
-                            .replaceAll("<[^>]*>", "");
-        String postContent = request.getParameter("postContent")
-                             .replaceAll("<[^>]*>", "");
-        String postGps = request.getParameter("postLat")
-                            .replaceAll("<[^>]*>", "")
+        String postTitle = request.getParameter("editTitle");
+                            
+        String postContent = request.getParameter("editContent")
+                             ;
+        String postGps = request.getParameter("editLat")
+                            
                             +","+
-                            request.getParameter("postLong")
-                            .replaceAll("<[^>]*>", "");
+                            request.getParameter("editLong")
+                            ;
+        
+
         
         Post antiguoPost = postFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("postId"))));
         
-        Part filePart = request.getPart("postImage");
-        if(filePart.getSubmittedFileName() !=null || !filePart.getSubmittedFileName().isEmpty()){
-            InputStream f = filePart.getInputStream();
-            byte[] img = IOUtils.toByteArray(f);
-            antiguoPost.setHeaderImage(img);
-        }
+        //Part filePart = request.getPart("editImage");
+        //if(filePart.getSubmittedFileName() !=null || !filePart.getSubmittedFileName().isEmpty()){
+        //    InputStream f = filePart.getInputStream();
+        //    byte[] img = IOUtils.toByteArray(f);
+        //    antiguoPost.setHeaderImage(img);
+        //}
         antiguoPost.setPostDate(Calendar.getInstance().getTime());
         antiguoPost.setPostGps(postGps);
         antiguoPost.setTitle(postTitle);
         antiguoPost.setPostContent(postContent);
         postFacade.edit(antiguoPost);
+        
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/PostServlet");
+        rd.forward(request, response); 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
