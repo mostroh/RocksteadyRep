@@ -41,7 +41,7 @@
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                            <c:if test="${empty usuario}">
+                        <c:if test="${empty usuario}">
                             <li>
                                 <a href="/RocksteadyRep/SingUp.jsp">Sign Up</a>
                             </li>
@@ -75,7 +75,7 @@
                                     <header>
                                         <h2>EDIT POST</h2>
                                     </header>
-                                    <form action="/NewPostServlet" method="post" enctype="multipart/form-data">
+                                    <form action="/RocksteadyRep/EditPostServlet" method="post" enctype="multipart/form-data">
                                         Title: <br>
                                         <input type="text" name="postTitle" value="${postToEdit.getTitle()}"/><br>
                                         Latitude:<br>
@@ -98,7 +98,7 @@
 
 
                         </c:if>
-                        <c:if test="${usuario.userType > 2}" >
+                        <c:if test="${usuario ne postToEdit.postedBy}" >
                             <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
                         </c:if>
                     </c:if>

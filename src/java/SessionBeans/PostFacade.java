@@ -38,7 +38,7 @@ public class PostFacade extends AbstractFacade<Post> {
     }
     
     public List <Post> getRecentPost(){
-        return em.createQuery("SELECT p FROM Post p")
+        return em.createQuery("SELECT p FROM Post p ORDER BY p.postDate DESC")
                 .setMaxResults(10)
                 .getResultList();
     }
