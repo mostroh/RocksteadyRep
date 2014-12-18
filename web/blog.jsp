@@ -104,10 +104,17 @@
                                     <span class="byline">
                                         <img height = "25px" width = "25px" src="images/default-user.png">
                                         ${post.postedBy.username} | ${post.postDate}
-                                        <c:if test="${post.postedBy.userId eq usuario.userId}">
-                                            | <a href="/RocksteadyRep/EditPostServlet?PostToEdit=${post.postId}">Edit post</a>
-                                            | <a href="/RocksteadyRep/AdminDeletePostServlet?DeleteOwnPost=${post.postId}">
-                                                <font color="red">Remove post</font>
+                                        <c:if test="${post.postedBy.userId eq usuario.userId}"> |
+                                            <form style='display:inline;' action="/RocksteadyRep/EditPostServlet" method="post">
+                                                <input style='display:inline;' type="hidden" name="PostToEdit" value="${post.postId}">
+                                                <input style='display:inline;' type="image" src="images/edit_icon.png" alt="Edit Post">
+                                            </form> 
+                                            <form style='display:inline;' action="/RocksteadyRep/AdminDeletePostServlet" method="post">
+                                                <input style='display:inline;' type="hidden" name="DeleteOwnPost" value="${post.postId}">
+                                                <input style='display:inline;' type="image" src="images/delete_icon.png" alt="Delete Post">
+                                            </form>
+<!--                                            | <a href="/RocksteadyRep/AdminDeletePostServlet?DeleteOwnPost=${post.postId}">
+                                                <font color="red">Remove post</font>-->
                                             </a>
                                         </c:if>
                                     </span>
@@ -116,62 +123,67 @@
                                 <p><a href="#" class="image full">
                                         <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
                                 <p>${post.getPostContent()}</p>
-                            
 
-                            <div id="mostrarMapa${post.getPostId()}"><br>
-                                <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" >
-                                    <center><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" >Show map</a></center>
-                            </div>                                  
+
+                                <div id="mostrarMapa${post.getPostId()}"><br>
+                                    <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" >
+                                        <center><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" >Show map</a></center>
+                                </div>                                  
                             </section>
-                        
+
                         </div>
-                                    <div>
-                                        <c:choose>
-                                            <c:when test="${not empty usuario}">
-                                                <c:forEach items="${post.getComentarioCollection()}" var="comentario">
-                                                    <div class="container">
-                                                        <header>
-                                                            <p><hr></p>
-                                                            <h4><img height = "30px" width = "30px" src="images/default-user.png"> 
-                                                                ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}  
-                                                                <c:if test="${comentario.commentBy.userId eq usuario.userId}">
-                                                                    | <a href="/RocksteadyRep/AdminDeleteCommentServlet?DeleteOwnComment=${comentario.commentId}">
-                                                                        <font color="red">Remove comment</font>
-                                                                    </a>
-                                                                </c:if>
-                                                            </h4>
-                                                            <p>${comentario.getCommentContent()}</p>
-                                                        </header>
-                                                    </div>
-                                                </c:forEach>
-                                                <form action="/RocksteadyRep/CommentServlet" method="post">
-                                                    Comment:<br>
-                                                    <textarea name="commentContent" rows="4" cols="100"></textarea><br>
-                                                    <input type="hidden" name="postCommented" value="${post.getPostId()}"/>
-                                                    <input type="submit" value="Add comment" name="btnComment${post.getPostId()}" />
-                                                </form>
-                                            </c:when>
-                                            <c:when test="${empty usuario}">
-                                                <h5>ONLY REGISTERED MEMBERS CAN SEE COMMENTS</h5>
-                                            </c:when>
-                                        </c:choose>
-                                    </div>
-                                    <!-- /Content -->
-                            </div>
-                        </c:forEach>
+                        <div>
+                            <c:choose>
+                                <c:when test="${not empty usuario}">
+                                    <c:forEach items="${post.getComentarioCollection()}" var="comentario">
+                                        <div class="container">
+                                            <header>
+                                                <p><hr></p>
+                                                <h4><img height = "30px" width = "30px" src="images/default-user.png"> 
+                                                    ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}  
+                                                    <c:if test="${comentario.commentBy.userId eq usuario.userId}"> |
+                                                        <form style='display:inline;' action="/RocksteadyRep/AdminDeleteCommentServlet" method="post">
+                                                            <input style='display:inline;' type="hidden" name="DeleteOwnComment" value="${comentario.commentId}">
+                                                            <input style='display:inline;' type="image" src="images/delete_icon.png" alt="Delete Comment">
+                                                        </form>
 
-
+<!--                                                                    | <a href="/RocksteadyRep/AdminDeleteCommentServlet?DeleteOwnComment=${comentario.commentId}">
+    <font color="red">Remove comment</font>
+</a>-->
+                                                    </c:if>
+                                                </h4>
+                                                <p>${comentario.getCommentContent()}</p>
+                                            </header>
+                                        </div>
+                                    </c:forEach>
+                                    <form action="/RocksteadyRep/CommentServlet" method="post">
+                                        Comment:<br>
+                                        <textarea name="commentContent" rows="4" cols="100"></textarea><br>
+                                        <input type="hidden" name="postCommented" value="${post.getPostId()}"/>
+                                        <input type="submit" value="Add comment" name="btnComment${post.getPostId()}" />
+                                    </form>
+                                </c:when>
+                                <c:when test="${empty usuario}">
+                                    <center><h5>ONLY REGISTERED MEMBERS CAN SEE COMMENTS</h5></center>
+                                </c:when>
+                            </c:choose>
+                        </div>
+                        <!-- /Content -->
                     </div>
-                </div>
-                <!-- Main -->
+                </c:forEach>
+
+
+            </div>
+        </div>
+        <!-- Main -->
 
 
 
-                <!-- Copyright -->
-                <div id="copyright">
-                    <div class="container">
-                    </div>
-                </div>
+        <!-- Copyright -->
+        <div id="copyright">
+            <div class="container">
+            </div>
+        </div>
 
-                </body>
-                </html>
+    </body>
+</html>
