@@ -39,6 +39,7 @@ public class AdminDeletePostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         if(!isNull(request.getParameter("DeleteOwnPost"))){
             Post p = postFacade.find(new BigDecimal
                                         (Integer.parseInt

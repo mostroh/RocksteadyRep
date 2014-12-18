@@ -37,7 +37,7 @@ public class PostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
         List <Post> postList = postFacade.getRecentPost();
         request.setAttribute("postList", postList);
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/blog.jsp");

@@ -24,6 +24,7 @@ public class ShowImages extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         
         BigDecimal postId =  new BigDecimal(Integer.parseInt(request.getParameter("postId")));

@@ -43,7 +43,7 @@ public class NewPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
         String postTitle = request.getParameter("postTitle")
                             .replaceAll("<[^>]*>", "");
         String postContent = request.getParameter("postContent")

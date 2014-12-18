@@ -36,7 +36,7 @@ public class EditPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
         Post postAEditar = postFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("PostToEdit"))));
         String[] latLong= postAEditar.getPostGps().split(",");
         request.setAttribute("postToEdit", postAEditar);

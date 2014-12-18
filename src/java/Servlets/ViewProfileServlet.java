@@ -37,6 +37,7 @@ public class ViewProfileServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         Usuario u = usuarioFacade.find(new BigDecimal(request.getParameter("profileOfUserID")));
         
         request.setAttribute("profileOfUser", u);

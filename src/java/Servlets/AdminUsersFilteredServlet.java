@@ -37,7 +37,7 @@ public class AdminUsersFilteredServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
         AdminPageHelper adminPageData = new AdminPageHelper();
         
         adminPageData.setUserList(usuarioFacade.findByNameContaining(request.getParameter("usernameSearchFilter")));

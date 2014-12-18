@@ -25,6 +25,7 @@ public class ShowUserImage extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
         BigDecimal userId = new BigDecimal(Integer.parseInt(request.getParameter("userId")));

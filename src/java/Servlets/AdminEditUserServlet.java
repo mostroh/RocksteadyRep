@@ -39,6 +39,7 @@ public class AdminEditUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String option = request.getParameter("userEdit").replaceAll("[^a-zA-Z]","");
         int userID = Integer.parseInt(request.getParameter("userEdit").replaceAll("[a-zA-Z]",""));
         AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();

@@ -43,6 +43,7 @@ public class EditProfileServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession sesion = request.getSession();
 
         Usuario user = (Usuario) sesion.getAttribute("usuario");
