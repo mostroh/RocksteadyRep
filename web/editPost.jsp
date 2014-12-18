@@ -77,18 +77,18 @@
                                     </header>
                                     <form action="/NewPostServlet" method="post" enctype="multipart/form-data">
                                         Title: <br>
-                                        <input type="text" name="postTitle" value="${postToEdit.gerTitle()}"/><br>
+                                        <input type="text" name="postTitle" value="${postToEdit.getTitle()}"/><br>
                                         Latitude:<br>
-                                        <input type="text" name="postLat"/><br>
+                                        <input type="text" name="postLat" value="${postLat}"/><br>
                                         Longitude:<br>
-                                        <input type="text" name="postLong"/><br>
+                                        <input type="text" name="postLong" value="${postLong}"/><br>
                                         Image:<br>
                                         <h6 style="color:red"> 2040 x 240 px</h6>
-                                        <input type="file" name="postImage" accept="image/*"><br>
+                                        <input type="file" name="postImage" accept="image/*" ><br>
                                         Content:<br>
-                                        <textarea name="postContent" rows="15" cols="100"></textarea><br>
+                                        <textarea name="postContent" rows="15" cols="100">${postToEdit.getPostContent()}</textarea><br>
 
-                                        <input type="submit" value="POST" name="btnPost" />
+                                        <input type="submit" value="EDIT POST" name="btnPost" />
 
                                     </form>
 
@@ -100,7 +100,7 @@
                         </c:if>
                         <c:if test="${usuario.userType > 2}" >
                             <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
-                        </c:if> 
+                        </c:if>
                     </c:if>
                     <c:if test="${empty usuario}">
                         <center><h2>YOU MUST BE LOGED IN TO ACCESS THIS PAGE</h2></center>

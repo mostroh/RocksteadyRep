@@ -78,7 +78,7 @@
                                     </header>
                                     <form action="/RocksteadyRep/NewPostServlet" method="post" enctype="multipart/form-data">
                                         Title: <br>
-                                        <input type="text" name="postTitle"/><br>
+                                        <input type="text" name="postTitle" value=""/><br>
                                         Latitude:<br>
                                         <input type="text" name="postLat"/><br>
                                         Longitude:<br>

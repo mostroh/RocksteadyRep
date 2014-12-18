@@ -39,7 +39,10 @@ public class EditPostServlet extends HttpServlet {
             throws ServletException, IOException {
         
         Post postAEditar = postFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("PostToEdit"))));
+        String[] latLong= postAEditar.getPostGps().split(",");
         request.setAttribute("postToEdit", postAEditar);
+        request.setAttribute("postLat", latLong[0]);
+        request.setAttribute("postLong", latLong[1]);
         request.getServletContext().getRequestDispatcher("/editPost.jsp").forward(request, response);
     }
 
