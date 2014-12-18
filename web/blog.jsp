@@ -120,11 +120,7 @@
                             <div id="mostrarMapa${post.getPostId()}"><br>
                                 <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" >
                                     <center><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" >Show map</a></center>
-                            </div>
-                                    
-                            <div id="cerrarMapa${post.getPostId()}" >
-                                <a href="" onclick="cerrarMapa(${post.getPostId()})">Close map</a>
-                            </div>
+                            </div>                                  
                             </section>
                         
                         </div>

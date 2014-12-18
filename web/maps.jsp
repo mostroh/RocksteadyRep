@@ -8,7 +8,7 @@
                     zoom: 12,
                     center: posicion
                 };
-                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                var map = new google.maps.Map(document.getElementById("map${param.idPost}"), mapOptions);
                 var marker = new google.maps.Marker({
                     position: posicion,
                     map: map,
@@ -26,7 +26,7 @@
         </script>
     </head>
     <body>
-        <div id="map" style="height:300px;width:1200px;"></div>
+        <div id="map${param.idPost}" style="height:300px;width:1200px;"></div>
     </body>
 </html>
 
