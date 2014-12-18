@@ -105,6 +105,7 @@
                                         <img height = "25px" width = "25px" src="images/default-user.png">
                                         ${post.postedBy.username} | ${post.postDate}
                                         <c:if test="${post.postedBy.userId eq usuario.userId}">
+                                            | <a href="/RocksteadyRep/EditPostServlet?PostToEdit=${post.postId}">Edit post</a>
                                             | <a href="/RocksteadyRep/AdminDeletePostServlet?DeleteOwnPost=${post.postId}">
                                                 <font color="red">Remove post</font>
                                             </a>

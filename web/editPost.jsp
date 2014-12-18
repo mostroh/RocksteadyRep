@@ -1,10 +1,9 @@
 <%-- 
-    Document   : newPost
-    Created on : 14-dic-2014, 20:11:09
+    Document   : editPost
+    Created on : 18-dic-2014, 12:58:03
     Author     : Blackproxy
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -74,11 +73,11 @@
 
                                 <section>
                                     <header>
-                                        <h2>NEW POST</h2>
+                                        <h2>EDIT POST</h2>
                                     </header>
-                                    <form action="/RocksteadyRep/NewPostServlet" method="post" enctype="multipart/form-data">
+                                    <form action="/NewPostServlet" method="post" enctype="multipart/form-data">
                                         Title: <br>
-                                        <input type="text" name="postTitle"/><br>
+                                        <input type="text" name="postTitle" value="${postToEdit.gerTitle()}"/><br>
                                         Latitude:<br>
                                         <input type="text" name="postLat"/><br>
                                         Longitude:<br>
