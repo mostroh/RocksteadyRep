@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.apache.commons.io.IOUtils;
  * @author YSF
  */
 public class SingUpServlet extends HttpServlet {
+
     @EJB
     private UsuarioFacade usuarioFacade;
 
@@ -36,16 +38,15 @@ public class SingUpServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        
+
         //Part file = request.getPart("image");
         //InputStream inputStream = file.getInputStream();
         //byte[] av = IOUtils.toByteArray(inputStream);
         int userType = 3;
-     
         String password = request.getParameter("password");
         String confirmpassword = request.getParameter("confirmPassword");
         if (password.equals(confirmpassword)) {
-            String nombreUsuario = (String) request.getParameter("username");
+            String nombreUsuario = request.getParameter("username");
             Usuario antiguoUsuario = usuarioFacade.getUsuarioByUserName(nombreUsuario);
             if (antiguoUsuario == null) {
                 String nombre = request.getParameter("nombre");
@@ -55,13 +56,13 @@ public class SingUpServlet extends HttpServlet {
                 String twitter = request.getParameter("twitterSingUp");
                 String facebook = request.getParameter("facebookSingUp");
                 String instagram = request.getParameter("instagramSingUp");
-                String linkedin = request.getParameter("linkedinSingU");               
-                 Part filePart = request.getPart("image");
-                InputStream f = filePart.getInputStream();
-                byte[] perfil = IOUtils.toByteArray(f);
-                Usuario nuevoUsuario = new Usuario(); 
-                nuevoUsuario.setUserType( BigInteger.valueOf(userType));
-           
+                String linkedin = request.getParameter("linkedinSingUp");
+                //Part filePart = request.getPart("image");
+                //InputStream f = filePart.getInputStream();
+                //byte[] perfil = IOUtils.toByteArray(f);
+                
+                Usuario nuevoUsuario = new Usuario();
+                nuevoUsuario.setUserType(BigInteger.valueOf(userType));
                 nuevoUsuario.setUsername(nombreUsuario);
                 nuevoUsuario.setName(nombre);
                 nuevoUsuario.setLastName(apellidos);
@@ -72,24 +73,23 @@ public class SingUpServlet extends HttpServlet {
                 nuevoUsuario.setFacebook(facebook);
                 nuevoUsuario.setInstagram(instagram);
                 nuevoUsuario.setLinkedin(linkedin);
-                nuevoUsuario.setImg(perfil);
-                System.out.println("metiendo usuario");
+                //nuevoUsuario.setImg(perfil);
+
                 usuarioFacade.create(nuevoUsuario);
-                System.out.println("fin metiendo usuario");           
-                sesion.setAttribute("usuario", nuevoUsuario);
-                request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-                
+
+                sesion.setAttribute("usuario", nuevoUsuario);            
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+                rd.forward(request, response);
+
             } else {
-                
-                request.setAttribute("Error", " Ya existe ese Usuario");
-                request.getServletContext().getRequestDispatcher("/SingUp.jsp").forward(request, response);   
-
+                request.setAttribute("errorMessage", "This username has already been used");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/SingUp.jsp");
+                rd.forward(request, response);
             }
-        }
-        else{
-            request.setAttribute("Error", " El Password y el Confirm Password no coinciden");
-            request.getServletContext().getRequestDispatcher("/SingUp.jsp").forward(request, response);
-
+        } else {
+            request.setAttribute("errorMessage", "Passwords do not match");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SingUp.jsp");
+            rd.forward(request, response);
         }
 
     }

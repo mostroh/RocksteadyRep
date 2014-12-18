@@ -10,10 +10,9 @@ import Entities.Usuario;
 import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.Calendar;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import sun.nio.ch.IOUtil;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -46,10 +44,14 @@ public class NewPostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String postTitle = (String) request.getParameter("postTitle");
-        String postContent = (String) request.getParameter("postContent");
+        String postTitle = request.getParameter("postTitle")
+                            .replaceAll("<[^>]*>", "");
+        String postContent = request.getParameter("postContent")
+                             .replaceAll("<[^>]*>", "");
         Usuario usuLogueado = (Usuario) request.getSession().getAttribute("usuario");
-        String postGps = (String)request.getParameter("postLat")+","+(String)request.getParameter("postLong");
+        String postGps = request.getParameter("postLat").replaceAll("<[^>]*>", "")
+                            +","+
+                            request.getParameter("postLong").replaceAll("<[^>]*>", "");
         
         Part filePart = request.getPart("postImage");
         InputStream f = filePart.getInputStream();
@@ -65,7 +67,8 @@ public class NewPostServlet extends HttpServlet {
         nuevoPost.setHeaderImage(img);
         postFacade.create(nuevoPost);
         
-        request.getServletContext().getRequestDispatcher("/PostServlet").forward(request, response);
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/PostServlet");
+        rd.forward(request, response); 
         
     }
 

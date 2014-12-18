@@ -40,7 +40,7 @@
         </div>
         <div id="main">
             <div class="container">
-                <div class="patata" align="center">
+                <div align="center">
                         <form action="SingUpServlet" autocomplete="on">
                             <div class="3u" align="right">
                                 UserName: <input type="text" name="username" value="" required="true"><br>
@@ -58,8 +58,10 @@
                                 Select image: <input type = "file" name="image" /><br> 
                             </div>    
                             <center><input type="submit" value="Register"></center>
-                            ${Error}
                         </form>
+                    <c:if test="${not empty errorMessage}">
+                        <font color="red">${errorMessage}</font>
+                    </c:if>
                 </div>
             </div>
         </div>

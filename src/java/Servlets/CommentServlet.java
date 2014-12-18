@@ -10,7 +10,6 @@ import Entities.Usuario;
 import SessionBeans.ComentarioFacade;
 import SessionBeans.PostFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import javax.ejb.EJB;
@@ -43,7 +42,8 @@ public class CommentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String commentContent = (String) request.getParameter("commentContent");
+        String commentContent = request.getParameter("commentContent")
+                                .replaceAll("<[^>]*>", "");
         Comentario comentario = new Comentario();
         comentario.setCommentBy((Usuario) request.getSession().getAttribute("usuario"));
         comentario.setPostCommented(postFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("postCommented")))));

@@ -8,10 +8,9 @@ package Servlets;
 import Entities.Post;
 import SessionBeans.PostFacade;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,8 +40,8 @@ public class PostServlet extends HttpServlet {
         
         List <Post> postList = postFacade.getRecentPost();
         request.setAttribute("postList", postList);
-        request.getServletContext().getRequestDispatcher("/blog.jsp").forward(request, response);
-        
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/blog.jsp");
+        rd.forward(request, response);        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
