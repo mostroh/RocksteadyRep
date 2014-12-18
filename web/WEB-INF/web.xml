@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>EditPerfilServlet</servlet-name>
-        <servlet-class>Servlets.EditPerfilServlet</servlet-class>
+        <servlet-class>Servlets.EditProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

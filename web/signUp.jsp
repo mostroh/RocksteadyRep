@@ -4,6 +4,7 @@
     Author     : inftel12
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,21 +24,45 @@
         </noscript>
     </head>
     <body>
+        
+        <!-- Header -->
         <div id="header">
             <div class="container">
+
+                <!-- Logo -->
                 <div id="logo">
-                    <h1><a href="index.html">Rocksteady</a></h1>
+                    <h1><a>Rocksteady</a></h1>
                     <span>BLOG</span>
                 </div>
+
+                <!-- Nav -->
                 <nav id="nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
-                        <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                        <li class="active"><a href="/RocksteadyRep/SingUp.html">SingUp</a></li>
+                        <li><a href="PostServlet">Blog</a></li>
+                        <c:if test="${empty usuario}">
+                            <li>
+                                <a href="signUp.jsp">Sign Up</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                            <c:if test="${usuario.userType == 1}">
+                            <li>
+                                <a href="admin.jsp">Admin Area</a>
+                            </c:if>
+                            <li>
+                                <a href="editProfile.jsp">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a href="LogOutServlet">Logout</a>
+                            </li>
+                        </c:if>
+                        
                     </ul>
                 </nav>
             </div>
         </div>
+        <!-- Header -->
         <div id="main">
             <div class="container">
                 <div align="center">
