@@ -54,21 +54,31 @@
         </div>
         <div id="main">
             <div class="container">
+               
+                 <header>
+                                <center>
+                                    <h2>Welcome <font color="orange">${usuario.username}</font>
+                                    </h2>
+                                </center>
+                            </header>
                 <div class="patata" align="center">
-                        <form action="SingUpServlet" autocomplete="on">
+                        <form action="EditPerfilServlet" method="post" enctype="multipart/form-data">
                             <div class="3u" align="right">
-                                UserName: <input type="text" name="username" value= "<c:out value = "${usuario.username}"/>" required="true"><br>
+                              
                                 First name: <input type="text" name="nombre" value= "<c:out value = "${usuario.name}"/>" required="true"><br>
                                 Last name: <input type="text" name="apellido" value= "<c:out value = "${usuario.lastName}"/>" required="true"/><br>
                                 Email: <input type="email" name="email" value = "<c:out value = "${usuario.email}"/>" required="true" /><br>
-                                Password : <input type="password" name="password" pattern=".{6,}" value = "<c:out value = "${usuario.email}"/>"required title="6 characters minimum"/><br>
-                               <%-- Confirm Password: <input type="password" name="confirmPassword" pattern=".{6,}" <c:out value = "${usuario.username}"/>"required title="6 characters minimum"/><br>--%>
+                               
+                            
                                 WebSite: <input type="text" name="website"   value = "<c:out value = "${usuario.email}"/>"/><br>
                                 Description: <input type="text" name="descriptionSingUp"  value = "<c:out value = "${usuario.description}"/>" /><br>
                                 Twitter: <input type="text" name="twitterSingUp"  value = "<c:out value = "${usuario.twitter}"/>" /><br>
                                 Facebook: <input type="text" name="facebookSingUp"  value = "<c:out value = "${usuario.facebook}"/>" /><br>
                                 Instagram: <input type="text" name="instagramSingUp"  value = "<c:out value = "${usuario.instagram}"/>"/><br>
                                 Linkedin: <input type="text" name="linkedinSingUp"  value = "<c:out value = "${usuario.linkedin}"/>"/><br><br>
+                                Image:<br>
+                               Content:<br>
+                               <img height = "100px" width = "100px" src="ShowUserImage?userId=${usuario.userId}">
                                 Select image: <input type = "file" name="image"  value = "<c:out value = "${usuario.img}"/>"/><br> 
                                                
                             </div>    

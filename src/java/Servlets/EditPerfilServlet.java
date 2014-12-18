@@ -6,15 +6,21 @@
 package Servlets;
 
 import Entities.Usuario;
+import static Entities.Usuario_.userType;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -39,22 +45,44 @@ public class EditPerfilServlet extends HttpServlet {
         HttpSession sesion = request.getSession();
 
         Usuario user = (Usuario) sesion.getAttribute("usuario");
-        
-        
-        String nombreUsuario = (String) request.getParameter("username");
+
+     
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellido");
-        String password = request.getParameter("password");
-        String confirmpassword = request.getParameter("confirmPassword");
         String email = request.getParameter("email");
         String description = request.getParameter("descriptionSingUp");
         String twitter = request.getParameter("twitterSingUp");
         String facebook = request.getParameter("facebookSingUp");
         String instagram = request.getParameter("instagramSingUp");
         String linkedin = request.getParameter("linkedinSingU");
+        Part filePart = request.getPart("image");
+        InputStream f = filePart.getInputStream();
+        byte[] perfil = IOUtils.toByteArray(f);
+
+        Usuario nuevoUsuario = new Usuario();
+ 
+
+        nuevoUsuario.setName(nombre);
+        nuevoUsuario.setLastName(apellidos);
+
+        nuevoUsuario.setDescription(description);
+        nuevoUsuario.setTwitter(twitter);
+        nuevoUsuario.setFacebook(facebook);
+        nuevoUsuario.setInstagram(instagram);
+        nuevoUsuario.setLinkedin(linkedin);
+        nuevoUsuario.setImg(perfil);
+
+        usuarioFacade.create(nuevoUsuario);
+
+        sesion.setAttribute("usuario", nuevoUsuario);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
 
     
-}
+
+ 
+    
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 /**
