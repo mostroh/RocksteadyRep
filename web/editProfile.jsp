@@ -27,25 +27,25 @@
         <div id="header">
             <div class="container">
                 <div id="logo">
-                    <h1><a href="index.html">Rocksteady</a></h1>
+                    <h1><a>Rocksteady</a></h1>
                     <span>BLOG</span>
                 </div>
+                <!-- Nav -->
                 <nav id="nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                        <li class="active"><a href="/RocksteadyRep/SingUp.html">SingUp</a></li>
-                         <c:if test="${usuario.userType == 1}">
+                            <c:if test="${empty usuario}">
+                            <li>
+                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
                             </c:if>
                             <c:if test="${not empty usuario}">
                             <li>
                                 <a href="LogOutServlet">Logout</a>
-                            </li>
-                        </c:if>
-                            <c:if test="${not empty usuario}">
-                            <li>
-                                <a href="editPerfil.jsp">Edit Perfil</a>
                             </li>
                         </c:if>
                     </ul>

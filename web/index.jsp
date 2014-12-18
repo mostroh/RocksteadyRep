@@ -50,7 +50,7 @@
                         <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
                             <c:if test="${empty usuario}">
                             <li>
-                                <a href="/RocksteadyRep/SingUp.jsp">Sign Up</a>
+                                <a href="/RocksteadyRep/SingUp.html">Sign Up</a>
                             </li>
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
@@ -58,12 +58,11 @@
                             </c:if>
                             <c:if test="${not empty usuario}">
                             <li>
-                                <a href="LogOutServlet">Logout</a>
+                                <a href="editProfile.jsp">Edit Profile</a>
                             </li>
-                        </c:if>
-                            <c:if test="${not empty usuario}">
                             <li>
-                                <a href="editPerfil.jsp">Edit Perfil</a>
+                                
+                                <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
                     </ul>

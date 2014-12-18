@@ -55,9 +55,13 @@
                         </c:if>
                         <c:if test="${usuario.userType == 1}">
                             <li><a href="admin.jsp">Admin Area</a>
-                        </c:if>
-                        <c:if test="${not empty usuario}">
+                            </c:if>
+                            <c:if test="${not empty usuario}">
                             <li>
+                                <a href="editProfile.jsp">Edit Profile</a>
+                            </li>
+                            <li>
+                                
                                 <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
