@@ -33,7 +33,7 @@
             <div class="container">
                 <!-- Logo -->
                 <div id="logo">
-                    <h1><a href="index.html">Rocksteady</a></h1>
+                    <h1><a>Rocksteady</a></h1>
                     <span>BLOG</span>
                 </div>
 
@@ -41,20 +41,25 @@
                 <nav id="nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
-                        <li><a href="/RocksteadyRep/PostServlet">Blog</a></li>
-                        <c:if test="${empty usuario}">
+                        <li><a href="PostServlet">Blog</a></li>
+                            <c:if test="${empty usuario}">
                             <li>
-                                <a href="/RocksteadyRep/SingUp.jsp">Sign Up</a>
+                                <a href="signUp.jsp">Sign Up</a>
                             </li>
                         </c:if>
-                        <c:if test="${usuario.userType == 1}">
-                            <li><a href="admin.jsp">Admin Area</a>
-                        </c:if>
                         <c:if test="${not empty usuario}">
+                            <c:if test="${usuario.userType == 1}">
+                                <li>
+                                    <a href="admin.jsp">Admin Area</a>
+                                </c:if>
+                            <li>
+                                <a href="editProfile.jsp">Edit Profile</a>
+                            </li>
                             <li>
                                 <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
+
                     </ul>
                 </nav>
 
@@ -68,6 +73,7 @@
 
                 <!-- Content -->
                 <div id="content" class="12u skel-cell-important">
+
                     <c:if test="${not empty usuario}" >
                         <c:if test="${usuario.userType <= 2}">
                             <div class="container">
@@ -78,7 +84,7 @@
                                     </header>
                                     <form action="/RocksteadyRep/ConfirmEditPostServlet" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="postId" value="${postToEdit.getPostId()}"
-                                        Title: <br>
+                                               Title: <br>
                                         <input type="text" name="postTitle" required="true" value="${postToEdit.getTitle()}"/><br>
                                         Latitude:<br>
                                         <input type="text" name="postLat" value="${postLat}"/><br>
@@ -96,9 +102,6 @@
 
                                 </section>
                             </div>
-                            <!-- /Content -->
-
-
                         </c:if>
                         <c:if test="${usuario ne postToEdit.postedBy}" >
                             <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
