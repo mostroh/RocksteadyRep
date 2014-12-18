@@ -94,12 +94,12 @@
                                     User <font color="red">${adminActionData.username}</font> deleted: 
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'deletePost'}">
-                                    Post by <font color="green">${adminActionData.username}</font>: 
+                                    Post successfully 
                                     <br><br>
                                     <h2>deleted</h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'deleteComment'}">
-                                    Comment succesfully 
+                                    Comment successfully
                                     <br><br>
                                     <h2>deleted</h2>
                                 </c:when>

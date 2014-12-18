@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +20,9 @@ import org.apache.commons.io.IOUtils;
 
 /**
  *
- * @author YSF
+ * @author inftel13
  */
+@MultipartConfig
 public class SingUpServlet extends HttpServlet {
 
     @EJB
@@ -39,9 +41,6 @@ public class SingUpServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
 
-        //Part file = request.getPart("image");
-        //InputStream inputStream = file.getInputStream();
-        //byte[] av = IOUtils.toByteArray(inputStream);
         int userType = 3;
         String password = request.getParameter("password");
         String confirmpassword = request.getParameter("confirmPassword");
@@ -57,9 +56,10 @@ public class SingUpServlet extends HttpServlet {
                 String facebook = request.getParameter("facebookSingUp");
                 String instagram = request.getParameter("instagramSingUp");
                 String linkedin = request.getParameter("linkedinSingUp");
-                //Part filePart = request.getPart("image");
-                //InputStream f = filePart.getInputStream();
-                //byte[] perfil = IOUtils.toByteArray(f);
+                
+                Part filePart = request.getPart("image");
+                InputStream f = filePart.getInputStream();
+                byte[] perfil = IOUtils.toByteArray(f);
                 
                 Usuario nuevoUsuario = new Usuario();
                 nuevoUsuario.setUserType(BigInteger.valueOf(userType));
@@ -73,7 +73,7 @@ public class SingUpServlet extends HttpServlet {
                 nuevoUsuario.setFacebook(facebook);
                 nuevoUsuario.setInstagram(instagram);
                 nuevoUsuario.setLinkedin(linkedin);
-                //nuevoUsuario.setImg(perfil);
+                nuevoUsuario.setImg(perfil);
 
                 usuarioFacade.create(nuevoUsuario);
 

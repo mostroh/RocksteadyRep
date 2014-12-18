@@ -41,7 +41,7 @@
         <div id="main">
             <div class="container">
                 <div align="center">
-                        <form action="SingUpServlet" autocomplete="on">
+                        <form action="SingUpServlet" method="post" enctype="multipart/form-data">
                             <div class="3u" align="right">
                                 UserName: <input type="text" name="username" value="" required="true"><br>
                                 First name: <input type="text" name="nombre" value="" required="true"/><br>
@@ -55,7 +55,7 @@
                                 Facebook: <input type="text" name="facebookSingUp" value="" /><br>
                                 Instagram: <input type="text" name="instagramSingUp" value="" /><br>
                                 Linkedin: <input type="text" name="linkedinSingUp" value="" /><br><br>
-                                Select image: <input type = "file" name="image" /><br> 
+                                Select image:  <input type="file" name="image" accept="image/*"><br> 
                             </div>    
                             <center><input type="submit" value="Register"></center>
                         </form>

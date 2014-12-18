@@ -43,16 +43,19 @@ public class NewPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String filename = request.getParameter("postImage");
         String postTitle = request.getParameter("postTitle")
                             .replaceAll("<[^>]*>", "");
         String postContent = request.getParameter("postContent")
                              .replaceAll("<[^>]*>", "");
         Usuario usuLogueado = (Usuario) request.getSession().getAttribute("usuario");
-        String postGps = request.getParameter("postLat").replaceAll("<[^>]*>", "")
+        String postGps = request.getParameter("postLat")
+                            .replaceAll("<[^>]*>", "")
                             +","+
-                            request.getParameter("postLong").replaceAll("<[^>]*>", "");
+                            request.getParameter("postLong")
+                            .replaceAll("<[^>]*>", "");
         
+        System.out.println("FILE = " + filename);
         Part filePart = request.getPart("postImage");
         InputStream f = filePart.getInputStream();
         byte[] img = IOUtils.toByteArray(f);
