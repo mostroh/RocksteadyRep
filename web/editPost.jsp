@@ -4,6 +4,7 @@
     Author     : Blackproxy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -72,6 +73,7 @@
 
                 <!-- Content -->
                 <div id="content" class="12u skel-cell-important">
+                    
                     <c:if test="${not empty usuario}" >
                         <c:if test="${usuario.userType <= 2}">
                             <div class="container">
@@ -91,8 +93,8 @@
                                         <h6 style="color:red"> 2040 x 240 px</h6>
                                         <input type="file" name="postImage" accept="image/*" ><br>
                                         Content:<br>
-                                        <textarea name="postContent" rows="15" cols="100">${postToEdit.getPostContent()}</textarea><br>
-
+                                        <textarea name="postContent" rows="15" cols="100">${postToEdit.getPostContent()}</textarea>
+                                        <br>
                                         <input type="submit" value="EDIT POST" name="btnPost" />
 
                                     </form>
@@ -102,9 +104,6 @@
                             <!-- /Content -->
 
 
-                        </c:if>
-                        <c:if test="${usuario.userType > 2}" >
-                            <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
                         </c:if>
                     </c:if>
                     <c:if test="${empty usuario}">

@@ -6,15 +6,14 @@
 package Servlets;
 
 import Entities.Usuario;
-import static Entities.Usuario_.userType;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +25,9 @@ import org.apache.commons.io.IOUtils;
  *
  * @author YSF
  */
-public class EditPerfilServlet extends HttpServlet {
+@MultipartConfig
+@WebServlet(name = "EditProfileServlet", urlPatterns = {"/EditProfileServlet"})
+public class EditProfileServlet extends HttpServlet {
 
     @EJB
     private UsuarioFacade usuarioFacade;
@@ -54,27 +55,27 @@ public class EditPerfilServlet extends HttpServlet {
         String twitter = request.getParameter("twitterSingUp");
         String facebook = request.getParameter("facebookSingUp");
         String instagram = request.getParameter("instagramSingUp");
-        String linkedin = request.getParameter("linkedinSingU");
+        String linkedin = request.getParameter("linkedinSingUp");
+        
         Part filePart = request.getPart("image");
         InputStream f = filePart.getInputStream();
         byte[] perfil = IOUtils.toByteArray(f);
-
-        Usuario nuevoUsuario = new Usuario();
- 
-
-        nuevoUsuario.setName(nombre);
-        nuevoUsuario.setLastName(apellidos);
-
-        nuevoUsuario.setDescription(description);
-        nuevoUsuario.setTwitter(twitter);
-        nuevoUsuario.setFacebook(facebook);
-        nuevoUsuario.setInstagram(instagram);
-        nuevoUsuario.setLinkedin(linkedin);
-        nuevoUsuario.setImg(perfil);
-
-        usuarioFacade.create(nuevoUsuario);
-
-        sesion.setAttribute("usuario", nuevoUsuario);
+        
+        user.setName(nombre);
+        user.setLastName(apellidos);
+        user.setDescription(description);
+        user.setTwitter(twitter);
+        user.setFacebook(facebook);
+        user.setInstagram(instagram);
+        user.setLinkedin(linkedin);
+        
+        if(perfil.length > 0){
+            user.setImg(perfil);
+        }
+        
+        usuarioFacade.edit(user);
+        sesion.setAttribute("usuario", user);
+        
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
 

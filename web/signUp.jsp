@@ -4,6 +4,7 @@
     Author     : inftel12
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,12 +24,17 @@
         </noscript>
     </head>
     <body>
+        
+        <!-- Header -->
         <div id="header">
             <div class="container">
+
+                <!-- Logo -->
                 <div id="logo">
                     <h1><a>Rocksteady</a></h1>
                     <span>BLOG</span>
                 </div>
+
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
@@ -56,6 +62,7 @@
                 </nav>
             </div>
         </div>
+        <!-- Header -->
         <div id="main">
             <div class="container">
                 <div align="center">
