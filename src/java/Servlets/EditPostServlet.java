@@ -8,7 +8,6 @@ package Servlets;
 import Entities.Post;
 import SessionBeans.PostFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

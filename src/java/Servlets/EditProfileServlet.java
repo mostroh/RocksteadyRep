@@ -47,7 +47,6 @@ public class EditProfileServlet extends HttpServlet {
 
         Usuario user = (Usuario) sesion.getAttribute("usuario");
 
-     
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellido");
         String email = request.getParameter("email");
@@ -73,16 +72,9 @@ public class EditProfileServlet extends HttpServlet {
             user.setImg(perfil);
         }
         
-        usuarioFacade.edit(user);
-        sesion.setAttribute("usuario", user);
-        
+        usuarioFacade.edit(user); 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
-
-    
-
- 
-    
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -109,13 +109,17 @@
                                     <span class="byline">
                                         <c:choose>
                                             <c:when test="${empty post.postedBy.getImg()}">
-                                                <img src="images/default-user.png" alt="UserImage" width="30px" height="30px"/>
+                                                <a href="/ViewProfileServlet?profileOfUserID=${post.postedBy.userId}">
+                                                    <img src="images/default-user.png" alt="UserImage" width="30px" height="30px"/>
+                                                </a>
                                             </c:when>
                                             <c:otherwise>
-                                                <img height = "30px" width = "30px" src="ShowUserImage?userId=${post.postedBy.userId}" alt="userImage">
+                                                <a href="/ViewProfileServlet?profileOfUserID=${post.postedBy.userId}">
+                                                    <img height = "30px" width = "30px" src="ShowUserImage?userId=${post.postedBy.userId}" alt="userImage">
+                                                </a>
                                             </c:otherwise>
                                         </c:choose>
-                                        ${post.postedBy.username} | ${post.postDate}
+                                                ${post.postedBy.username} | ${post.postDate}
                                         <c:if test="${post.postedBy.userId eq usuario.userId}"> |
                                             <form style='display:inline;' action="/RocksteadyRep/EditPostServlet" method="post">
                                                 <input style='display:inline;' type="hidden" name="PostToEdit" value="${post.postId}">
