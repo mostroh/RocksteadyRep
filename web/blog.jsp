@@ -102,7 +102,14 @@
                                 <header>
                                     <h2>${post.getTitle()}</h2>
                                     <span class="byline">
-                                        <img height = "30px" width = "30px" src="ShowUserImage?userId=${post.postedBy.userId}">
+                                        <c:choose>
+                                            <c:when test="${empty post.postedBy.getImg()}">
+                                                <img src="images/default-user.png" alt="UserImage" width="30px" height="30px"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img height = "30px" width = "30px" src="ShowUserImage?userId=${post.postedBy.userId}" alt="userImage">
+                                            </c:otherwise>
+                                        </c:choose>
                                         ${post.postedBy.username} | ${post.postDate}
                                         <c:if test="${post.postedBy.userId eq usuario.userId}"> |
                                             <form style='display:inline;' action="/RocksteadyRep/EditPostServlet" method="post">
@@ -120,15 +127,28 @@
                                     </span>
 
                                 </header>
-                                <p><a href="#" class="image full">
-                                        <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
+                                <c:if test="${not empty post.getHeaderImage()}">
+                                    <p><a href="#" class="image full">
+                                            <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
+                                        </c:if>
+                                        <c:if test="${empty post.getHeaderImage()}">
+                                    <p><a href="#" class="image full">
+                                            <img height = "300px" width = "1200px" src="images/RockSteadyPost.jpg" alt="Imagen Post ${post.getPostId()}"></a></p>
+                                        </c:if>
+
                                 <p>${post.getPostContent()}</p>
 
+                                <c:choose>
+                                    <c:when test="${post.getPostGps() eq ','}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div id="mostrarMapa${post.getPostId()}"><br>
+                                            <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" >
+                                                <center><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" >Show map</a></center>
+                                        </div> 
+                                    </c:otherwise>
+                                </c:choose>
 
-                                <div id="mostrarMapa${post.getPostId()}"><br>
-                                    <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" >
-                                        <center><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" >Show map</a></center>
-                                </div>                                  
                             </section>
 
                         </div>
@@ -139,17 +159,21 @@
                                         <div class="container">
                                             <header>
                                                 <p><hr></p>
-                                                <h4><img height = "20px" width = "20px" src="ShowUserImage?userId=${comentario.commentBy.userId}"> 
+                                                <h4>
+                                                    <c:choose>
+                                                        <c:when test="${empty comentario.commentBy.getImg()}">
+                                                            <img src="images/default-user.png" alt="UserImage" width="20px" height="20px"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <img height = "20px" width = "20px" src="ShowUserImage?userId=${comentario.commentBy.userId}">
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                     ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}  
                                                     <c:if test="${comentario.commentBy.userId eq usuario.userId}"> |
                                                         <form style='display:inline;' action="/RocksteadyRep/AdminDeleteCommentServlet" method="post">
                                                             <input style='display:inline;' type="hidden" name="DeleteOwnComment" value="${comentario.commentId}">
                                                             <input style='display:inline;' type="image" src="images/delete_icon.png" alt="Delete Comment">
                                                         </form>
-
-<!--                                                                    | <a href="/RocksteadyRep/AdminDeleteCommentServlet?DeleteOwnComment=${comentario.commentId}">
-    <font color="red">Remove comment</font>
-</a>-->
                                                     </c:if>
                                                 </h4>
                                                 <p>${comentario.getCommentContent()}</p>
@@ -165,8 +189,8 @@
                                 </c:when>
                                 <c:when test="${empty usuario}">
                                     <center><h5>ONLY REGISTERED MEMBERS CAN SEE COMMENTS</h5></center>
-                                </c:when>
-                            </c:choose>
+                                    </c:when>
+                                </c:choose>
                         </div>
                         <!-- /Content -->
                     </div>
