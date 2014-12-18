@@ -75,9 +75,10 @@
                                     <header>
                                         <h2>EDIT POST</h2>
                                     </header>
-                                    <form action="/RocksteadyRep/EditPostServlet" method="post" enctype="multipart/form-data">
+                                    <form action="/RocksteadyRep/ConfirmEditPostServlet" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="postId" value="${postToEdit.getPostId()}"
                                         Title: <br>
-                                        <input type="text" name="postTitle" value="${postToEdit.getTitle()}"/><br>
+                                        <input type="text" name="postTitle" required="true" value="${postToEdit.getTitle()}"/><br>
                                         Latitude:<br>
                                         <input type="text" name="postLat" value="${postLat}"/><br>
                                         Longitude:<br>
@@ -86,7 +87,7 @@
                                         <h6 style="color:red"> 2040 x 240 px</h6>
                                         <input type="file" name="postImage" accept="image/*" ><br>
                                         Content:<br>
-                                        <textarea name="postContent" rows="15" cols="100">${postToEdit.getPostContent()}</textarea><br>
+                                        <textarea name="postContent" rows="15" cols="100" required="true">${postToEdit.getPostContent()}</textarea><br>
 
                                         <input type="submit" value="EDIT POST" name="btnPost" />
 

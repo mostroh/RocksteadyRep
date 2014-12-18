@@ -43,7 +43,7 @@ public class NewPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String filename = request.getParameter("postImage");
+        
         String postTitle = request.getParameter("postTitle")
                             .replaceAll("<[^>]*>", "");
         String postContent = request.getParameter("postContent")
@@ -55,19 +55,20 @@ public class NewPostServlet extends HttpServlet {
                             request.getParameter("postLong")
                             .replaceAll("<[^>]*>", "");
         
-        System.out.println("FILE = " + filename);
-        Part filePart = request.getPart("postImage");
-        InputStream f = filePart.getInputStream();
-        byte[] img = IOUtils.toByteArray(f);
-        
         Post nuevoPost = new Post();
+        
+        Part filePart = request.getPart("postImage");
+        if(filePart.getSubmittedFileName() !=null || !filePart.getSubmittedFileName().isEmpty()){
+            InputStream f = filePart.getInputStream();
+            byte[] img = IOUtils.toByteArray(f);
+            nuevoPost.setHeaderImage(img);
+        }
         nuevoPost.setPostDate(Calendar.getInstance().getTime());
         nuevoPost.setMvpost(Character.MIN_VALUE);
         nuevoPost.setPostedBy(usuLogueado);
         nuevoPost.setPostGps(postGps);
         nuevoPost.setTitle(postTitle);
         nuevoPost.setPostContent(postContent);
-        nuevoPost.setHeaderImage(img);
         postFacade.create(nuevoPost);
         
         RequestDispatcher rd= getServletContext().getRequestDispatcher("/PostServlet");
