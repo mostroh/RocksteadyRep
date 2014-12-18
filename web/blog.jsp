@@ -110,48 +110,53 @@
                                             </a>
                                         </c:if>
                                     </span>
-                                        
+
                                 </header>
                                 <p><a href="#" class="image full">
                                         <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
                                 <p>${post.getPostContent()}</p>
-                            </section>
+                            
 
                             <div id="mostrarMapa${post.getPostId()}"><br>
-                                <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" href="#mapa${post.getPostId()}">
-                                    <center><img lborder="0" src="images/Google-Maps-icon.png" width="120" height="70" alt="Icono mapa" ></a></center><br>
-                                    </div>
-                                    </div>
-
+                                <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" >
+                                    <center><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" >Show map</a></center>
+                            </div>
+                                    
+                            <div id="cerrarMapa${post.getPostId()}" >
+                                <a href="" onclick="cerrarMapa(${post.getPostId()})">Close map</a>
+                            </div>
+                            </section>
+                        
+                        </div>
                                     <div>
                                         <c:choose>
-                                        <c:when test="${not empty usuario}">
-                                            <c:forEach items="${post.getComentarioCollection()}" var="comentario">
-                                                <div class="container">
-                                                    <header>
-                                                        <p><hr></p>
-                                                        <h4><img height = "30px" width = "30px" src="images/default-user.png"> 
-                                                            ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}  
-                                                            <c:if test="${comentario.commentBy.userId eq usuario.userId}">
-                                                                | <a href="/RocksteadyRep/AdminDeleteCommentServlet?DeleteOwnComment=${comentario.commentId}">
-                                                                <font color="red">Remove comment</font>
-                                                                </a>
-                                                            </c:if>
-                                                        </h4>
-                                                        <p>${comentario.getCommentContent()}</p>
-                                                    </header>
-                                                </div>
-                                            </c:forEach>
-                                            <form action="/RocksteadyRep/CommentServlet" method="post">
-                                                Comment:<br>
-                                                <textarea name="commentContent" rows="4" cols="100"></textarea><br>
-                                                <input type="hidden" name="postCommented" value="${post.getPostId()}"/>
-                                                <input type="submit" value="Add comment" name="btnComment${post.getPostId()}" />
-                                            </form>
-                                        </c:when>
-                                        <c:when test="${empty usuario}">
-                                            <h5>ONLY REGISTERED MEMBERS CAN SEE COMMENTS</h5>
-                                        </c:when>
+                                            <c:when test="${not empty usuario}">
+                                                <c:forEach items="${post.getComentarioCollection()}" var="comentario">
+                                                    <div class="container">
+                                                        <header>
+                                                            <p><hr></p>
+                                                            <h4><img height = "30px" width = "30px" src="images/default-user.png"> 
+                                                                ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}  
+                                                                <c:if test="${comentario.commentBy.userId eq usuario.userId}">
+                                                                    | <a href="/RocksteadyRep/AdminDeleteCommentServlet?DeleteOwnComment=${comentario.commentId}">
+                                                                        <font color="red">Remove comment</font>
+                                                                    </a>
+                                                                </c:if>
+                                                            </h4>
+                                                            <p>${comentario.getCommentContent()}</p>
+                                                        </header>
+                                                    </div>
+                                                </c:forEach>
+                                                <form action="/RocksteadyRep/CommentServlet" method="post">
+                                                    Comment:<br>
+                                                    <textarea name="commentContent" rows="4" cols="100"></textarea><br>
+                                                    <input type="hidden" name="postCommented" value="${post.getPostId()}"/>
+                                                    <input type="submit" value="Add comment" name="btnComment${post.getPostId()}" />
+                                                </form>
+                                            </c:when>
+                                            <c:when test="${empty usuario}">
+                                                <h5>ONLY REGISTERED MEMBERS CAN SEE COMMENTS</h5>
+                                            </c:when>
                                         </c:choose>
                                     </div>
                                     <!-- /Content -->
@@ -171,5 +176,5 @@
                     </div>
                 </div>
 
-    </body>
-</html>
+                </body>
+                </html>
