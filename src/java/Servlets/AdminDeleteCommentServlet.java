@@ -10,6 +10,7 @@ import SessionBeans.AdminActionPerformedHelper;
 import SessionBeans.ComentarioFacade;
 import java.io.IOException;
 import java.math.BigDecimal;
+import static java.util.Objects.isNull;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AdminDeleteCommentServlet", urlPatterns = {"/AdminDeleteCommentServlet"})
 public class AdminDeleteCommentServlet extends HttpServlet {
+
     @EJB
     private ComentarioFacade comentarioFacade;
 
@@ -38,17 +40,22 @@ public class AdminDeleteCommentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
-        adminActionData.setOption("deleteComment");
-        Comentario c = comentarioFacade.find(new BigDecimal
-                                        (Integer.parseInt
-                                        (request.getParameter("commentIDtoDelete"))));
-        comentarioFacade.remove(c);
-        
-        request.setAttribute("adminActionData",adminActionData);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin_ok.jsp");
-        rd.forward(request, response);
-        
+        if (!isNull(request.getParameter("DeleteOwnComment"))) {
+            Comentario c = comentarioFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("DeleteOwnComment"))));
+            comentarioFacade.remove(c);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/PostServlet");
+            rd.forward(request, response);
+        } else {
+            AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
+            adminActionData.setOption("deleteComment");
+            Comentario c = comentarioFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("commentIDtoDelete"))));
+            comentarioFacade.remove(c);
+
+            request.setAttribute("adminActionData", adminActionData);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin_ok.jsp");
+            rd.forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

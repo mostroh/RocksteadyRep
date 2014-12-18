@@ -10,6 +10,7 @@ import SessionBeans.AdminActionPerformedHelper;
 import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.math.BigDecimal;
+import static java.util.Objects.isNull;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,16 +39,25 @@ public class AdminDeletePostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
-        adminActionData.setOption("deletePost");
-        Post p = postFacade.find(new BigDecimal
+        if(!isNull(request.getParameter("DeleteOwnPost"))){
+            Post p = postFacade.find(new BigDecimal
+                                        (Integer.parseInt
+                                        (request.getParameter("DeleteOwnPost"))));
+            postFacade.remove(p);
+            RequestDispatcher rd= getServletContext().getRequestDispatcher("/PostServlet");
+            rd.forward(request, response);
+        }else{
+            AdminActionPerformedHelper adminActionData = new AdminActionPerformedHelper();
+            adminActionData.setOption("deletePost");
+            Post p = postFacade.find(new BigDecimal
                                         (Integer.parseInt
                                         (request.getParameter("postIDtoDelete"))));
-        postFacade.remove(p);
+            postFacade.remove(p);
         
-        request.setAttribute("adminActionData",adminActionData);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin_ok.jsp");
-        rd.forward(request, response);
+            request.setAttribute("adminActionData",adminActionData);
+            RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin_ok.jsp");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
