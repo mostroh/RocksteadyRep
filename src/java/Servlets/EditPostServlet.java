@@ -41,8 +41,8 @@ public class EditPostServlet extends HttpServlet {
         String[] latLong= postAEditar.getPostGps().split(",");
         request.setAttribute("postToEdit", postAEditar);
         if(latLong.length!=0){
-            request.setAttribute("postLat", latLong[0]);
-            request.setAttribute("postLong", latLong[1]);
+            request.setAttribute("postLat", latLong[0].replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", ""));
+            request.setAttribute("postLong", latLong[1].replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", ""));
         }
         else{
             request.setAttribute("postLat", "");

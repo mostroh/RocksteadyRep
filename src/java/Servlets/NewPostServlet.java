@@ -50,10 +50,10 @@ public class NewPostServlet extends HttpServlet {
                              .replaceAll("<[^>]*>", "");
         Usuario usuLogueado = (Usuario) request.getSession().getAttribute("usuario");
         String postGps = request.getParameter("postLat")
-                            .replaceAll("<[^>]*>", "")
+                            .replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", "")
                             +","+
                             request.getParameter("postLong")
-                            .replaceAll("<[^>]*>", "");
+                            .replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", "");
         
         Post nuevoPost = new Post();
         
