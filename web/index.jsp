@@ -123,12 +123,12 @@
                                                 </a>
                                             </c:otherwise>
                                         </c:choose>
-                                        postedBy ${mvpPpost.postedBy.username} </span>
+                                        postedBy ${mvpPost.postedBy.username} </span>
                                 </header>
 
                                 <c:if test="${not empty mvpPost.getHeaderImage()}">
                                     <p><a href="#" class="image full">
-                                            <img height = "157px" width = "783px" src="ShowImages?postId=${mvpPost.getPostId()}" alt="Imagen Post ${mvpPpost.getPostId()}"/></a>
+                                            <img height = "157px" width = "783px" src="ShowImages?postId=${mvpPost.getPostId()}" alt="Imagen Post ${mvpPost.getPostId()}"/></a>
                                     </p>
                                 </c:if>
                                 <c:if test="${empty mvpPost.getHeaderImage()}">
