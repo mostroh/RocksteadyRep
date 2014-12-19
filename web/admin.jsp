@@ -177,10 +177,10 @@
                                                         <td>Admin</td>
                                                     </c:when>
                                                     <c:when test="${user.userType == 2}">
-                                                        <td>Writer</td>
+                                                        <td><fmt:message key="Writer"/></td>
                                                     </c:when>
                                                     <c:when test="${user.userType == 3}">
-                                                        <td>Registered</td>
+                                                        <td><fmt:message key="Registered"/></td>
                                                     </c:when>
                                                 </c:choose>
 
@@ -189,10 +189,10 @@
                                                         <form action="AdminEditUserServlet">
                                                             <select name="userEdit" onchange="this.form.submit();">
                                                                 <option value="default">Select action...</option>
-                                                                <option value="setAdmin${user.userId}">Set Admin</option>
-                                                                <option value="setWriter${user.userId}">Set Writer</option>
-                                                                <option value="setRegistered${user.userId}">Set Registered</option>
-                                                                <option value="deleteUser${user.userId}">Delete User</font></option>
+                                                                <option value="setAdmin${user.userId}"><fmt:message key="setadmin"/></option>
+                                                                <option value="setWriter${user.userId}"><fmt:message key="setWriter"/></option>
+                                                                <option value="setRegistered${user.userId}"><fmt:message key="setRegistred"/></option>
+                                                                <option value="deleteUser${user.userId}"><fmt:message key="deleteUser"/></option>
                                                             </select>
                                                         </form>   
                                                     </c:if>
