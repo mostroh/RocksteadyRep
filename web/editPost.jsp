@@ -95,15 +95,15 @@
                                     Festival position (click the map for set a position):
                                     <div id="latLongMap" style="width:800px; height: 300px;"></div><br>
                                     <form action="/RocksteadyRep/ConfirmEditPostServlet">
-                                        <input type="hidden" name="postId" value="${postToEdit.postId}"/>
+                                        <input type="hidden" name="postId" value="${pdh.p.postId}"/>
                                         Title: <br>
-                                        <input type="text" name="editTitle" required="true" value="${postToEdit.getTitle()}"/><br>
+                                        <input type="text" name="editTitle" required="true" value="${pdh.p.getTitle()}"/><br>
                                         Latitude:<br>
-                                        <input id="inLat" type="text" name="editLat" value="${postLat}"/><br>
+                                        <input id="inLat" type="text" name="editLat" value="${pdh.lat}"/><br>
                                         Longitude:<br>
-                                        <input id="inLong" type="text" name="editLong" value="${postLong}"/><br>
+                                        <input id="inLong" type="text" name="editLong" value="${pdh.lon}"/><br>
                                         Content:<br>
-                                        <textarea name="editContent" rows="15" cols="100" required="true">${postToEdit.getPostContent()}</textarea><br>
+                                        <textarea name="editContent" rows="15" cols="100" required="true">${pdh.p.getPostContent()}</textarea><br>
 
                                         <input type="submit" value="EDIT POST" name="btnEditPost" />
 
@@ -112,7 +112,7 @@
                                 </section>
                             </div>
                         </c:if>
-                        <c:if test="${usuario ne postToEdit.postedBy}" >
+                        <c:if test="${usuario ne pdh.p.postedBy}" >
                             <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
                         </c:if>
                     </c:if>
