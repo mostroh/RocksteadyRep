@@ -81,7 +81,7 @@
                 <div class="container">
                     <header>
                         <center>
-                            <h2>Hello <font color="orange"> ${usuario.username}</font>
+                            <h2><fmt:message key="Hello"/> <font color="orange"> ${usuario.username}</font>
                             </h2>
                         </center>
                         <br><br>
@@ -92,8 +92,8 @@
                             <section>
                                 <form action="AdminUsersFilteredServlet">
                                     <fieldset>
-                                        <legend><b><fmt:message key="editUsers"/></b></legend>
-                                        Filter by:<br>
+                                        <legend><b><fmt:message key="EditUsers"/></b></legend>
+                                       <fmt:message key="FilterBy"/>:<br>
                                         <input type="text" name="usernameSearchFilter">
                                         <br>
                                         <br><br>
@@ -105,8 +105,8 @@
                             <section>
                                 <form action="AdminPostByUserServlet">
                                     <fieldset>
-                                        <legend><b><fmt:message key="deletePost"/></b></legend>
-                                        <fmt:message key="fromUser"/>:<br>
+                                        <legend><b><fmt:message key="DeletePost"/></b></legend>
+                                        <fmt:message key="FromUser"/>:<br>
                                         <input type="text" name="postsByUserFilter">
                                         <br>
                                         <br><bzq>
@@ -118,8 +118,8 @@
                             <section>
                                 <form action="AdminCommentByUserServlet">
                                     <fieldset>
-                                        <legend><b><fmt:message key="DeleteComent"/></b></legend>
-                                        From user:<br>
+                                        <legend><b><fmt:message key="DeleteComment"/></b></legend>
+                                        <fmt:message key="FromUser"/>:<br>
                                         <input type="text" name="commentsByUserFilter">
                                         <br>
                                         <br><br>
@@ -131,8 +131,8 @@
                             <section>
                                 <form action="AdminMakeMVPostServlet">
                                     <fieldset>
-                                        <legend><b>Select MVPost</b></legend>
-                                        Remember, MVP shows on HOME page...<br>
+                                        <legend><b><fmt:message key="selectMVPost"/></b></legend>
+                                        <fmt:message key="remember"/>, <fmt:message key="MVPshowsonHOMEpage"/>...<br>
                                         <br><br>
                                         <input type="submit" value="GetPosts"></fieldset>
                                 </form>
@@ -152,21 +152,21 @@
                                     <br><br>
                                     <header>
                                         <center>
-                                            <h2><font color="red">No users found</font></h2></center>
+                                            <h2><font color="red"><fmt:message key="noUsersFound"/></font></h2></center>
                                     </header>
                                 </c:when>
                                 <c:when test="${not empty allData.userList}">
                                     <br><br>
                                     <header>
                                         <center>
-                                            <h2><font color="green">Users found:</font></h2>
+                                            <h2><font color="green"><fmt:message key="usersFound"/>:</font></h2>
                                         </center>
                                     </header>
                                     <table style="width:100%">
                                         <tr>
-                                            <th><b>Username</b></th>
-                                            <th><b>User-level</b></th>
-                                            <th><b>Perform action</b></th>
+                                            <th><b><fmt:message key="userName"/></b></th>
+                                            <th><b><fmt:message key="userLevel"/></b></th>
+                                            <th><b><fmt:message key="performAction"/></b></th>
                                         </tr>
                                         <c:forEach items="${allData.userList}" var="user">
 
@@ -198,7 +198,7 @@
                                                     </c:if>
                                                     <c:if test="${user.userId eq usuario.userId}">
                                                         <font color="red">
-                                                        This is me
+                                                        <fmt:message key="thisIsMe"/>
                                                         </font>
                                                     </c:if>
                                                 </td>
@@ -216,9 +216,9 @@
                                     <br><br>
                                     <header>
                                         <center>
-                                            <h2><font color="red">No posts found.</font></h2>
+                                            <h2><font color="red"><fmt:message key="noPostFound"/>.</font></h2>
                                             <br>
-                                            <h5>Please make sure username is valid.</h5>
+                                            <h5><fmt:message key="pleaseMakeSureUsernameIsValid"/>.</h5>
                                         </center>
                                     </header>
                                 </c:when>
@@ -236,7 +236,7 @@
                                             ${post.postDate}
                                         </li>
                                         <form action="AdminDeletePostServlet">
-                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtoDelete">Delete post</button>
+                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtoDelete"><fmt:message key="DeletePost"/></button>
                                         </form> 
                                         <br>
                                     </c:forEach>
@@ -252,18 +252,18 @@
                                 <c:when test="${empty allData.commentList}">
                                     <br><br>
                                     <header>
-                                        <center><h2><font color="red">No comments found.</font></h2>
-                                            <br><h5>Please make sure username is valid.</h5></center>
+                                        <center><h2><font color="red"><fmt:message key="pleaseMakeSureUsernameIsValid"/><fmt:message key="noComentFound"/>.</font></h2>
+                                            <br><h5><fmt:message key="pleaseMakeSureUsernameIsValid"/>.</h5></center>
                                     </header></c:when>
                                 <c:when test="${not empty allData.commentList}">
                                     <br><br>
                                     <header>
-                                        <center><h2><font color="green">Comments found:</font></h2></center>
+                                        <center><h2><font color="green"><fmt:message key="comentFound"/>:</font></h2></center>
                                     </header>
                                     <c:forEach items="${allData.commentList}" var="c">
                                         <li>${c.commentContent}
                                             <form action="AdminDeleteCommentServlet">
-                                                <button onclick="this.form.submit();" value="${c.commentId}" name="commentIDtoDelete">Delete comment</button>
+                                                <button onclick="this.form.submit();" value="${c.commentId}" name="commentIDtoDelete"><fmt:message key="DeleteComment"/></button>
                                             </form>  
                                         </li>
                                     </c:forEach>
@@ -280,7 +280,7 @@
                                     <header>
                                         <center>
                                             <h2>
-                                                <font color="red">No posts found.. get people posting</font>
+                                                <font color="red"><fmt:message key="noPostFound"/>..<fmt:message key="getPeoplePosting"/> </font>
                                             </h2>
                                         </center>
                                     </header>
@@ -292,7 +292,7 @@
                                             ${post.postDate}
                                         </li>
                                         <form action="AdminNewMVPostServlet">
-                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtomakeMVP">Make MVPost</button>
+                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtomakeMVP"><fmt:message key="MakeMVPost"/></button>
                                         </form> 
                                         <br>
                                     </c:forEach>
@@ -314,9 +314,9 @@
                             <center>
                                 <h2>
                                     <font color="red">
-                                    You're not an admin.
+                                    <fmt:message key="YoureNotAnAdmin"/>.
                                     <br><br><br>
-                                    Get out.
+                                     <fmt:message key="getOut"/>.
                                     <meta http-equiv="refresh" content="5;url=http://www.keepcalmandposters.com/posters/2566862.png">
                                     </font> 
                                 </h2>
