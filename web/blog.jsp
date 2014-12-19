@@ -85,7 +85,7 @@
                 <!--                <div class="row">-->
                 <!--                    <div id="content" class="12u skel-cell-important">-->
                 <header>
-                    <center><h2>POST LIST</h2></center>
+                    <center><h2><fmt:message key="PostList"/></h2></center>
                 </header>
                 <!--</div>-->
                 <!--</div>-->
@@ -94,7 +94,7 @@
                         <div id="nav">
                             <ul> 
                                 <li class="newPost">
-                                    <a href="newPost.jsp">New post</a>
+                                    <a href="newPost.jsp"><fmt:message key="newPost"/></a>
                                 </li>
 
                             </ul>
@@ -105,7 +105,7 @@
                 <div>
                     <center><h2>Filter post</h2></center>
                     <center><form action="/RocksteadyRep/PostServlet" method="post">
-                            Between <input type="date" name="dateFrom"/> and <input type="date" name="dateTo"/><br>
+                             <fmt:message key="between"/><input type="date" name="dateFrom"/> and <input type="date" name="dateTo"/><br>
                             <input type="submit" value="Filter" name="btnFilter" />
                         </form></center>
                 </div>
@@ -204,7 +204,7 @@
                                         </div>
                                     </c:forEach>
                                     <form action="/RocksteadyRep/CommentServlet" method="post">
-                                        Comment:<br>
+                                        <fmt:message key="Comment"/>:<br>
                                         <textarea name="commentContent" rows="4" cols="100"></textarea><br>
                                         <input type="hidden" name="postCommented" value="${post.getPostId()}"/>
                                         <input type="submit" value="Add comment" name="btnComment${post.getPostId()}" />
