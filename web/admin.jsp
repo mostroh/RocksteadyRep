@@ -181,7 +181,7 @@
                                                         <td><fmt:message key="Writer"/></td>
                                                     </c:when>
                                                     <c:when test="${user.userType == 3}">
-                                                        <td><fmt:message key="Registered"/></td>
+                                                        <td><fmt:message key="Registred"/></td>
                                                     </c:when>
                                                 </c:choose>
 
@@ -293,7 +293,7 @@
                                             ${post.postDate}
                                         </li>
                                         <form action="AdminNewMVPostServlet">
-                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtomakeMVP"><fmt:message key="MakeMVPost"/></button>
+                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtomakeMVP"><fmt:message key="makeMVPost"/></button>
                                         </form> 
                                         <br>
                                     </c:forEach>

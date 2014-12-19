@@ -72,7 +72,7 @@
                
                  <header>
                                 <center>
-                                    <h2>Welcome <font color="orange">${usuario.username}</font>
+                                    <h2><fmt:message key="editProfile"/> <font color="orange">${usuario.username}</font>
                                     </h2>
                                 </center>
                             </header>
