@@ -45,11 +45,11 @@ public class ConfirmEditPostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String postTitle = request.getParameter("postTitle")
+        String postTitle = request.getParameter("editTitle")
                             .replaceAll("<[^>]*>", "");
-        String postContent = request.getParameter("postContent")
+        String postContent = request.getParameter("editContent")
                              .replaceAll("<[^>]*>", "");
-        String postGps = request.getParameter("postLat")
+        String postGps = request.getParameter("editLat")
                             .replaceAll("<[^>]*>", "")
                             +","+
                             request.getParameter("editLong")

@@ -1,11 +1,17 @@
+<%-- 
+    Document   : index
+    Created on : Dec 12, 2014, 2:41:36 PM
+    Author     : EduardROckerse
+--%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<c:set var="language" value="en" scope="session" />
-<fmt:setLocale value="${sessionScope.locale}" />
-<fmt:setBundle basename="com.me.jsp.bundle.file" />
+<!DOCTYPE html>
+<c:if test="${not empty sessionScope.locale}">
+<fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
+</c:if>
+<fmt:setBundle basename="Internalizacion.messages" />
 <html>
     <head>
         <title>Home - Rocksteady Blog</title>
@@ -30,29 +36,31 @@
                 <span>BLOG</span>
             </div> <!-- Logo -->
 
-            <nav id="nav"> <!-- Nav -->
-                <ul>
-                    <li><a href="index.jsp">Home</a></li>
-                    <li><a href="PostServlet">Blog</a></li>
+            <!-- Nav -->
+                <nav id="nav">
+                    <ul>
+                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
+                        <li><a href="PostServlet">Blog</a></li>
                         <c:if test="${empty usuario}">
-                        <li>
-                            <a href="signUp.jsp">Sign Up</a>
-                        </li>
-                    </c:if>
-                    <c:if test="${not empty usuario}">
-                        <c:if test="${usuario.userType == 1}">
                             <li>
-                                <a href="admin.jsp">Admin Area</a>
+                                <a href="signUp.jsp"><fmt:message key="signup"/></a>
+                            </li>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                            <c:if test="${usuario.userType == 1}">
+                            <li>
+                                <a href="admin.jsp"><fmt:message key="adminArea"/></a>
                             </c:if>
-                        <li>
-                            <a href="editProfile.jsp">Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="LogOutServlet">Logout</a>
-                        </li>
-                    </c:if>
-                </ul>
-            </nav> <!-- Nav -->
+                            <li>
+                                <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
+                            </li>
+                            <li>
+                                <a href="LogOutServlet"><fmt:message key="logout"/></a>
+                            </li>
+                        </c:if>
+                        
+                    </ul>
+                </nav> <!-- Nav -->
         </div> <!-- Header -->
 
         <div id="main"> <!-- Main -->
@@ -60,7 +68,7 @@
                 <c:when test="${not empty usuario}">
                     <header>
                         <center>
-                            <h2>Welcome <font color="orange">${usuario.username}</font>
+                            <h2><fmt:message key="welcome"/> <font color="orange">${usuario.username}</font>
                             </h2>
                         </center>
                     </header>
@@ -68,15 +76,15 @@
                 <c:when test="${empty usuario}">
                     <header>
                         <center>
-                            <h2>Log in</h2>
+                            <h2><fmt:message key="login"/></h2>
                         </center>
                     </header>
                     <center>
                         <div class="3u" align="right">
                             <form action="LoginServlet" method="post" autocomplete="off">
-                                UserName:   <input type="text" name="name" required="true"><br><br>
-                                Password:   <input type="password" name="pwd"required="true"><br>
-                                <input type="submit" value="Log in">
+                                <fmt:message key="userName"/>   <input type="text" name="name" required="true"><br><br>
+                                <fmt:message key="password"/>   <input type="password" name="pwd"required="true"><br>
+                                <input type="submit" value="<fmt:message key="login"/>">
                             </form>
                         </div>
                     </center>
@@ -87,13 +95,13 @@
                     <c:choose>
                         <c:when test="${not lh.userexists}">
                             <center>
-                                <h2><font color="red">Invalid username</font>
+                                <h2><font color="red"><fmt:message key="invalidusername"/></font>
                                 </h2>
                             </center>
                         </c:when>
                         <c:when test="${lh.wrongpassword}">
                             <center>
-                                <h2><font color="red">Wrong password</font>
+                                <h2><font color="red"><fmt:message key="errorContraseña"/></font>
                                 </h2>
                             </center>
                         </c:when>
@@ -123,7 +131,7 @@
                                                 </a>
                                             </c:otherwise>
                                         </c:choose>
-                                        postedBy ${mvpPost.postedBy.username} </span>
+                                        <fmt:message key="postedby"/> : ${mvpPost.postedBy.username} </span>
                                 </header>
 
                                 <c:if test="${not empty mvpPost.getHeaderImage()}">
@@ -137,7 +145,7 @@
                                     </p>
                                 </c:if>
                                 <p>${fn:substring(mvpPost.postContent, 0, 300)} [...]</p>
-                                <a href="/RocksteadyRep/PostServlet" class="button">Read all posts</a>
+                                <a href="/RocksteadyRep/PostServlet" class="button"><fmt:message key="readallposts"/></a>
                             </c:if>
 
 
@@ -162,9 +170,9 @@
                     <div id="sidebar" class="4u">
                         <section>
                             <header>
-                                <h2>Blog posts by date</h2>
+                                <h2><fmt:message key="blogpostsbydate"/></h2>
                             </header>
-                            <p>For your ease of use you can lookup blog posts by year or month here.</p>
+                            <p><fmt:message key="blogpostsbydatedescr"/></p>
                             <ul class="default">
                                 <li><a href="#">2014</a></li>
                                 <li><a href="#">2013</a></li>
