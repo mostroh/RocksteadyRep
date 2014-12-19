@@ -36,7 +36,7 @@ public class LogOutServlet extends HttpServlet {
         HttpSession sesion = request.getSession();
         sesion.removeAttribute("usuario");
        
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/IndexServlet");
         rd.forward(request, response);
     }
 

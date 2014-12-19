@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 
         }
         request.setAttribute("lh", lh);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/IndexServlet");
         rd.forward(request, response);
     }
 
