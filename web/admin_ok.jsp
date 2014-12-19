@@ -84,19 +84,19 @@
                         <h3>
                             <c:choose>
                                 <c:when test="${adminActionData.option eq 'setAdmin'}">
-                                    <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> is now: 
+                                    <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> <fmt:message key="isNow"/>: 
                                     <br><br>
                                     <h2>admin</h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'setRegistered'}">
-                                  <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> is now: 
+                                  <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> <fmt:message key="isNow"/>: 
                                     <br><br>
                                     <h2>a <fmt:message key="Registred"/> <fmt:message key="user"/></h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'setWriter'}">
-                                   <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> is now: 
+                                   <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> <fmt:message key="isNow"/>: 
                                     <br><br>
-                                    <h2>writer</h2>
+                                    <h2><fmt:message key="Writer"/></h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'deleteUser'}">
                                     <fmt:message key="user"/> <font color="red">${adminActionData.username}</font> <fmt:message key="deleted"/> : 
@@ -126,7 +126,7 @@
 
                     <div id="nav">
                         <ul> 
-                            <li class="active"><a href="admin.jsp">Back to admin panel</a></li>
+                            <li class="active"><a href="admin.jsp"><fmt:message key="backToAdminPanel"/></a></li>
                         </ul>
                     </div>
                 </center>
