@@ -81,7 +81,7 @@
                 <div class="container">
                     <header>
                         <center>
-                            <h2>Hello <font color="orange"> ${usuario.username}</font>
+                            <h2><fmt:message key="Hello"/> <font color="orange"> ${usuario.username}</font>
                             </h2>
                         </center>
                         <br><br>
@@ -92,7 +92,7 @@
                             <section>
                                 <form action="AdminUsersFilteredServlet">
                                     <fieldset>
-                                        <legend><b><fmt:message key="editUsers"/></b></legend>
+                                        <legend><b><fmt:message key="EditUsers"/></b></legend>
                                        <fmt:message key="FilterBy"/>:<br>
                                         <input type="text" name="usernameSearchFilter">
                                         <br>
@@ -105,8 +105,8 @@
                             <section>
                                 <form action="AdminPostByUserServlet">
                                     <fieldset>
-                                        <legend><b><fmt:message key="deletePost"/></b></legend>
-                                        <fmt:message key="fromUser"/>:<br>
+                                        <legend><b><fmt:message key="DeletePost"/></b></legend>
+                                        <fmt:message key="FromUser"/>:<br>
                                         <input type="text" name="postsByUserFilter">
                                         <br>
                                         <br><bzq>
@@ -118,7 +118,7 @@
                             <section>
                                 <form action="AdminCommentByUserServlet">
                                     <fieldset>
-                                        <legend><b><fmt:message key="DeleteComent"/></b></legend>
+                                        <legend><b><fmt:message key="DeleteComment"/></b></legend>
                                         <fmt:message key="FromUser"/>:<br>
                                         <input type="text" name="commentsByUserFilter">
                                         <br>
