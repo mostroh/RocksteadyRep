@@ -19,9 +19,11 @@
         <script src="js/skel.min.js"></script>
         <script src="js/skel-panels.min.js"></script>
         <script src="js/init.js"></script>
+        <script src="js/latLongMap.js" type="text/javascript"></script>
         <noscript>
         <link rel="stylesheet" href="css/skel-noscript.css" />
         <link rel="stylesheet" href="css/style.css" />
+        <link href="css/mapStyle.css" rel="stylesheet" type="text/css"/>
         </noscript>
         <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
@@ -82,14 +84,16 @@
                                     <header>
                                         <h2>EDIT POST</h2>
                                     </header>
+                                    Festival position (click the map for set a position):
+                                    <div id="latLongMap" style="width:800px; height: 300px;"></div><br>
                                     <form action="/RocksteadyRep/ConfirmEditPostServlet">
                                         <input type="hidden" name="postId" value="${postToEdit.postId}"/>
                                         Title: <br>
                                         <input type="text" name="editTitle" required="true" value="${postToEdit.getTitle()}"/><br>
                                         Latitude:<br>
-                                        <input type="text" name="editLat" value="${postLat}"/><br>
+                                        <input id="inLat" type="text" name="editLat" value="${postLat}"/><br>
                                         Longitude:<br>
-                                        <input type="text" name="editLong" value="${postLong}"/><br>
+                                        <input id="inLong" type="text" name="editLong" value="${postLong}"/><br>
                                         Content:<br>
                                         <textarea name="editContent" rows="15" cols="100" required="true">${postToEdit.getPostContent()}</textarea><br>
 

@@ -18,13 +18,17 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="js/skel.min.js"></script>
         <script src="js/skel-panels.min.js"></script>
+        <script src="js/latLongMap.js" type="text/javascript"></script>
         <script src="js/init.js"></script>
         <noscript>
         <link rel="stylesheet" href="css/skel-noscript.css" />
         <link rel="stylesheet" href="css/style.css" />
+        <link href="css/mapStyle.css" rel="stylesheet" type="text/css"/>
         </noscript>
         <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    
+    
     </head>
     <body>
 
@@ -81,13 +85,15 @@
                                     <header>
                                         <h2>NEW POST</h2>
                                     </header>
+                                    Festival position (click the map for set a position):
+                                    <div id="latLongMap" style="width:800px; height: 300px;"></div><br>
                                     <form action="/RocksteadyRep/NewPostServlet" method="post" enctype="multipart/form-data">
                                         Title: <br>
                                         <input type="text" name="postTitle" required="true"/><br>
                                         Latitude:<br>
-                                        <input type="text" name="postLat"/><br>
+                                        <input id="inLat" type="text" name="postLat"/><br>
                                         Longitude:<br>
-                                        <input type="text" name="postLong"/><br>
+                                        <input id="inLong" type="text" name="postLong"/><br>
                                         Image:<br>
                                         <h6 style="color:red"> 2040 x 240 px</h6>
                                         <input type="file" name="postImage" accept="image/*"/><br>
