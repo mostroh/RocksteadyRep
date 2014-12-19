@@ -39,7 +39,8 @@ public class AdminPageHelper {
      * @param searchOption 
      * 1 = Edit users  
      * 2 = Delete Post 
-     * 3 =  Delete Comment
+     * 3 = Delete Comment
+     * 4 = MVPost
      */
     public void setSearchOption(int searchOption) {
         this.searchOption = searchOption;

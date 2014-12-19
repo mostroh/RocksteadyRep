@@ -48,16 +48,16 @@
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="PostServlet">Blog</a></li>
-                        <c:if test="${empty usuario}">
+                            <c:if test="${empty usuario}">
                             <li>
                                 <a href="signUp.jsp">Sign Up</a>
                             </li>
                         </c:if>
                         <c:if test="${not empty usuario}">
                             <c:if test="${usuario.userType == 1}">
-                            <li>
-                                <a href="admin.jsp">Admin Area</a>
-                            </c:if>
+                                <li>
+                                    <a href="admin.jsp">Admin Area</a>
+                                </c:if>
                             <li>
                                 <a href="editProfile.jsp">Edit Profile</a>
                             </li>
@@ -65,7 +65,7 @@
                                 <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
-                        
+
                     </ul>
                 </nav>
             </div>
@@ -123,11 +123,25 @@
                                 </form>
                             </section>
                         </div>
+                        <div class="3u">
+                            <section>
+                                <form action="AdminMakeMVPostServlet">
+                                    <fieldset>
+                                        <legend><b>Select MVPost</b></legend>
+                                        Remember, MVP shows on HOME page...<br>
+                                        <br><br>
+                                        <input type="submit" value="GetPosts"></fieldset>
+                                </form>
+                            </section>
+                        </div>
                     </div>
-                    <!-- SEARCH RESULTS: -->
 
+
+
+                    <!-- SEARCH RESULTS: -->
                     <c:choose>
 
+                        
                         <c:when test="${allData.searchOption == 1}">
                             <c:choose>
                                 <c:when test="${empty allData.userList}">
@@ -190,10 +204,9 @@
                                     </table>
                                 </c:when>
                             </c:choose>
-
-
                         </c:when>
 
+                        
                         <c:when test="${allData.searchOption == 2}"><c:choose>
                                 <c:when test="${empty allData.postList}">
                                     <br><br>
@@ -229,7 +242,7 @@
 
 
                         </c:when>
-
+                        
                         <c:when test="${allData.searchOption == 3}">
                             <c:choose>
                                 <c:when test="${empty allData.commentList}">
@@ -251,6 +264,34 @@
                                         </li>
                                     </c:forEach>
 
+                                </c:when>
+                            </c:choose>
+                        </c:when>
+
+                        
+                        <c:when test="${allData.searchOption == 4}">
+                            <c:choose>
+                                <c:when test="${empty allData.postList}">
+                                    <br><br>
+                                    <header>
+                                        <center>
+                                            <h2>
+                                                <font color="red">No posts found.. get people posting</font>
+                                            </h2>
+                                        </center>
+                                    </header>
+                                </c:when>
+                                <c:when test="${not empty allData.postList}">
+                                    <c:forEach items="${allData.postList}" var="post">
+                                        <li><b> ${post.title}</b>
+                                            <br>
+                                            ${post.postDate}
+                                        </li>
+                                        <form action="AdminNewMVPostServlet">
+                                            <button onclick="this.form.submit();" value="${post.postId}" name="postIDtomakeMVP">Make MVPost</button>
+                                        </form> 
+                                        <br>
+                                    </c:forEach>
                                 </c:when>
                             </c:choose>
                         </c:when>
