@@ -36,29 +36,31 @@
                 <span>BLOG</span>
             </div> <!-- Logo -->
 
-            <nav id="nav"> <!-- Nav -->
-                <ul>
-                    <li><a href="IndexServlet">Home</a></li>
-                    <li><a href="PostServlet">Blog</a></li>
+            <!-- Nav -->
+                <nav id="nav">
+                    <ul>
+                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
+                        <li><a href="PostServlet">Blog</a></li>
                         <c:if test="${empty usuario}">
-                        <li>
-                            <a href="signUp.jsp">Sign Up</a>
-                        </li>
-                    </c:if>
-                    <c:if test="${not empty usuario}">
-                        <c:if test="${usuario.userType == 1}">
                             <li>
-                                <a href="admin.jsp">Admin Area</a>
+                                <a href="signUp.jsp"><fmt:message key="signup"/></a>
+                            </li>
+                        </c:if>
+                        <c:if test="${not empty usuario}">
+                            <c:if test="${usuario.userType == 1}">
+                            <li>
+                                <a href="admin.jsp"><fmt:message key="adminArea"/></a>
                             </c:if>
-                        <li>
-                            <a href="editProfile.jsp">Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="LogOutServlet">Logout</a>
-                        </li>
-                    </c:if>
-                </ul>
-            </nav> <!-- Nav -->
+                            <li>
+                                <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
+                            </li>
+                            <li>
+                                <a href="LogOutServlet"><fmt:message key="logout"/></a>
+                            </li>
+                        </c:if>
+                        
+                    </ul>
+                </nav> <!-- Nav -->
         </div> <!-- Header -->
 
         <div id="main"> <!-- Main -->
