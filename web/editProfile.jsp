@@ -116,6 +116,11 @@
                             <center>
                                 <input type="submit" value="Update profile">
                             </center>
+                                
+                                <br><br>
+                                <a href="LocaleServlet?lang=es">ESPAÑOL</a><br>
+                                <a href="LocaleServlet?lang=en_US">ENGLISH</a><br>
+                                <a href="LocaleServlet?lang=fr_FR">FRANÇAIS</a><br>
                         </form>
                 </div>
             </div>
