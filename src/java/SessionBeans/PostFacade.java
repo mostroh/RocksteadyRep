@@ -58,4 +58,6 @@ public class PostFacade extends AbstractFacade<Post> {
                 .getResultList();
     }
     
+    
+    
 }
