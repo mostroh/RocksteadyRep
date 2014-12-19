@@ -4,9 +4,14 @@
     Author     : Blackproxy
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<c:if test="${not empty sessionScope.locale}">
+<fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
+</c:if>
+<fmt:setBundle basename="Internalizacion.messages" />
 <html>
     <head>
         <title>Blog - Rocksteady Blog</title>
@@ -40,11 +45,14 @@
                 </div>
 
                 <!-- Nav -->
-                <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
-                        <li><a href="PostServlet">Blog</a></li>
+                        <li>
+                            <a href="IndexServlet"><fmt:message key="home"/></a>
+                        </li>
+                        <li>
+                            <a href="PostServlet">Blog</a>
+                        </li>
                         <c:if test="${empty usuario}">
                             <li>
                                 <a href="signUp.jsp"><fmt:message key="signup"/></a>
@@ -62,9 +70,8 @@
                                 <a href="LogOutServlet"><fmt:message key="logout"/></a>
                             </li>
                         </c:if>
-                        
                     </ul>
-                </nav>
+                </nav> 
 
             </div>
         </div>
@@ -88,15 +95,15 @@
                                     Festival position (click the map for set a position):
                                     <div id="latLongMap" style="width:800px; height: 300px;"></div><br>
                                     <form action="/RocksteadyRep/ConfirmEditPostServlet">
-                                        <input type="hidden" name="postId" value="${postToEdit.postId}"/>
+                                        <input type="hidden" name="postId" value="${pdh.p.postId}"/>
                                         Title: <br>
-                                        <input type="text" name="editTitle" required="true" value="${postToEdit.getTitle()}"/><br>
+                                        <input type="text" name="editTitle" required="true" value="${pdh.p.getTitle()}"/><br>
                                         Latitude:<br>
-                                        <input id="inLat" type="text" name="editLat" value="${postLat}"/><br>
+                                        <input id="inLat" type="text" name="editLat" value="${pdh.lat}"/><br>
                                         Longitude:<br>
-                                        <input id="inLong" type="text" name="editLong" value="${postLong}"/><br>
+                                        <input id="inLong" type="text" name="editLong" value="${pdh.lon}"/><br>
                                         Content:<br>
-                                        <textarea name="editContent" rows="15" cols="100" required="true">${postToEdit.getPostContent()}</textarea><br>
+                                        <textarea name="editContent" rows="15" cols="100" required="true">${pdh.p.getPostContent()}</textarea><br>
 
                                         <input type="submit" value="EDIT POST" name="btnEditPost" />
 
@@ -105,7 +112,7 @@
                                 </section>
                             </div>
                         </c:if>
-                        <c:if test="${usuario ne postToEdit.postedBy}" >
+                        <c:if test="${usuario ne pdh.p.postedBy}" >
                             <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
                         </c:if>
                     </c:if>

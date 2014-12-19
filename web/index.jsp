@@ -39,8 +39,12 @@
             <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
-                        <li><a href="PostServlet">Blog</a></li>
+                        <li>
+                            <a href="IndexServlet"><fmt:message key="home"/></a>
+                        </li>
+                        <li>
+                            <a href="PostServlet">Blog</a>
+                        </li>
                         <c:if test="${empty usuario}">
                             <li>
                                 <a href="signUp.jsp"><fmt:message key="signup"/></a>
@@ -58,10 +62,11 @@
                                 <a href="LogOutServlet"><fmt:message key="logout"/></a>
                             </li>
                         </c:if>
-                        
                     </ul>
-                </nav> <!-- Nav -->
-        </div> <!-- Header -->
+                </nav> 
+                <!-- Nav -->
+        </div> 
+        <!-- Header -->
 
         <div id="main"> <!-- Main -->
             <c:choose>
@@ -174,10 +179,10 @@
                             </header>
                             <p><fmt:message key="blogpostsbydatedescr"/></p>
                             <ul class="default">
-                                <li><a href="#">2014</a></li>
-                                <li><a href="#">2013</a></li>
-                                <li><a href="#">2012</a></li>
-                                <li><a href="#">2011</a></li>
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2014">2014</a></li>
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2013">2013</a></li>
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2012">2012</a></li>
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2011">2011</a></li>
                             </ul>
                         </section>
                     </div>

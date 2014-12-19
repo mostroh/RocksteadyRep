@@ -58,6 +58,11 @@ public class PostFacade extends AbstractFacade<Post> {
                 .getResultList();
     }
     
+    public List <String> getAllGPS(){
+        return em.createQuery("SELECT p.postGps FROM Post p")
+                .getResultList();
+    }
+    
     
     
 }

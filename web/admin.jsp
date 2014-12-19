@@ -6,12 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<!--
-        Monochromed by TEMPLATED
-    templated.co @templatedco
-    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+<!DOCTYPE html>
 <c:if test="${not empty sessionScope.locale}">
 <fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
 </c:if>
@@ -50,8 +45,12 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
-                        <li><a href="PostServlet">Blog</a></li>
+                        <li>
+                            <a href="IndexServlet"><fmt:message key="home"/></a>
+                        </li>
+                        <li>
+                            <a href="PostServlet">Blog</a>
+                        </li>
                         <c:if test="${empty usuario}">
                             <li>
                                 <a href="signUp.jsp"><fmt:message key="signup"/></a>
@@ -61,6 +60,7 @@
                             <c:if test="${usuario.userType == 1}">
                             <li>
                                 <a href="admin.jsp"><fmt:message key="adminArea"/></a>
+                            </li>
                             </c:if>
                             <li>
                                 <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
@@ -72,6 +72,7 @@
                         
                     </ul>
                 </nav>
+                        
             </div>
         </div>
         <!-- Header -->
@@ -177,10 +178,10 @@
                                                         <td>Admin</td>
                                                     </c:when>
                                                     <c:when test="${user.userType == 2}">
-                                                        <td>Writer</td>
+                                                        <td><fmt:message key="Writer"/></td>
                                                     </c:when>
                                                     <c:when test="${user.userType == 3}">
-                                                        <td>Registered</td>
+                                                        <td><fmt:message key="Registered"/></td>
                                                     </c:when>
                                                 </c:choose>
 
@@ -189,10 +190,10 @@
                                                         <form action="AdminEditUserServlet">
                                                             <select name="userEdit" onchange="this.form.submit();">
                                                                 <option value="default">Select action...</option>
-                                                                <option value="setAdmin${user.userId}">Set Admin</option>
-                                                                <option value="setWriter${user.userId}">Set Writer</option>
-                                                                <option value="setRegistered${user.userId}">Set Registered</option>
-                                                                <option value="deleteUser${user.userId}">Delete User</font></option>
+                                                                <option value="setAdmin${user.userId}"><fmt:message key="setadmin"/></option>
+                                                                <option value="setWriter${user.userId}"><fmt:message key="setWriter"/></option>
+                                                                <option value="setRegistered${user.userId}"><fmt:message key="setRegistred"/></option>
+                                                                <option value="deleteUser${user.userId}"><fmt:message key="deleteUser"/></option>
                                                             </select>
                                                         </form>   
                                                     </c:if>

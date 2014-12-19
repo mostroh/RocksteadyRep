@@ -5,37 +5,30 @@
  */
 package Servlets;
 
-import Entities.Post;
 import SessionBeans.PostFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "IndexServlet", urlPatterns = {"/IndexServlet"})
-public class IndexServlet extends HttpServlet {
-
+@WebServlet(name = "worldMapServlet", urlPatterns = {"/worldMapServlet"})
+public class worldMapServlet extends HttpServlet {
     @EJB
     private PostFacade postFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        List<Post> mvpPost = postFacade.getMVPost();
-        Post p = null;
-        if (mvpPost != null && !mvpPost.isEmpty()) {
-            p = mvpPost.get(0);
-            request.setAttribute("mvpPost", p);
-
-        }
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);
-
+        
+        
+        List <String> listaGps = postFacade.getAllGPS();
+        request.setAttribute("listaGps", listaGps);
+        request.getServletContext().getRequestDispatcher("/worldMap.jsp").forward(request, response);
+          
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,5 +69,4 @@ public class IndexServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

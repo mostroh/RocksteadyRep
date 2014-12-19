@@ -46,55 +46,73 @@ public class PostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         request.setCharacterEncoding("UTF-8");
         List<Post> postList = null;
         if (request.getParameter("btnFilter") != null) {
-            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
             String dateFromStr = request.getParameter("dateFrom");
             String dateToStr = request.getParameter("dateTo");
-            Date dateFrom = null;
-            Date dateTo = null;
-            if ((dateFromStr != null) && (dateToStr != null)) {
-                if (dateFromStr.equals("")) {
-                    try {
-                        dateFrom = formatoDelTexto.parse("2010-01-01");
-                    } catch (ParseException ex) {
-                        Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    try {
-                        dateFrom = formatoDelTexto.parse(dateFromStr);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                if (dateToStr.equals("")) {
-                    dateTo = Calendar.getInstance().getTime();
-                } else {
-                    try {
-                        dateTo = formatoDelTexto.parse(dateToStr);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                postList = postFacade.getFilteredPost(dateFrom, dateTo);
-            }
-
-        } else {
+            postList = getPostByDate(dateFromStr,dateToStr);
+        }
+        else if(request.getParameter("postYear") !=null){
+            String postYear= request.getParameter("postYear");
+            String dateFromStr =postYear+"-01-01";
+            String dateToStr =postYear+"-12-31";
+            postList=getPostByDate(dateFromStr, dateToStr);
+        }
+        else {
             postList = postFacade.getRecentPost();
         }
         if (!isNull(request.getParameter("makeMVP"))) {
-            AdminPageHelper a = new AdminPageHelper();
-            a.setPostList(postList);
-            a.setSearchOption(4);
-            request.setAttribute("allData", a);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin.jsp");
-            rd.forward(request, response);
+            toAdmin(postList, request, response);
         } else {
             request.setAttribute("postList", postList);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/blog.jsp");
             rd.forward(request, response);
         }
+    }
+
+    private void toAdmin(List<Post> postList, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        AdminPageHelper a = new AdminPageHelper();
+        a.setPostList(postList);
+        a.setSearchOption(4);
+        request.setAttribute("allData", a);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin.jsp");
+        rd.forward(request, response);
+    }
+
+    private List<Post> getPostByDate(String dateFromStr,String dateToStr) {
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFrom = null;
+        Date dateTo = null;
+        List<Post> postList =null;
+        if ((dateFromStr != null) && (dateToStr != null)) {
+            if (dateFromStr.equals("")) {
+                try {
+                    dateFrom = formatoDelTexto.parse("2010-01-01");
+                } catch (ParseException ex) {
+                    Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                try {
+                    dateFrom = formatoDelTexto.parse(dateFromStr);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (dateToStr.equals("")) {
+                dateTo = Calendar.getInstance().getTime();
+            } else {
+                try {
+                    dateTo = formatoDelTexto.parse(dateToStr);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            postList = postFacade.getFilteredPost(dateFrom, dateTo);
+        }
+
+        return postList;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

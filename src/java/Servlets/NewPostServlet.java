@@ -45,9 +45,11 @@ public class NewPostServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String postTitle = request.getParameter("postTitle")
-                            .replaceAll("<[^>]*>", "");
+                            .replaceAll("<[^>]*>", "")
+                            .replaceAll("\\(.+?\\)","");
         String postContent = request.getParameter("postContent")
-                             .replaceAll("<[^>]*>", "");
+                             .replaceAll("<[^>]*>", "")
+                             .replaceAll("\\(.+?\\)","");;
         Usuario usuLogueado = (Usuario) request.getSession().getAttribute("usuario");
         String postGps = request.getParameter("postLat")
                             .replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", "")

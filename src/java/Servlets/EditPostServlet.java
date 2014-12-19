@@ -6,6 +6,7 @@
 package Servlets;
 
 import Entities.Post;
+import SessionBeans.PostDataHelper;
 import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -36,18 +37,21 @@ public class EditPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PostDataHelper pdh = new PostDataHelper();
         request.setCharacterEncoding("UTF-8");
+        
         Post postAEditar = postFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("PostToEdit"))));
         String[] latLong= postAEditar.getPostGps().split(",");
-        request.setAttribute("postToEdit", postAEditar);
+        pdh.setP(postAEditar);
         if(latLong.length!=0){
-            request.setAttribute("postLat", latLong[0].replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", ""));
-            request.setAttribute("postLong", latLong[1].replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", ""));
+            pdh.setLat(latLong[0].replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", ""));
+            pdh.setLon(latLong[1].replaceAll("[^-?[0-9]\\d*(\\.\\d+)?]", ""));
         }
         else{
-            request.setAttribute("postLat", "");
-            request.setAttribute("postLong", "");
+            pdh.setLat("");
+            pdh.setLon("");
         }
+        request.setAttribute("pdh", pdh);
         request.getServletContext().getRequestDispatcher("/editPost.jsp").forward(request, response);
     }
 
