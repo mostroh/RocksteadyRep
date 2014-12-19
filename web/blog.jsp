@@ -4,9 +4,14 @@
     Author     : Blackproxy
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<c:if test="${not empty sessionScope.locale}">
+<fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
+</c:if>
+<fmt:setBundle basename="Internalizacion.messages" />
 <html>
     <head>
         <title>Blog - Rocksteady Blog</title>
@@ -30,20 +35,21 @@
     <body>
 
         <!-- Header -->
-        <div id="header">
-            <div class="container">
-                <!-- Logo -->
-                <div id="logo">
-                    <h1><a>Rocksteady</a></h1>
-                    <span>BLOG</span>
-                </div>
+        <div id="header">  
+            <div id="logo"> <!-- Logo -->
+                <h1><a>Rocksteady</a></h1>
+                <span>BLOG</span>
+            </div> <!-- Logo -->
 
-                <!-- Nav -->
-                <!-- Nav -->
+            <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
-                        <li><a href="PostServlet">Blog</a></li>
+                        <li>
+                            <a href="IndexServlet"><fmt:message key="home"/></a>
+                        </li>
+                        <li>
+                            <a href="PostServlet">Blog</a>
+                        </li>
                         <c:if test="${empty usuario}">
                             <li>
                                 <a href="signUp.jsp"><fmt:message key="signup"/></a>
@@ -51,8 +57,9 @@
                         </c:if>
                         <c:if test="${not empty usuario}">
                             <c:if test="${usuario.userType == 1}">
-                            <li>
-                                <a href="admin.jsp"><fmt:message key="adminArea"/></a>
+                                <li>
+                                    <a href="admin.jsp"><fmt:message key="adminArea"/></a>
+                                </li>
                             </c:if>
                             <li>
                                 <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
@@ -61,12 +68,10 @@
                                 <a href="LogOutServlet"><fmt:message key="logout"/></a>
                             </li>
                         </c:if>
-                        
                     </ul>
-                </nav>
-
-            </div>
-        </div>
+                </nav> 
+                <!-- Nav -->
+        </div> 
         <!-- Header -->
 
 
