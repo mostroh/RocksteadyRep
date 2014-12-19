@@ -1,17 +1,8 @@
-<%-- 
-    Document   : index
-    Created on : Dec 16, 2014, 10:25:34 PM
-    Author     : inftel13
---%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<!--
-    Monochromed by TEMPLATED
-    templated.co @templatedco
-    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <c:set var="language" value="en" scope="session" />
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="com.me.jsp.bundle.file" />
@@ -22,7 +13,6 @@
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="js/skel.min.js"></script>
         <script src="js/skel-panels.min.js"></script>
@@ -31,156 +21,143 @@
         <link rel="stylesheet" href="css/skel-noscript.css" />
         <link rel="stylesheet" href="css/style.css" />
         </noscript>
-        <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
     </head>
     <body>
-
         <!-- Header -->
-        <div id="header">
-            <div class="container">
+        <div id="header">  
+            <div id="logo"> <!-- Logo -->
+                <h1><a>Rocksteady</a></h1>
+                <span>BLOG</span>
+            </div> <!-- Logo -->
 
-                <!-- Logo -->
-                <div id="logo">
-                    <h1><a>Rocksteady</a></h1>
-                    <span>BLOG</span>
-                </div>
-
-                <!-- Nav -->
-                <nav id="nav">
-                    <ul>
-                        <li><a href="index.jsp">Home</a></li>
-                        <li><a href="PostServlet">Blog</a></li>
+            <nav id="nav"> <!-- Nav -->
+                <ul>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="PostServlet">Blog</a></li>
                         <c:if test="${empty usuario}">
-                            <li>
-                                <a href="signUp.jsp">Sign Up</a>
-                            </li>
-                        </c:if>
-                        <c:if test="${not empty usuario}">
-                            <c:if test="${usuario.userType == 1}">
+                        <li>
+                            <a href="signUp.jsp">Sign Up</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${not empty usuario}">
+                        <c:if test="${usuario.userType == 1}">
                             <li>
                                 <a href="admin.jsp">Admin Area</a>
                             </c:if>
-                            <li>
-                                <a href="editProfile.jsp">Edit Profile</a>
-                            </li>
-                            <li>
-                                <a href="LogOutServlet">Logout</a>
-                            </li>
-                        </c:if>
-                        
-                    </ul>
-                </nav>
+                        <li>
+                            <a href="editProfile.jsp">Edit Profile</a>
+                        </li>
+                        <li>
+                            <a href="LogOutServlet">Logout</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav> <!-- Nav -->
+        </div> <!-- Header -->
 
-            </div>
-        </div>
-        <!-- Header -->
-
-        <!-- Main -->
-        <div id="main">
-            <div id="main">
-                <div class="container">
+        <div id="main"> <!-- Main -->
+            <c:choose>
+                <c:when test="${not empty usuario}">
+                    <header>
+                        <center>
+                            <h2>Welcome <font color="orange">${usuario.username}</font>
+                            </h2>
+                        </center>
+                    </header>
+                </c:when>
+                <c:when test="${empty usuario}">
+                    <header>
+                        <center>
+                            <h2>Log in</h2>
+                        </center>
+                    </header>
+                    <center>
+                        <div class="3u" align="right">
+                            <form action="LoginServlet" method="post" autocomplete="off">
+                                UserName:   <input type="text" name="name" required="true"><br><br>
+                                Password:   <input type="password" name="pwd"required="true"><br>
+                                <input type="submit" value="Log in">
+                            </form>
+                        </div>
+                    </center>
+                </c:when>
+            </c:choose>
+            <c:if test="${not empty lh}">
+                <center>
                     <c:choose>
-                        <c:when test="${not empty usuario}">
-                            <header>
-                                <center>
-                                    <h2>Welcome <font color="orange">${usuario.username}</font>
-                                    </h2>
-                                </center>
-                            </header>
-                        </c:when>
-                        <c:when test="${empty usuario}">
-                            <header>
-                                <center>
-                                    <h2>Log in</h2>
-                                </center>
-                            </header>
+                        <c:when test="${not lh.userexists}">
                             <center>
-
-                                <div class="3u" align="right">
-                                    <form action="LoginServlet" method="post" autocomplete="off">
-                                        UserName:<input type="text" name="name" required="true"><br><br>
-                                        Password: <input type="password" name="pwd"required="true"><br>
-                                        <input type="submit" value="Log in">
-                                    </form>
-
-                                </div>
+                                <h2><font color="red">Invalid username</font>
+                                </h2>
                             </center>
                         </c:when>
-
+                        <c:when test="${lh.wrongpassword}">
+                            <center>
+                                <h2><font color="red">Wrong password</font>
+                                </h2>
+                            </center>
+                        </c:when>
                     </c:choose>
-                    <c:if test="${not empty lh}">
-                        <center>
-                            <c:choose>
-                                <c:when test="${not lh.userexists}">
-                                    <center>
-                                        <h2><font color="red">Invalid username</font>
-                                        </h2>
-                                    </center>
-                                </c:when>
-                                <c:when test="${lh.wrongpassword}">
-                                    <center>
-                                        <h2><font color="red">Wrong password</font>
-                                        </h2>
-                                    </center>
-                                </c:when>
-                            </c:choose>
-                        </center>
-                    </c:if>
+                </center>
+            </c:if>
 
-
-
-                    <div class="divider"></div>
-                </div>
-            </div>
-
-            <!-- log in / register (optional) -->
+            <div class="divider"></div>
             <div class="container">
-                <header>
-                    <h2>Last blog posts</h2>
-                </header>
                 <div class="row">
-                    <div class="3u">
-                        <section>
-                            <a href="#" class="image full"><img src="images/pics01.jpg" alt="" /></a>
-                            <p>Title of blog post 1</p>
-                        </section>
-                    </div>
-                    <div class="3u">
-                        <section>
-                            <a href="#" class="image full"><img src="images/pics11.jpg" alt="" /></a>
-                            <p>Title of blog post 2</p>
-                        </section>
-                    </div>
-                    <div class="3u">
-                        <section>
-                            <a href="#" class="image full"><img src="images/pics12.jpg" alt="" /></a>
-                            <p>Title of blog post 3</p>
-                        </section>
-                    </div>
-                    <div class="3u">
-                        <section>
-                            <a href="#" class="image full"><img src="images/pics13.jpg" alt="" /></a>
-                            <p>Title of blog post 4</p>
-                        </section>
-                    </div>
-                </div>
-                <div class="divider">&nbsp;</div>
-                <div class="row">
-
                     <!-- Content -->
                     <div class="8u skel-cell-important">
                         <section id="content">
-                            <header>
-                                <h2>Important blog post title</h2>
-                                <span class="byline">User | Date | GPS data link</span>
-                            </header>
-                            <p><a href="#" class="image full"><img src="images/pics02.jpg" alt=""></a></p>
-                            <p>First 100 chars of blog post</p>
-                            <a href="#" class="button">All important blog posts.html</a>
+                            <c:if test="${not empty mvpPost}">
+                                <header>
+                                    <h2>${mvpPost.title}</h2>
+                                    <span class="byline"> 
+                                        <c:choose>
+                                            <c:when test="${empty mvpPost.postedBy.getImg()}">
+                                                <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${mvpPost.postedBy.userId}">
+                                                    <img src="images/default-user.png" alt="UserImage" width="20px" height="20px"/>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${mvpPost.postedBy.userId}">
+                                                    <img height = "20px" width = "20px" src="ShowUserImage?userId=${mvpPost.postedBy.userId}"/>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        postedBy ${mvpPpost.postedBy.username} </span>
+                                </header>
+
+                                <c:if test="${not empty mvpPost.getHeaderImage()}">
+                                    <p><a href="#" class="image full">
+                                            <img height = "157px" width = "783px" src="ShowImages?postId=${mvpPost.getPostId()}" alt="Imagen Post ${mvpPpost.getPostId()}"/></a>
+                                    </p>
+                                </c:if>
+                                <c:if test="${empty mvpPost.getHeaderImage()}">
+                                    <p><a href="#" class="image full">
+                                            <img height = "157px" width = "783px" src="images/RockSteadyPost.jpg" alt="Imagen Post ${mvpPost.getPostId()}"/></a>
+                                    </p>
+                                </c:if>
+                                <p>${fn:substring(mvpPost.postContent, 0, 300)} [...]</p>
+                                <a href="/RocksteadyRep/PostServlet" class="button">Read all posts</a>
+                            </c:if>
+
+
+                            <c:if test="${empty mvpPost}">
+                                <header>
+                                    <h2>MVPost not found</h2>
+                                    <span class="byline">  | Date </span>
+                                </header>
+                                <p>
+                                    <a href="#" class="image full"><img src="images/pics02.jpg" alt=""></a>   
+
+                                </p>
+                                <p>Ask an admin to set a mvpPost</p>
+
+                            </c:if>
                         </section>
                     </div>
                     <!-- /Content -->
+
+
                     <!-- Sidebar -->
                     <div id="sidebar" class="4u">
                         <section>
@@ -198,7 +175,6 @@
                     </div>
                     <!-- Sidebar -->
                 </div>
-
             </div>
         </div>
         <!-- Main -->
@@ -207,10 +183,8 @@
         <div id="copyright">
             <div class="container">
 
-
             </div>
         </div>
-
     </body>
 </html>
 
