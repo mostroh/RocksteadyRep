@@ -46,36 +46,38 @@ public class PostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-        String dateFromStr = request.getParameter("dateFrom");
-        String dateToStr = request.getParameter("dateTo");
-        Date dateFrom = null;
-        Date dateTo = null;
         List<Post> postList = null;
-        GregorianCalendar cal = new GregorianCalendar();
-        if ((dateFromStr != null) && (dateToStr != null)) {
-            if (dateFromStr.equals("")) {
-                cal.setTime(new Date(Long.MIN_VALUE));
-                dateFrom = cal.getTime();
-            }
-            else{
-                try {
-                    dateFrom = formatoDelTexto.parse(dateFromStr);
-                } catch (ParseException ex) {
-                    Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+        if (request.getParameter("btnFilter") != null) {
+            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+            String dateFromStr = request.getParameter("dateFrom");
+            String dateToStr = request.getParameter("dateTo");
+            Date dateFrom = null;
+            Date dateTo = null;
+
+            GregorianCalendar cal = new GregorianCalendar();
+            if ((dateFromStr != null) && (dateToStr != null)) {
+                if (dateFromStr.equals("")) {
+                    cal.setTime(new Date(Long.MIN_VALUE));
+                    dateFrom = cal.getTime();
+                } else {
+                    try {
+                        dateFrom = formatoDelTexto.parse(dateFromStr);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
-            if (dateToStr.equals("")) {
-                dateTo = Calendar.getInstance().getTime();
-            }
-            else{
-                try {
-                    dateTo = formatoDelTexto.parse(dateToStr);
-                } catch (ParseException ex) {
-                    Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                if (dateToStr.equals("")) {
+                    dateTo = Calendar.getInstance().getTime();
+                } else {
+                    try {
+                        dateTo = formatoDelTexto.parse(dateToStr);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                postList = postFacade.getFilteredPost(dateFrom, dateTo);
             }
-            postList = postFacade.getFilteredPost(dateFrom, dateTo);
+
         } else {
             postList = postFacade.getRecentPost();
         }
