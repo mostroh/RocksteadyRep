@@ -77,17 +77,17 @@ public class SingUpServlet extends HttpServlet {
                 usuarioFacade.create(nuevoUsuario);
 
                 sesion.setAttribute("usuario", nuevoUsuario);            
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("IndexServlet");
                 rd.forward(request, response);
 
             } else {
                 request.setAttribute("errorMessage", "This username has already been used");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/SingUp.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("IndexServlet");
                 rd.forward(request, response);
             }
         } else {
             request.setAttribute("errorMessage", "Passwords do not match");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SingUp.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("IndexServlet");
             rd.forward(request, response);
         }
 
