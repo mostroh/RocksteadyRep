@@ -3,7 +3,7 @@
     Created on : Dec 13, 2014, 4:41:36 PM
     Author     : EduardROckerse
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -12,6 +12,10 @@
     templated.co @templatedco
     Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<c:if test="${not empty sessionScope.locale}">
+<fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
+</c:if>
+<fmt:setBundle basename="Internalizacion.messages" />
 <html>
     <head>
         <title>Blog - Rocksteady Blog</title>
@@ -46,26 +50,26 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp"><fmt:message key="home"/></a></li>
                         <li><a href="PostServlet">Blog</a></li>
-                            <c:if test="${empty usuario}">
+                        <c:if test="${empty usuario}">
                             <li>
-                                <a href="signUp.jsp">Sign Up</a>
+                                <a href="signUp.jsp"><fmt:message key="signup"/></a>
                             </li>
                         </c:if>
                         <c:if test="${not empty usuario}">
                             <c:if test="${usuario.userType == 1}">
-                                <li>
-                                    <a href="admin.jsp">Admin Area</a>
-                                </c:if>
                             <li>
-                                <a href="editProfile.jsp">Edit Profile</a>
+                                <a href="admin.jsp"><fmt:message key="adminArea"/></a>
+                            </c:if>
+                            <li>
+                                <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
                             </li>
                             <li>
-                                <a href="LogOutServlet">Logout</a>
+                                <a href="LogOutServlet"><fmt:message key="logout"/></a>
                             </li>
                         </c:if>
-
+                        
                     </ul>
                 </nav>
             </div>
@@ -88,7 +92,7 @@
                             <section>
                                 <form action="AdminUsersFilteredServlet">
                                     <fieldset>
-                                        <legend><b>Edit users</b></legend>
+                                        <legend><b><fmt:message key="editUsers"/></b></legend>
                                         Filter by:<br>
                                         <input type="text" name="usernameSearchFilter">
                                         <br>
@@ -101,11 +105,11 @@
                             <section>
                                 <form action="AdminPostByUserServlet">
                                     <fieldset>
-                                        <legend><b>Delete post</b></legend>
-                                        From user:<br>
+                                        <legend><b><fmt:message key="deletePost"/></b></legend>
+                                        <fmt:message key="fromUser"/>:<br>
                                         <input type="text" name="postsByUserFilter">
                                         <br>
-                                        <br><br>
+                                        <br><bzq>
                                         <input type="submit" value="Find posts"></fieldset>
                                 </form>
                             </section>
@@ -114,7 +118,7 @@
                             <section>
                                 <form action="AdminCommentByUserServlet">
                                     <fieldset>
-                                        <legend><b>Delete comment</b></legend>
+                                        <legend><b><fmt:message key="DeleteComent"/></b></legend>
                                         From user:<br>
                                         <input type="text" name="commentsByUserFilter">
                                         <br>
