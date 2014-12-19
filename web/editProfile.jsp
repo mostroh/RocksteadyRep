@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <c:if test="${not empty sessionScope.locale}">
-<fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
+    <fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
 </c:if>
 <fmt:setBundle basename="Internalizacion.messages" />
 <html>
@@ -35,7 +35,7 @@
                     <h1><a>Rocksteady</a></h1>
                     <span>BLOG</span>
                 </div>
-                
+
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
@@ -52,9 +52,9 @@
                         </c:if>
                         <c:if test="${not empty usuario}">
                             <c:if test="${usuario.userType == 1}">
-                            <li>
-                                <a href="admin.jsp"><fmt:message key="adminArea"/></a>
-                            </c:if>
+                                <li>
+                                    <a href="admin.jsp"><fmt:message key="adminArea"/></a>
+                                </c:if>
                             <li>
                                 <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
                             </li>
@@ -64,64 +64,72 @@
                         </c:if>
                     </ul>
                 </nav> 
-                
+
             </div>
         </div>
         <div id="main">
             <div class="container">
-               
-                 <header>
-                                <center>
-                                    <h2><fmt:message key="editProfile"/> <font color="orange">${usuario.username}</font>
-                                    </h2>
-                                </center>
-                            </header>
+
+                <header>
+                    <center>
+                        <h2><fmt:message key="editProfile"/> <font color="orange">${usuario.username}</font>
+                        </h2>
+                    </center>
+                </header>
                 <div class="patata" align="center">
-                        <form action="EditProfileServlet" method="post" enctype="multipart/form-data">
-                            <div class="2u" align="center">
-                                <br>
-                                <center>
-                                    <img height = "100px" width = "100px" src="ShowUserImage?userId=${usuario.userId}">
-                                </center>
-                                <br>
-                                First name: <input type="text" name="nombre" value= "${usuario.name}" required="true">
-                                <br>
-                                Last name: <input type="text" name="apellido" value= "${usuario.lastName}" required="true"/>
-                                <br>
-                                Email: <input type="email" name="email" value = "${usuario.email}" required="true" />
-                                <br>
-                                WebSite: 
-                                <input type="text" name="website"   value = "${usuario.email}"/>
-                                <br>
-                                Description: 
-                                <input type="text" name="descriptionSingUp"  value = "${usuario.description}"/>
-                                <br>
-                                Twitter: 
-                                <input type="text" name="twitterSingUp"  value = "${usuario.twitter}" />
-                                <br>
-                                Facebook: 
-                                <input type="text" name="facebookSingUp"  value = "${usuario.facebook}" />
-                                <br>
-                                Instagram: 
-                                <input type="text" name="instagramSingUp"  value = "${usuario.instagram}"/>
-                                <br>
-                                Linkedin: 
-                                <input type="text" name="linkedinSingUp"  value = "${usuario.linkedin}"/>
-                                <br>
-                                Select new image:
-                                <input type="file" name="image" accept="image/*"><br> 
-                                <br> 
-                                               
-                            </div>    
+                    <form action="EditProfileServlet" method="post" enctype="multipart/form-data">
+                        <div class="2u" align="center">
+                            <br>
                             <center>
-                                <input type="submit" value="Update profile">
+                                <img height = "100px" width = "100px" src="ShowUserImage?userId=${usuario.userId}">
                             </center>
-                                
-                                <br><br>
-                                <a href="LocaleServlet?lang=es">ESPAÑOL</a><br>
-                                <a href="LocaleServlet?lang=en_US">ENGLISH</a><br>
-                                <a href="LocaleServlet?lang=fr_FR">FRANÇAIS</a><br>
-                        </form>
+                            <br>
+                            First name: <input type="text" name="nombre" value= "${usuario.name}" required="true">
+                            <br>
+                            Last name: <input type="text" name="apellido" value= "${usuario.lastName}" required="true"/>
+                            <br>
+                            Email: <input type="email" name="email" value = "${usuario.email}" required="true" />
+                            <br>
+                            WebSite: 
+                            <input type="text" name="website"   value = "${usuario.email}"/>
+                            <br>
+                            Description: 
+                            <input type="text" name="descriptionSingUp"  value = "${usuario.description}"/>
+                            <br>
+                            Twitter: 
+                            <input type="text" name="twitterSingUp"  value = "${usuario.twitter}" />
+                            <br>
+                            Facebook: 
+                            <input type="text" name="facebookSingUp"  value = "${usuario.facebook}" />
+                            <br>
+                            Instagram: 
+                            <input type="text" name="instagramSingUp"  value = "${usuario.instagram}"/>
+                            <br>
+                            Linkedin: 
+                            <input type="text" name="linkedinSingUp"  value = "${usuario.linkedin}"/>
+                            <br>
+                            Select new image:
+                            <input type="file" name="image" accept="image/*"><br> 
+                            <br> 
+
+                        </div>    
+                        <center>
+                            <input type="submit" value="Update profile">
+                        </center>
+
+                        <br><br>
+                        <a href="LocaleServlet?lang=es">                                    
+                            <img height = "45px" width = "45px" src="images/ESPAA_1.png" alt="Idioma Español"/>
+                            Español</a>
+                        <a href="LocaleServlet?lang=en_US">
+                            <img height = "40px" width = "40px" src="images/icono ingles.png" alt="Idioma Ingles"/>
+                            English
+                        </a>
+                        <a href="LocaleServlet?lang=fr_FR">
+                            <img height = "40px" width = "40px" src="images/French Southern and Antarctic Lands Flag.png" alt="Idioma Frances"/>
+                            Français
+                        </a><br>
+                    </form>
                 </div>
             </div>
         </div>
