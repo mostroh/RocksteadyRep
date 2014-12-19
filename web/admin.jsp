@@ -98,7 +98,7 @@
                                         <input type="text" name="usernameSearchFilter">
                                         <br>
                                         <br><br>
-                                        <input type="submit" value="Search"></fieldset>
+                                        <input type="submit" value="<fmt:message key="sreach"/>"></fieldset>
                                 </form>
                             </section>
                         </div>
@@ -111,7 +111,7 @@
                                         <input type="text" name="postsByUserFilter">
                                         <br>
                                         <br><bzq>
-                                        <input type="submit" value="Find posts"></fieldset>
+                                        <input type="submit" value="<fmt:message key="findPost"/>"></fieldset>
                                 </form>
                             </section>
                         </div>
@@ -124,7 +124,7 @@
                                         <input type="text" name="commentsByUserFilter">
                                         <br>
                                         <br><br>
-                                        <input type="submit" value="Find comments"></fieldset>
+                                        <input type="submit" value="<fmt:message key="findComment"/>"></fieldset>
                                 </form>
                             </section>
                         </div>
@@ -135,7 +135,7 @@
                                         <legend><b><fmt:message key="selectMVPost"/></b></legend>
                                         <fmt:message key="remember"/>, <fmt:message key="MVPshowsonHOMEpage"/>...<br>
                                         <br><br>
-                                        <input type="submit" value="GetPosts"></fieldset>
+                                        <input type="submit" value="<fmt:message key="getPost"/>"></fieldset>
                                 </form>
                             </section>
                         </div>
