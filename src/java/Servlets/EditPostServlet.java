@@ -8,7 +8,6 @@ package Servlets;
 import Entities.Post;
 import SessionBeans.PostFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -37,12 +36,18 @@ public class EditPostServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
         Post postAEditar = postFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("PostToEdit"))));
         String[] latLong= postAEditar.getPostGps().split(",");
         request.setAttribute("postToEdit", postAEditar);
-        request.setAttribute("postLat", latLong[0]);
-        request.setAttribute("postLong", latLong[1]);
+        if(latLong.length!=0){
+            request.setAttribute("postLat", latLong[0]);
+            request.setAttribute("postLong", latLong[1]);
+        }
+        else{
+            request.setAttribute("postLat", "");
+            request.setAttribute("postLong", "");
+        }
         request.getServletContext().getRequestDispatcher("/editPost.jsp").forward(request, response);
     }
 

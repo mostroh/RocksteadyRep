@@ -5,10 +5,10 @@
  */
 package Servlets;
 
-import Entities.Post;
-import SessionBeans.PostFacade;
+import Entities.Usuario;
+import SessionBeans.UsuarioFacade;
 import java.io.IOException;
-import java.util.List;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Blackproxy
+ * @author inftel13
  */
-@WebServlet(name = "PostServlet", urlPatterns = {"/PostServlet"})
-public class PostServlet extends HttpServlet {
+@WebServlet(name = "ViewProfileServlet", urlPatterns = {"/ViewProfileServlet"})
+public class ViewProfileServlet extends HttpServlet {
     @EJB
-    private PostFacade postFacade;
+    private UsuarioFacade usuarioFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,11 @@ public class PostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        List <Post> postList = postFacade.getRecentPost();
-        request.setAttribute("postList", postList);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/blog.jsp");
-        rd.forward(request, response);        
+        Usuario u = usuarioFacade.find(new BigDecimal(request.getParameter("profileOfUserID")));
+        
+        request.setAttribute("profileOfUser", u);
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/viewProfile.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

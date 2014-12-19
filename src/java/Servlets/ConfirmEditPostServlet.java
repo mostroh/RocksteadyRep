@@ -6,9 +6,14 @@
 package Servlets;
 
 import Entities.Post;
+import Entities.Usuario;
 import SessionBeans.PostFacade;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Enumeration;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,13 +21,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author Blackproxy
  */
-@WebServlet(name = "PostServlet", urlPatterns = {"/PostServlet"})
-public class PostServlet extends HttpServlet {
+@WebServlet(name = "ConfirmEditPostServlet", urlPatterns = {"/ConfirmEditPostServlet"})
+public class ConfirmEditPostServlet extends HttpServlet {
     @EJB
     private PostFacade postFacade;
 
@@ -38,10 +45,34 @@ public class PostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        List <Post> postList = postFacade.getRecentPost();
-        request.setAttribute("postList", postList);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/blog.jsp");
-        rd.forward(request, response);        
+        String postTitle = request.getParameter("postTitle")
+                            .replaceAll("<[^>]*>", "");
+        String postContent = request.getParameter("postContent")
+                             .replaceAll("<[^>]*>", "");
+        String postGps = request.getParameter("postLat")
+                            .replaceAll("<[^>]*>", "")
+                            +","+
+                            request.getParameter("editLong")
+                            ;
+        
+
+        
+        Post antiguoPost = postFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("postId"))));
+        
+        //Part filePart = request.getPart("editImage");
+        //if(filePart.getSubmittedFileName() !=null || !filePart.getSubmittedFileName().isEmpty()){
+        //    InputStream f = filePart.getInputStream();
+        //    byte[] img = IOUtils.toByteArray(f);
+        //    antiguoPost.setHeaderImage(img);
+        //}
+        antiguoPost.setPostDate(Calendar.getInstance().getTime());
+        antiguoPost.setPostGps(postGps);
+        antiguoPost.setTitle(postTitle);
+        antiguoPost.setPostContent(postContent);
+        postFacade.edit(antiguoPost);
+        
+        RequestDispatcher rd= getServletContext().getRequestDispatcher("/PostServlet");
+        rd.forward(request, response); 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

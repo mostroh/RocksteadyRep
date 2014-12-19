@@ -70,29 +70,35 @@
                             </header>
                 <div class="patata" align="center">
                         <form action="EditProfileServlet" method="post" enctype="multipart/form-data">
-                            <div class="3u" align="right">
+                            <div class="2u" align="center">
                                 <br>
                                 <center>
                                     <img height = "100px" width = "100px" src="ShowUserImage?userId=${usuario.userId}">
                                 </center>
                                 <br>
-                                First name: <input type="text" name="nombre" value= "<c:out value = "${usuario.name}"/>" required="true"><br>
-                                Last name: <input type="text" name="apellido" value= "<c:out value = "${usuario.lastName}"/>" required="true"/><br>
-                                Email: <input type="email" name="email" value = "<c:out value = "${usuario.email}"/>" required="true" /><br>
-                               
-                            
+                                First name: <input type="text" name="nombre" value= "${usuario.name}" required="true">
+                                <br>
+                                Last name: <input type="text" name="apellido" value= "${usuario.lastName}" required="true"/>
+                                <br>
+                                Email: <input type="email" name="email" value = "${usuario.email}" required="true" />
+                                <br>
                                 WebSite: 
-                                <input type="text" name="website"   value = "<c:out value = "${usuario.email}"/>"/><br>
+                                <input type="text" name="website"   value = "${usuario.email}"/>
+                                <br>
                                 Description: 
-                                <input type="text" name="descriptionSingUp"  value = "<c:out value = "${usuario.description}"/>" /><br>
+                                <input type="text" name="descriptionSingUp"  value = "${usuario.description}"/>
+                                <br>
                                 Twitter: 
-                                <input type="text" name="twitterSingUp"  value = "<c:out value = "${usuario.twitter}"/>" /><br>
+                                <input type="text" name="twitterSingUp"  value = "${usuario.twitter}" />
+                                <br>
                                 Facebook: 
-                                <input type="text" name="facebookSingUp"  value = "<c:out value = "${usuario.facebook}"/>" /><br>
+                                <input type="text" name="facebookSingUp"  value = "${usuario.facebook}" />
+                                <br>
                                 Instagram: 
-                                <input type="text" name="instagramSingUp"  value = "<c:out value = "${usuario.instagram}"/>"/><br>
+                                <input type="text" name="instagramSingUp"  value = "${usuario.instagram}"/>
+                                <br>
                                 Linkedin: 
-                                <input type="text" name="linkedinSingUp"  value = "<c:out value = "${usuario.linkedin}"/>"/><br><br>
+                                <input type="text" name="linkedinSingUp"  value = "${usuario.linkedin}"/>
                                 <br>
                                 Select new image:
                                 <input type="file" name="image" accept="image/*"><br> 

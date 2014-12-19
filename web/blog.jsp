@@ -38,21 +38,21 @@
                     <span>BLOG</span>
                 </div>
 
-               <!-- Nav -->
+                <!-- Nav -->
                 <nav id="nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="PostServlet">Blog</a></li>
-                        <c:if test="${empty usuario}">
+                            <c:if test="${empty usuario}">
                             <li>
                                 <a href="signUp.jsp">Sign Up</a>
                             </li>
                         </c:if>
                         <c:if test="${not empty usuario}">
                             <c:if test="${usuario.userType == 1}">
-                            <li>
-                                <a href="admin.jsp">Admin Area</a>
-                            </c:if>
+                                <li>
+                                    <a href="admin.jsp">Admin Area</a>
+                                </c:if>
                             <li>
                                 <a href="editProfile.jsp">Edit Profile</a>
                             </li>
@@ -60,7 +60,7 @@
                                 <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
-                        
+
                     </ul>
                 </nav>
 
@@ -109,24 +109,27 @@
                                     <span class="byline">
                                         <c:choose>
                                             <c:when test="${empty post.postedBy.getImg()}">
-                                                <img src="images/default-user.png" alt="UserImage" width="30px" height="30px"/>
+                                                <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${post.postedBy.userId}">
+                                                    <img src="images/default-user.png" alt="UserImage" width="30px" height="30px"/>
+                                                </a>
                                             </c:when>
                                             <c:otherwise>
-                                                <img height = "30px" width = "30px" src="ShowUserImage?userId=${post.postedBy.userId}" alt="userImage">
+                                                <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${post.postedBy.userId}">
+                                                    <img height = "30px" width = "30px" src="ShowUserImage?userId=${post.postedBy.userId}" alt="userImage"/>
+                                                </a>
                                             </c:otherwise>
                                         </c:choose>
-                                        ${post.postedBy.username} | ${post.postDate}
+                                        <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${post.postedBy.userId}">${post.postedBy.username}</a>
+                                        | ${post.postDate}
                                         <c:if test="${post.postedBy.userId eq usuario.userId}"> |
                                             <form style='display:inline;' action="/RocksteadyRep/EditPostServlet" method="post">
-                                                <input style='display:inline;' type="hidden" name="PostToEdit" value="${post.postId}">
-                                                <input style='display:inline;' type="image" src="images/edit_icon.png" alt="Edit Post">
+                                                <input style='display:inline;' type="hidden" name="PostToEdit" value="${post.postId}"/>
+                                                <input style='display:inline;' type="image" src="images/edit_icon.png" alt="Edit Post"/>
                                             </form> 
                                             <form style='display:inline;' action="/RocksteadyRep/AdminDeletePostServlet" method="post">
-                                                <input style='display:inline;' type="hidden" name="DeleteOwnPost" value="${post.postId}">
-                                                <input style='display:inline;' type="image" src="images/delete_icon.png" alt="Delete Post">
+                                                <input style='display:inline;' type="hidden" name="DeleteOwnPost" value="${post.postId}"/>
+                                                <input style='display:inline;' type="image" src="images/delete_icon.png" alt="Delete Post"/>
                                             </form>
-<!--                                            | <a href="/RocksteadyRep/AdminDeletePostServlet?DeleteOwnPost=${post.postId}">
-                                                <font color="red">Remove post</font>-->
                                             </a>
                                         </c:if>
                                     </span>
@@ -134,11 +137,11 @@
                                 </header>
                                 <c:if test="${not empty post.getHeaderImage()}">
                                     <p><a href="#" class="image full">
-                                            <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"></a></p>
+                                            <img height = "300px" width = "1200px" src="ShowImages?postId=${post.getPostId()}" alt="Imagen Post ${post.getPostId()}"/></a></p>
                                         </c:if>
                                         <c:if test="${empty post.getHeaderImage()}">
                                     <p><a href="#" class="image full">
-                                            <img height = "300px" width = "1200px" src="images/RockSteadyPost.jpg" alt="Imagen Post ${post.getPostId()}"></a></p>
+                                            <img height = "300px" width = "1200px" src="images/RockSteadyPost.jpg" alt="Imagen Post ${post.getPostId()}"/></a></p>
                                         </c:if>
 
                                 <p>${post.getPostContent()}</p>
@@ -148,8 +151,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <div id="mostrarMapa${post.getPostId()}"><br>
-                                            <a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')" >
-                                                <center><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" >Show map</a></center>
+                                            <center><a onclick="cargarMapa(${post.getPostId()}, '${post.getPostGps()}')"><img lborder="0" src="images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" />Show map</a></center>
                                         </div> 
                                     </c:otherwise>
                                 </c:choose>
@@ -167,17 +169,21 @@
                                                 <h4>
                                                     <c:choose>
                                                         <c:when test="${empty comentario.commentBy.getImg()}">
-                                                            <img src="images/default-user.png" alt="UserImage" width="20px" height="20px"/>
+                                                            <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${comentario.commentBy.userId}">
+                                                                <img src="images/default-user.png" alt="UserImage" width="20px" height="20px"/>
+                                                            </a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <img height = "20px" width = "20px" src="ShowUserImage?userId=${comentario.commentBy.userId}">
+                                                            <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${comentario.commentBy.userId}">
+                                                                <img height = "20px" width = "20px" src="ShowUserImage?userId=${comentario.commentBy.userId}"/>
+                                                            </a>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    ${comentario.getCommentBy().getUsername()} | ${comentario.getCommentDate()}  
+                                                    <a href="/RocksteadyRep/ViewProfileServlet?profileOfUserID=${comentario.commentBy.userId}">${comentario.getCommentBy().getUsername()} </a>| ${comentario.getCommentDate()}  
                                                     <c:if test="${comentario.commentBy.userId eq usuario.userId}"> |
                                                         <form style='display:inline;' action="/RocksteadyRep/AdminDeleteCommentServlet" method="post">
-                                                            <input style='display:inline;' type="hidden" name="DeleteOwnComment" value="${comentario.commentId}">
-                                                            <input style='display:inline;' type="image" src="images/delete_icon.png" alt="Delete Comment">
+                                                            <input style='display:inline;' type="hidden" name="DeleteOwnComment" value="${comentario.commentId}"/>
+                                                            <input style='display:inline;' type="image" src="images/delete_icon.png" alt="Delete Comment"/>
                                                         </form>
                                                     </c:if>
                                                 </h4>

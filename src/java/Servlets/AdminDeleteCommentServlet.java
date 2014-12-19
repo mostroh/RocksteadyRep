@@ -40,6 +40,7 @@ public class AdminDeleteCommentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         if (!isNull(request.getParameter("DeleteOwnComment"))) {
             Comentario c = comentarioFacade.find(new BigDecimal(Integer.parseInt(request.getParameter("DeleteOwnComment"))));
             comentarioFacade.remove(c);

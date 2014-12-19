@@ -42,16 +42,16 @@
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="PostServlet">Blog</a></li>
-                        <c:if test="${empty usuario}">
+                            <c:if test="${empty usuario}">
                             <li>
                                 <a href="signUp.jsp">Sign Up</a>
                             </li>
                         </c:if>
                         <c:if test="${not empty usuario}">
                             <c:if test="${usuario.userType == 1}">
-                            <li>
-                                <a href="admin.jsp">Admin Area</a>
-                            </c:if>
+                                <li>
+                                    <a href="admin.jsp">Admin Area</a>
+                                </c:if>
                             <li>
                                 <a href="editProfile.jsp">Edit Profile</a>
                             </li>
@@ -59,7 +59,7 @@
                                 <a href="LogOutServlet">Logout</a>
                             </li>
                         </c:if>
-                        
+
                     </ul>
                 </nav>
 
@@ -73,7 +73,7 @@
 
                 <!-- Content -->
                 <div id="content" class="12u skel-cell-important">
-                    
+
                     <c:if test="${not empty usuario}" >
                         <c:if test="${usuario.userType <= 2}">
                             <div class="container">
@@ -82,28 +82,26 @@
                                     <header>
                                         <h2>EDIT POST</h2>
                                     </header>
-                                    <form action="/NewPostServlet" method="post" enctype="multipart/form-data">
+                                    <form action="/RocksteadyRep/ConfirmEditPostServlet">
+                                        <input type="hidden" name="postId" value="${postToEdit.postId}"/>
                                         Title: <br>
-                                        <input type="text" name="postTitle" value="${postToEdit.getTitle()}"/><br>
+                                        <input type="text" name="editTitle" required="true" value="${postToEdit.getTitle()}"/><br>
                                         Latitude:<br>
-                                        <input type="text" name="postLat" value="${postLat}"/><br>
+                                        <input type="text" name="editLat" value="${postLat}"/><br>
                                         Longitude:<br>
-                                        <input type="text" name="postLong" value="${postLong}"/><br>
-                                        Image:<br>
-                                        <h6 style="color:red"> 2040 x 240 px</h6>
-                                        <input type="file" name="postImage" accept="image/*" ><br>
+                                        <input type="text" name="editLong" value="${postLong}"/><br>
                                         Content:<br>
-                                        <textarea name="postContent" rows="15" cols="100">${postToEdit.getPostContent()}</textarea>
-                                        <br>
-                                        <input type="submit" value="EDIT POST" name="btnPost" />
+                                        <textarea name="editContent" rows="15" cols="100" required="true">${postToEdit.getPostContent()}</textarea><br>
+
+                                        <input type="submit" value="EDIT POST" name="btnEditPost" />
 
                                     </form>
 
                                 </section>
                             </div>
-                            <!-- /Content -->
-
-
+                        </c:if>
+                        <c:if test="${usuario ne postToEdit.postedBy}" >
+                            <center><h2>YOU HAVE NOT ENOUGH PERMISSIONS TO ACCESS THIS PAGE</h2></center>
                         </c:if>
                     </c:if>
                     <c:if test="${empty usuario}">

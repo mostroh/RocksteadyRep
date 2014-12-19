@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AdminCommentByUserServlet", urlPatterns = {"/AdminCommentByUserServlet"})
 public class AdminCommentByUserServlet extends HttpServlet {
+
     @EJB
     private UsuarioFacade usuarioFacade;
     @EJB
@@ -41,21 +42,20 @@ public class AdminCommentByUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        request.setCharacterEncoding("UTF-8");
         AdminPageHelper allData = new AdminPageHelper();
         allData.setSearchOption(3);
         Usuario user;
         List resBusqueda = usuarioFacade.getUserByName(request.getParameter("commentsByUserFilter"));
-        if(resBusqueda.isEmpty()){
+        if (resBusqueda.isEmpty()) {
             allData.setPostList(null);
-        }else{
+        } else {
             user = (Usuario) resBusqueda.get(0);
             allData.setCommentList(comentarioFacade.getCommentsByUser(user));
         }
 
-        
-        request.setAttribute("allData",allData);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/admin.jsp");
+        request.setAttribute("allData", allData);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin.jsp");
         rd.forward(request, response);
     }
 
