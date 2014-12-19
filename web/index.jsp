@@ -3,7 +3,7 @@
     Created on : Dec 16, 2014, 10:25:34 PM
     Author     : inftel13
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -12,6 +12,9 @@
     templated.co @templatedco
     Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<c:set var="language" value="en" scope="session" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="com.me.jsp.bundle.file" />
 <html>
     <head>
         <title>Home - Rocksteady Blog</title>
