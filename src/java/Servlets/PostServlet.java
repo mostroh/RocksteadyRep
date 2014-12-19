@@ -55,12 +55,13 @@ public class PostServlet extends HttpServlet {
             String dateToStr = request.getParameter("dateTo");
             Date dateFrom = null;
             Date dateTo = null;
-
-            GregorianCalendar cal = new GregorianCalendar();
             if ((dateFromStr != null) && (dateToStr != null)) {
                 if (dateFromStr.equals("")) {
-                    cal.setTime(new Date(Long.MIN_VALUE));
-                    dateFrom = cal.getTime();
+                    try {
+                        dateFrom = formatoDelTexto.parse("2010-01-01");
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
                     try {
                         dateFrom = formatoDelTexto.parse(dateFromStr);
