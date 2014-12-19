@@ -6,6 +6,7 @@
 package Servlets;
 
 import Entities.Post;
+import SessionBeans.AdminPageHelper;
 import SessionBeans.PostFacade;
 import java.io.IOException;
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import static java.util.Objects.isNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -81,9 +83,18 @@ public class PostServlet extends HttpServlet {
         } else {
             postList = postFacade.getRecentPost();
         }
-        request.setAttribute("postList", postList);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/blog.jsp");
-        rd.forward(request, response);
+        if (!isNull(request.getParameter("makeMVP"))) {
+            AdminPageHelper a = new AdminPageHelper();
+            a.setPostList(postList);
+            a.setSearchOption(4);
+            request.setAttribute("allData", a);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin.jsp");
+            rd.forward(request, response);
+        } else {
+            request.setAttribute("postList", postList);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/blog.jsp");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

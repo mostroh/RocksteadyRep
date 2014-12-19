@@ -52,4 +52,10 @@ public class PostFacade extends AbstractFacade<Post> {
                 .getResultList();
     }
     
+    public List <Post> getMVPost(){
+        return em.createQuery("SELECT p FROM Post p WHERE p.mvpost = :one")
+                .setParameter("one", 'Y')
+                .getResultList();
+    }
+    
 }

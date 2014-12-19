@@ -108,6 +108,11 @@
                                     <br><br>
                                     <h2>deleted</h2>
                                 </c:when>
+                                <c:when test="${adminActionData.option eq 'mvp'}">
+                                    Post successfully set as
+                                    <br><br>
+                                    <h2>MVP</h2>
+                                </c:when>
                             </c:choose>
                         </h3>
                     </center>
