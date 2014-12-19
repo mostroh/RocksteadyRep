@@ -50,7 +50,7 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="index.jsp"><fmt:message key="home"/></a></li>
+                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
                         <li><a href="PostServlet">Blog</a></li>
                         <c:if test="${empty usuario}">
                             <li>

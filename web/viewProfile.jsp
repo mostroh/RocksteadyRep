@@ -34,26 +34,26 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
                         <li><a href="PostServlet">Blog</a></li>
-                            <c:if test="${empty usuario}">
+                        <c:if test="${empty usuario}">
                             <li>
-                                <a href="signUp.jsp">Sign Up</a>
+                                <a href="signUp.jsp"><fmt:message key="signup"/></a>
                             </li>
                         </c:if>
                         <c:if test="${not empty usuario}">
                             <c:if test="${usuario.userType == 1}">
-                                <li>
-                                    <a href="admin.jsp">Admin Area</a>
-                                </c:if>
                             <li>
-                                <a href="editProfile.jsp">Edit Profile</a>
+                                <a href="admin.jsp"><fmt:message key="adminArea"/></a>
+                            </c:if>
+                            <li>
+                                <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
                             </li>
                             <li>
-                                <a href="LogOutServlet">Logout</a>
+                                <a href="LogOutServlet"><fmt:message key="logout"/></a>
                             </li>
                         </c:if>
-
+                        
                     </ul>
                 </nav>
 
