@@ -42,7 +42,7 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="IndexServlet"><fmt:message key="home"/></a></li>
                         <li><a href="PostServlet">Blog</a></li>
                         <c:if test="${empty usuario}">
                             <li>
@@ -53,7 +53,6 @@
                             <c:if test="${usuario.userType == 1}">
                             <li>
                                 <a href="admin.jsp"><fmt:message key="adminArea"/></a>
-                            </li>
                             </c:if>
                             <li>
                                 <a href="editProfile.jsp"><fmt:message key="editProfile"/></a>
