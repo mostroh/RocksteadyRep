@@ -74,7 +74,7 @@ public class EditProfileServlet extends HttpServlet {
         }
         
         usuarioFacade.edit(user); 
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/IndexServlet");
         rd.forward(request, response);
     }
 
