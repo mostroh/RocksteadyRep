@@ -4,9 +4,14 @@
     Author     : YSF
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<c:if test="${not empty sessionScope.locale}">
+<fmt:setLocale value="${sessionScope.locale}" scope= "session"/>
+</c:if>
+<fmt:setBundle basename="Internalizacion.messages" />
 <html>
     <head>
         <title>Home - Rocksteady Blog</title>
@@ -31,7 +36,6 @@
                     <span>BLOG</span>
                 </div>
                 
-                <!-- Nav -->
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
