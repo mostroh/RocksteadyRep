@@ -8,6 +8,7 @@ package SessionBeans;
 import Entities.Post;
 import Entities.Usuario;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -39,6 +40,14 @@ public class PostFacade extends AbstractFacade<Post> {
     
     public List <Post> getRecentPost(){
         return em.createQuery("SELECT p FROM Post p ORDER BY p.postDate DESC")
+                .setMaxResults(10)
+                .getResultList();
+    }
+    
+    public List <Post> getFilteredPost(Date dateFrom, Date dateTo){
+        return em.createQuery("SELECT p FROM Post p WHERE p.postDate BETWEEN :dateFrom AND :dateTo ORDER BY p.postDate DESC")
+                .setParameter("dateFrom",new java.sql.Date(dateFrom.getTime()))
+                .setParameter("dateTo", new java.sql.Date(dateTo.getTime()))
                 .setMaxResults(10)
                 .getResultList();
     }

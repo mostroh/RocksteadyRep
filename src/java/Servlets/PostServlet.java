@@ -8,7 +8,14 @@ package Servlets;
 import Entities.Post;
 import SessionBeans.PostFacade;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "PostServlet", urlPatterns = {"/PostServlet"})
 public class PostServlet extends HttpServlet {
+
     @EJB
     private PostFacade postFacade;
 
@@ -38,10 +46,42 @@ public class PostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        List <Post> postList = postFacade.getRecentPost();
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        String dateFromStr = request.getParameter("dateFrom");
+        String dateToStr = request.getParameter("dateTo");
+        Date dateFrom = null;
+        Date dateTo = null;
+        List<Post> postList = null;
+        GregorianCalendar cal = new GregorianCalendar();
+        if ((dateFromStr != null) && (dateToStr != null)) {
+            if (dateFromStr.equals("")) {
+                cal.setTime(new Date(Long.MIN_VALUE));
+                dateFrom = cal.getTime();
+            }
+            else{
+                try {
+                    dateFrom = formatoDelTexto.parse(dateFromStr);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (dateToStr.equals("")) {
+                dateTo = Calendar.getInstance().getTime();
+            }
+            else{
+                try {
+                    dateTo = formatoDelTexto.parse(dateToStr);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PostServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            postList = postFacade.getFilteredPost(dateFrom, dateTo);
+        } else {
+            postList = postFacade.getRecentPost();
+        }
         request.setAttribute("postList", postList);
-        RequestDispatcher rd= getServletContext().getRequestDispatcher("/blog.jsp");
-        rd.forward(request, response);        
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/blog.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

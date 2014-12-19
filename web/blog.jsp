@@ -96,7 +96,13 @@
                     </center>
                     <br><br>
                 </c:if>
-
+                <div>
+                    <center><h2>Filter post</h2></center>
+                    <center><form action="/RocksteadyRep/PostServlet" method="post">
+                            Between <input type="date" name="dateFrom"/> and <input type="date" name="dateTo"/><br>
+                            <input type="submit" value="Filter" name="btnFilter" />
+                        </form></center>
+                </div>
                 <c:forEach items="${postList}" var="post">
                     <div class="row">
                         <br>
