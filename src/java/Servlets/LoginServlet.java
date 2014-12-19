@@ -46,7 +46,8 @@ public class LoginServlet extends HttpServlet {
         String locale = request.getParameter("locale");
         if (locale != null && !locale.isEmpty()) {
             sesion.setAttribute("locale", locale);
-
+        }else{
+            sesion.setAttribute("locale", "en");
         }
         String nombre = request.getParameter("name");
         String password = request.getParameter("pwd");

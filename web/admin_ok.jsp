@@ -84,35 +84,35 @@
                         <h3>
                             <c:choose>
                                 <c:when test="${adminActionData.option eq 'setAdmin'}">
-                                    User <font color="green">${adminActionData.username}</font> is now: 
+                                    <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> <fmt:message key="isNow"/>: 
                                     <br><br>
                                     <h2>admin</h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'setRegistered'}">
-                                    User <font color="green">${adminActionData.username}</font> is now: 
+                                  <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> <fmt:message key="isNow"/>: 
                                     <br><br>
-                                    <h2>a registered user</h2>
+                                    <h2>a <fmt:message key="Registred"/> <fmt:message key="user"/></h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'setWriter'}">
-                                    User <font color="green">${adminActionData.username}</font> is now: 
+                                   <fmt:message key="user"/> <font color="green">${adminActionData.username}</font> <fmt:message key="isNow"/>: 
                                     <br><br>
-                                    <h2>writer</h2>
+                                    <h2><fmt:message key="Writer"/></h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'deleteUser'}">
-                                    User <font color="red">${adminActionData.username}</font> deleted: 
+                                    <fmt:message key="user"/> <font color="red">${adminActionData.username}</font> <fmt:message key="deleted"/> : 
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'deletePost'}">
-                                    Post successfully 
+                                    <fmt:message key="postSuccessfully"/>
                                     <br><br>
-                                    <h2>deleted</h2>
+                                    <h2><fmt:message key="postSuccessfullyDeleted"/></h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'deleteComment'}">
-                                    Comment successfully
+                                     <fmt:message key="commentSuccessfully"/>
                                     <br><br>
-                                    <h2>deleted</h2>
+                                    <h2><fmt:message key="deleted"/></h2>
                                 </c:when>
                                 <c:when test="${adminActionData.option eq 'mvp'}">
-                                    Post successfully set as
+                                    <fmt:message key="PostsuccessfullySetAs"/>
                                     <br><br>
                                     <h2>MVP</h2>
                                 </c:when>
@@ -126,7 +126,7 @@
 
                     <div id="nav">
                         <ul> 
-                            <li class="active"><a href="admin.jsp">Back to admin panel</a></li>
+                            <li class="active"><a href="admin.jsp"><fmt:message key="backToAdminPanel"/></a></li>
                         </ul>
                     </div>
                 </center>
