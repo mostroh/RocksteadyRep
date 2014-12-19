@@ -9,6 +9,7 @@ import Entities.Usuario;
 import SessionBeans.LogInHelper;
 import SessionBeans.UsuarioFacade;
 import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,16 +43,15 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession sesion = request.getSession();
 
+        String locale = request.getParameter("locale");
+        if (locale != null && !locale.isEmpty()) {
+            sesion.setAttribute("locale", locale);
+
+        }
         String nombre = request.getParameter("name");
         String password = request.getParameter("pwd");
         LogInHelper lh = new LogInHelper();
 
-        //compruebo si existe usuario con nombre "name"
-        //sino false y hago request.setAttribute("lh",lh);
-        //si existe lh.setUserexists(true);
-        //y sigo:
-        // si null = contraseña mal -> lh.setWrongPassword(false)
-        //Usuario user = usuarioFacade.getUserByNickname(nombre, password);
         Usuario user = usuarioFacade.getUsuarioByUserName(nombre);
 
         if (user != null) {
